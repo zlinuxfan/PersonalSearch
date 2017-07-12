@@ -2,6 +2,7 @@ import Utils.Utilities;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 class ElementOfPage {
@@ -35,11 +36,11 @@ class ElementOfPage {
     }
 
     private void createTextBox() {
-        while (this.textBoxs.size() < 1) {
-            for (UrlInfo urlInfo: this.urlInfoList) {
-                if (!urlInfo.isYoutube()) {
-                    this.textBoxs.add(getText(urlInfo.getLink().toString()));
-                    this.urlInfoList.remove(urlInfo);
+        while (this.textBoxs.size() < 3) {
+            for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext();) {
+                if (!urlInfoIterator.next().isYoutube()) {
+                    this.textBoxs.add(getText(urlInfoIterator.next().getLink().toString()));
+                    urlInfoIterator.remove();
                 }
             }
         }
