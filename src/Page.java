@@ -39,34 +39,34 @@ public class Page {
         private String nameParagraph = "default";
         private String guidOfGroup = "ACEE8C4B-D51D-493C-151B-C36F6A98600E";
         private String guidOfParentGroup = "ID00000000";
-        private String sectionTitle; // Заголовок раздела(title)
-        private String sectionDescription; // Описание раздела(description)
-        private String[] sectionKeywords; // Ключевые слова раздела(keywords)
-        private String briefDescriptionSection; //Описание раздела
+        private String sectionTitle = ""; // Заголовок раздела(title)
+        private String sectionDescription = ""; // Описание раздела(description)
+        private String[] sectionKeywords = {""}; // Ключевые слова раздела(keywords)
+        private String briefDescriptionSection = ""; //Описание раздела
         private String pathSection = "default-group"; // Путь для раздела
-        private String partitionSortingSection; // Порядок сортировки раздела
+        private String partitionSortingSection = ""; // Порядок сортировки раздела
 
-        private String guidOfElement; // GUID идентификатор элемента
-        private String nameOfElement; // название элемента
-        private String briefDescriptionElement; //Описание элемента
-        private String textOfElement; // Текст для элемента
-        private String tags; // Метки
-        private String elementActiviti = "1"; // Активность элемента
+        private String guidOfElement = ""; // GUID идентификатор элемента
+        private String nameOfElement = ""; // название элемента
+        private String briefDescriptionElement = ""; //Описание элемента
+        private String textOfElement = ""; // Текст для элемента
+        private String tags = ""; // Метки
+        private String elementActivity = "1"; // Активность элемента
         private String sortingOrderOfElement = "0"; // Порядок сортировки элемента
-        private String pathElement; // Путь к элементу
-        private String elementTitle; // Заголовок (title)
-        private String elementDescription; // Значение мета-тега description для страницы с элементом
-        private String elementKeywords; // Значение мета-тега keywords для страницы с элементом
+        private String pathElement = ""; // Путь к элементу
+        private String elementTitle = ""; // Заголовок (title)
+        private String elementDescription = ""; // Значение мета-тега description для страницы с элементом
+        private String elementKeywords = ""; // Значение мета-тега keywords для страницы с элементом
         private boolean indexing = true; // Флаг индексации
 
         private String data = "02.07.2017 20:49:57";
         private String dataOfPublication = "0000-00-00 00:00:00";
         private String dataOfPublicationEnd  = "0000-00-00 00:00:00"; // Дата завершения публикации;
-        private String pathImage; // Файл изображения для элемента
-        private String pathImageSmall; // Файл изображения для элемента
-        private String shortcuts; // Ярлыки
+        private String pathImage = ""; // Файл изображения для элемента
+        private String pathImageSmall = ""; // Файл изображения для элемента
+        private String shortcuts = ""; // Ярлыки
         private String siteUserID = "0"; // Идентификатор пользователя сайта
-        private ArrayList<OnceText> textBoxs;
+        private ArrayList<OnceText> textBoxes;
         private String pathYouTube;
         private List<UrlInfo> urlInfoList;
 
@@ -75,8 +75,7 @@ public class Page {
                        String briefDescriptionElement,
                        String textOfElement,
                        String pathElement,
-                       ArrayList<OnceText> textBoxs,
-                       String pathYouTube,
+                       ArrayList<OnceText> textBoxes,
                        List<UrlInfo> urlInfoList) {
 
             this.guidOfElement = guidOfElement;
@@ -84,9 +83,18 @@ public class Page {
             this.briefDescriptionElement = briefDescriptionElement;
             this.textOfElement = textOfElement;
             this.pathElement = pathElement;
-            this.textBoxs = textBoxs;
-            this.pathYouTube = pathYouTube;
+            this.textBoxes = textBoxes;
+            this.pathYouTube = selectPathYouTube(urlInfoList);
             this.urlInfoList = urlInfoList;
+        }
+
+        private String selectPathYouTube(List<UrlInfo> urlInfoList) {
+            for (UrlInfo urlInfo: urlInfoList) {
+                if (urlInfo.isYoutube()) {
+                    return urlInfo.getLink().toString();
+                }
+            }
+            return "";
         }
 
         public Builder nameParagraph(String val) {
@@ -229,7 +237,7 @@ public class Page {
         this.briefDescriptionElement = builder.briefDescriptionElement;
         this.textOfElement = builder.textOfElement;
         this.tags = builder.tags;
-        this.elementActiviti = builder.elementActiviti;
+        this.elementActiviti = builder.elementActivity;
         this.sortingOrderOfElement = builder.sortingOrderOfElement;
         this.pathlElement = builder.pathElement;
         this.elementTitle = builder.elementTitle;
@@ -243,7 +251,7 @@ public class Page {
         this.pathImageSmall = builder.pathImageSmall;
         this.shortcuts = builder.shortcuts;
         this.siteUserID = builder.siteUserID;
-        this.textBoxs = builder.textBoxs;
+        this.textBoxs = builder.textBoxes;
         this.pathYouTube = builder.pathYouTube;
         this.urlInfoList = builder.urlInfoList;
     }

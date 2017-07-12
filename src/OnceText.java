@@ -6,4 +6,12 @@ class OnceText {
         this.textBox = textBox;
         this.checkBox = checkBox;
     }
+
+    public String getTextBox() {
+        return textBox;
+    }
+
+    public boolean isCheckBox() {
+        return checkBox;
+    }
 }

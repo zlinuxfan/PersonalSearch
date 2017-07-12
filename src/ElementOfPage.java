@@ -6,9 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 
 class ElementOfPage {
+    private static final int NUMBER_TEXT_BOX = 3;
+
     private String name;
     private String path;
-    private List<String> textBoxs = new ArrayList<>();
+    private List<String> textBoxes = new ArrayList<>();
     private ArrayList<UrlInfo> urlInfoList;
 
     ElementOfPage(String name, ArrayList<UrlInfo> urlInfoList) {
@@ -27,8 +29,8 @@ class ElementOfPage {
         return path;
     }
 
-    public List<String> getTextBoxs() {
-        return textBoxs;
+    public List<String> getTextBoxes() {
+        return textBoxes;
     }
 
     public ArrayList<UrlInfo> getUrlInfoList() {
@@ -36,14 +38,21 @@ class ElementOfPage {
     }
 
     private void createTextBox() {
-        while (this.textBoxs.size() < 3) {
+        System.out.println("Crate text boxes ...");
+        int counter = 0;
+        while (this.textBoxes.size() < NUMBER_TEXT_BOX) {
             for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext();) {
                 if (!urlInfoIterator.next().isYoutube()) {
-                    this.textBoxs.add(getText(urlInfoIterator.next().getLink().toString()));
+                    this.textBoxes.add(getText(urlInfoIterator.next().getLink().toString()));
                     urlInfoIterator.remove();
                 }
             }
+            if (counter == this.textBoxes.size()) {
+                System.out.print(" + 1");
+                counter++;
+            }
         }
+        System.out.println();
     }
 
     private static String getText(String url) {

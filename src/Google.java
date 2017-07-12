@@ -28,7 +28,7 @@ class Google implements Find {
                     h3Descriptions.get(i).text()
             ));
         }
-
+        System.out.println("google find ...");
         return urlInfoList;
     }
 }
