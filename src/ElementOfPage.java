@@ -39,8 +39,8 @@ class ElementOfPage {
 
     private void createTextBox() {
         System.out.println("Crate text boxes ...");
-        int counter = 0;
-        while (this.textBoxes.size() < NUMBER_TEXT_BOX) {
+        int counter = 1;
+        while (this.textBoxes.size() <= NUMBER_TEXT_BOX) {
             for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext();) {
                 if (!urlInfoIterator.next().isYoutube()) {
                     this.textBoxes.add(getText(urlInfoIterator.next().getLink().toString()));
@@ -52,7 +52,6 @@ class ElementOfPage {
                 counter++;
             }
         }
-        System.out.println();
     }
 
     private static String getText(String url) {

@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileWriter {
+public class CsvFileWriter_Page {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 3;
@@ -122,7 +122,7 @@ public class CsvFileWriter {
 
             System.out.println("CSV file was created successfully !!!");
         } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
+            System.out.println("Error in CsvFileWriter_Page !!!");
             e.printStackTrace();
         } finally {
             try {
@@ -134,6 +134,13 @@ public class CsvFileWriter {
             }
         }
 
+    }
+
+    private static String crateIframe(int width, int height, String src, int frameborder) {
+        return String.format(
+                "<iframe width=\"%d\" height=\"%d\" src=\"%s\" frameborder=\"%d\" allowfullscreen></iframe>",
+                width, height, src, frameborder
+        );
     }
 
     private static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
