@@ -1,12 +1,16 @@
 import Utils.Utilities;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 class ElementOfPage {
     private static final int NUMBER_TEXT_BOX = 3;
+    private static Logger log = LoggerFactory.getLogger(ElementOfPage.class);
 
     private String name;
     private String path;
@@ -39,17 +43,17 @@ class ElementOfPage {
 
     private void createTextBox() {
         System.out.println("Crate text boxes ...");
-        int counter = 1;
+
         while (this.textBoxes.size() <= NUMBER_TEXT_BOX) {
-            for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext();) {
-                if (!urlInfoIterator.next().isYoutube()) {
-                    this.textBoxes.add(getText(urlInfoIterator.next().getLink().toString()));
-                    urlInfoIterator.remove();
+            try {
+                for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext(); ) {
+                    if (!urlInfoIterator.next().isYoutube()) {
+                        this.textBoxes.add(getText(urlInfoIterator.next().getLink().toString()));
+                        urlInfoIterator.remove();
+                    }
                 }
-            }
-            if (counter == this.textBoxes.size()) {
-                System.out.print(" + 1");
-                counter++;
+            } catch (NoSuchElementException e) {
+                log.error("java.util.NoSuchElementException.");
             }
         }
     }

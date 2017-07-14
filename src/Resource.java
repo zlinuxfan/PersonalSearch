@@ -1,12 +1,15 @@
 public class Resource {
     private String nameRequest;
     private String title;
-    private String descripion;
+    private String description;
+    private String phraseOfElement;
+    private String textOfElement;
 
-    public Resource(String nameRequest, String title, String description) {
+    public Resource(String nameRequest, String title, String description, String phraseOfElement) {
         this.nameRequest = nameRequest;
         this.title = title;
-        descripion = description;
+        this.description = description;
+        this.phraseOfElement = phraseOfElement;
     }
 
     public String getNameRequest() {
@@ -17,7 +20,19 @@ public class Resource {
         return title;
     }
 
-    public String getDescripion() {
-        return descripion;
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPhraseOfElement() {
+        return phraseOfElement;
+    }
+
+    public String getTextOfElement() {
+        return textOfElement;
+    }
+
+    public void setTextOfElement(String textOfElement) {
+        this.textOfElement = textOfElement;
     }
 }

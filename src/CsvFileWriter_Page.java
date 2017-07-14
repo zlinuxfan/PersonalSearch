@@ -6,7 +6,7 @@ import java.util.List;
 public class CsvFileWriter_Page {
 
     private static final int NUMBER_TEXT_BOX = 3;
-    private static final int NUMBER_ELEMENT = 3;
+    private static final int NUMBER_ELEMENT = 5;
 
     private static final String DELIMITER = ";";
     private static final String NEW_LINE_SEPARATOR = "\n";
@@ -67,7 +67,7 @@ public class CsvFileWriter_Page {
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(page.getSectionDescription()).append("\"");
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(arrayToCsvFormat(page.getSectionKeywords())).append("\"");
+                fileWriter.append("\"").append(page.getSectionKeywords()).append("\"");
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(page.getBriefDescriptionSection()).append("\"");
                 fileWriter.append(DELIMITER);
@@ -113,7 +113,7 @@ public class CsvFileWriter_Page {
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(page.getSiteUserID()).append("\"");
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(textBoxesToCsv(page.getTextBoxs())).append("\"");
+                fileWriter.append("\"").append(textBoxesToCsv(page.getTextBoxes())).append("\"");
                 fileWriter.append("\"").append(page.getPathYouTube()).append("\"");
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(urlInfoListToCsv(page.getUrlInfoList())).append("\"");

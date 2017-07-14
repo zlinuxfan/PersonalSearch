@@ -7,7 +7,12 @@ public class GuidOfElement {
         this.guid = numberOfStartGuid;
     }
 
+    public int getGuid() {
+        return this.guid;
+    }
+
     public int next() {
-        return ++this.guid;
+        this.guid++;
+        return getGuid();
     }
 }

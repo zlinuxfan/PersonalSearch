@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 public class CsvFileReader_Resource {
     private static final String DELIMITER = ";";
-    private static final String NEW_LINE_SEPARATOR = "\n";
-    private static String PAGE_HEADER = "";
 
     // attributes index
     private static final int RESOURCE_NAME_REQUEST = 0;
     private static final int RESOURCE_TITLE = 1;
     private static final int RESOURCE_DESCRIPTION = 2;
+    private static final int RESOURCE_TEXT_OF_ELEMENT = 3;
 
     public static ArrayList<Resource> readCsvFile(String fileName) {
 
@@ -32,7 +31,8 @@ public class CsvFileReader_Resource {
                     resource.add(new Resource(
                             tokens[RESOURCE_NAME_REQUEST],
                             tokens[RESOURCE_TITLE],
-                            tokens[RESOURCE_DESCRIPTION]
+                            tokens[RESOURCE_DESCRIPTION],
+                            tokens[RESOURCE_TEXT_OF_ELEMENT]
                             ));
                 }
             }

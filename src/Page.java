@@ -7,7 +7,7 @@ public class Page {
     private String guidOfParentGroup;
     private String sectionTitle; // Заголовок раздела(title)
     private String sectionDescription; // Описание раздела(description)
-    private String[] sectionKeywords; // Ключевые слова раздела(keywords)
+    private String sectionKeywords; // Ключевые слова раздела(keywords)
     private String briefDescriptionSection; //Описание раздела
     private String pathSection; // Путь для раздела
     private String partitionSortingSection; // Порядок сортировки раздела
@@ -19,7 +19,7 @@ public class Page {
     private String tags; // Метки
     private String elementActiviti; // Активность элемента
     private String sortingOrderOfElement; // Порядок сортировки элемента
-    private String pathlElement; // Путь к элементукr
+    private String pathlElement; // Путь к элементу
     private String elementTitle; // Заголовок (title)
     private String elementDescription; // Значение мета-тега description для страницы с элементом
     private String elementKeywords; // Значение мета-тега keywords для страницы с элементом
@@ -31,19 +31,19 @@ public class Page {
     private String pathImageSmall; // Файл изображения для элемента
     private String shortcuts; // Ярлыки
     private String siteUserID; // Идентификатор пользователя сайта
-    private ArrayList<OnceText> textBoxs;
+    private ArrayList<OnceText> textBoxes;
     private String pathYouTube;
     private List<UrlInfo> urlInfoList;
 
     public static class Builder {
-        private String nameParagraph = "default";
-        private String guidOfGroup = "ACEE8C4B-D51D-493C-151B-C36F6A98600E";
-        private String guidOfParentGroup = "ID00000000";
+        private String nameParagraph = "";
+        private String guidOfGroup = "";
+        private String guidOfParentGroup = "";
         private String sectionTitle = ""; // Заголовок раздела(title)
         private String sectionDescription = ""; // Описание раздела(description)
-        private String[] sectionKeywords = {""}; // Ключевые слова раздела(keywords)
+        private String sectionKeywords = ""; // Ключевые слова раздела(keywords)
         private String briefDescriptionSection = ""; //Описание раздела
-        private String pathSection = "default-group"; // Путь для раздела
+        private String pathSection = ""; // Путь для раздела
         private String partitionSortingSection = ""; // Порядок сортировки раздела
 
         private String guidOfElement = ""; // GUID идентификатор элемента
@@ -103,117 +103,117 @@ public class Page {
         }
 
         public Builder guidOfGroup(String val) {
-            this.nameParagraph = val;
+            this.guidOfGroup = val;
             return this;
         }
 
         public Builder guidOfParentGroup(String val) {
-            this.nameParagraph = val;
+            this.guidOfParentGroup = val;
             return this;
         }
 
         public Builder sectionTitle(String val) {
-            this.nameParagraph = val;
+            this.sectionTitle = val;
             return this;
         }
 
         public Builder sectionDescription(String val) {
-            this.nameParagraph = val;
+            this.sectionDescription = val;
             return this;
         }
 
         public Builder sectionKeywords(String val) {
-            this.nameParagraph = val;
+            this.sectionKeywords = val;
             return this;
         }
 
         public Builder briefDescriptionSection(String val) {
-            this.nameParagraph = val;
+            this.briefDescriptionSection = val;
             return this;
         }
 
         public Builder pathSection(String val) {
-            this.nameParagraph = val;
+            this.pathSection = val;
             return this;
         }
 
         public Builder partitionSortingSection(String val) {
-            this.nameParagraph = val;
+            this.partitionSortingSection = val;
             return this;
         }
 
         public Builder guidOfElement(String val) {
-            this.nameParagraph = val;
+            this.guidOfElement = val;
             return this;
         }
 
         public Builder tags(String val) {
-            this.nameParagraph = val;
+            this.tags = val;
             return this;
         }
 
         public Builder elementActiviti(String val) {
-            this.nameParagraph = val;
+            this.elementActivity = val;
             return this;
         }
 
         public Builder sortingOrderOfElement(String val) {
-            this.nameParagraph = val;
+            this.sortingOrderOfElement = val;
             return this;
         }
 
         public Builder elementTitle(String val) {
-            this.nameParagraph = val;
+            this.elementTitle = val;
             return this;
         }
 
         public Builder elementDescription(String val) {
-            this.nameParagraph = val;
+            this.elementDescription = val;
             return this;
         }
 
         public Builder elementKeywords(String val) {
-            this.nameParagraph = val;
+            this.elementKeywords = val;
             return this;
         }
 
-        public Builder indexing(String val) {
-            this.nameParagraph = val;
+        public Builder indexing(boolean val) {
+            this.indexing = val;
             return this;
         }
 
         public Builder data(String val) {
-            this.nameParagraph = val;
+            this.data = val;
             return this;
         }
 
         public Builder dataOfPublication(String val) {
-            this.nameParagraph = val;
+            this.dataOfPublication = val;
             return this;
         }
 
         public Builder dataOfPublicationEnd(String val) {
-            this.nameParagraph = val;
+            this.dataOfPublicationEnd = val;
             return this;
         }
 
         public Builder pathImage(String val) {
-            this.nameParagraph = val;
+            this.pathImage = val;
             return this;
         }
 
         public Builder pathImageSmall(String val) {
-            this.nameParagraph = val;
+            this.pathImageSmall = val;
             return this;
         }
 
         public Builder shortcuts(String val) {
-            this.nameParagraph = val;
+            this.shortcuts = val;
             return this;
         }
 
         public Builder siteUserID(String val) {
-            this.nameParagraph = val;
+            this.siteUserID = val;
             return this;
         }
 
@@ -251,7 +251,7 @@ public class Page {
         this.pathImageSmall = builder.pathImageSmall;
         this.shortcuts = builder.shortcuts;
         this.siteUserID = builder.siteUserID;
-        this.textBoxs = builder.textBoxes;
+        this.textBoxes = builder.textBoxes;
         this.pathYouTube = builder.pathYouTube;
         this.urlInfoList = builder.urlInfoList;
     }
@@ -276,7 +276,7 @@ public class Page {
         return sectionDescription;
     }
 
-    public String[] getSectionKeywords() {
+    public String getSectionKeywords() {
         return sectionKeywords;
     }
 
@@ -368,8 +368,8 @@ public class Page {
         return siteUserID;
     }
 
-    public ArrayList<OnceText> getTextBoxs() {
-        return textBoxs;
+    public ArrayList<OnceText> getTextBoxes() {
+        return textBoxes;
     }
 
     public String getPathYouTube() {

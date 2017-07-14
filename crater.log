@@ -1,5 +1,6 @@
-2017-07-12 11:47:09,720 ERROR Utils.Utilities  - Jsoup.connect error: https://ok.ru/video/10149234088
-2017-07-12 11:47:43,475 ERROR Utils.Utilities  - Jsoup.connect error: http://teammy.com/notes/256076print
-2017-07-12 17:36:52,393 ERROR Utils.Utilities  - Jsoup.connect error: https://ok.ru/video/10149234088
-2017-07-12 17:40:30,438 ERROR Utils.Utilities  - Jsoup.connect error: https://ok.ru/video/10149234088
-2017-07-12 18:31:49,901 ERROR Utils.Utilities  - Jsoup.connect error: http://do-by-hands.ru/origami-dlya-detej/kak-sdelat-mech-iz-bumagi-origami-sxema/
+2017-07-14 18:21:32,562 ERROR Utils.Utilities  - Jsoup.connect error: http://www.glav-dacha.ru/obrezka-plodovyh-derevev/
+2017-07-14 18:22:13,992 ERROR Utils.Utilities  - Jsoup.connect error: http://www.domogorodnika.ru/osnovy-agrotehniki/kak-vyrastit-bazilik-iz-semjan
+2017-07-14 18:32:10,141 ERROR ElementOfPage  - java.util.NoSuchElementException.
+2017-07-14 18:53:22,012 ERROR Utils.Utilities  - Jsoup.connect error: https://otvet.mail.ru/question/59751517
+2017-07-14 19:06:26,668 ERROR Utils.Utilities  - Jsoup.connect error: https://otvet.mail.ru/question/59751517
+2017-07-14 19:07:28,014 ERROR Utils.Utilities  - Jsoup.connect error: https://otvet.mail.ru/question/59751517
