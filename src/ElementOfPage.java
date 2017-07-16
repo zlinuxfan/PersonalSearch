@@ -43,15 +43,19 @@ class ElementOfPage {
 
     private void createTextBox() {
         System.out.println("Crate text boxes ...");
+        Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator();
+        String text;
 
-        while (this.textBoxes.size() <= NUMBER_TEXT_BOX) {
+        while (this.textBoxes.size() <= NUMBER_TEXT_BOX && urlInfoIterator.hasNext()) {
             try {
-                for (Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator(); urlInfoIterator.hasNext(); ) {
                     if (!urlInfoIterator.next().isYoutube()) {
-                        this.textBoxes.add(getText(urlInfoIterator.next().getLink().toString()));
-                        urlInfoIterator.remove();
+                        text = getText(urlInfoIterator.next().getLink().toString());
+                        if (!text.equals("")) {
+                            this.textBoxes.add(text);
+                            urlInfoIterator.remove();
+                        }
+
                     }
-                }
             } catch (NoSuchElementException e) {
                 log.error("java.util.NoSuchElementException.");
             }

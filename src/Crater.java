@@ -18,12 +18,13 @@ public class Crater {
 
         Google google = new Google();
         List<Page> pages = new ArrayList<>();
+        GuidOfElement guidOfElement = new GuidOfElement(236);
 
         int counter = 0;
 
         for (Resource resource: resources) {
 
-            if (counter >= 1) {
+            if (counter >= 3) {
                 break;
             }
 
@@ -34,6 +35,7 @@ public class Crater {
                     google.find(resource.getNameRequest()
                     ));
 
+
             ArrayList<OnceText> onceTexts = elementOfPage
                     .getTextBoxes()
                     .stream()
@@ -41,8 +43,6 @@ public class Crater {
                     .collect(Collectors.toCollection(ArrayList::new));
 
             ArrayList<UrlInfo> urlInforms = elementOfPage.getUrlInfoList();
-
-            GuidOfElement guidOfElement = new GuidOfElement(0);
 
             Page page = new Page.Builder(
                     String.valueOf(guidOfElement.next()),
@@ -58,10 +58,13 @@ public class Crater {
 
             pages.add(page);
 
+            CsvFileWriter_Page.write((String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
+            pages.remove(0);
+
             counter++;
         }
         
-        CsvFileWriter_Page.write(sdf.format(System.currentTimeMillis())+".csv", pages);
+//        CsvFileWriter_Page.write(sdf.format(System.currentTimeMillis())+".csv", pages);
 
     }
 

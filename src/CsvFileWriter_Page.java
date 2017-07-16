@@ -114,9 +114,10 @@ public class CsvFileWriter_Page {
                 fileWriter.append("\"").append(page.getSiteUserID()).append("\"");
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(textBoxesToCsv(page.getTextBoxes())).append("\"");
-                fileWriter.append("\"").append(page.getPathYouTube()).append("\"");
+                fileWriter.append("\"").append(crateIframe(560, 315, page.getPathYouTube(), 0)).append("\"");
                 fileWriter.append(DELIMITER);
                 fileWriter.append("\"").append(urlInfoListToCsv(page.getUrlInfoList())).append("\"");
+                fileWriter.append(DELIMITER);
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
 

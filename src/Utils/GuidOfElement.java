@@ -15,4 +15,5 @@ public class GuidOfElement {
         this.guid++;
         return getGuid();
     }
+
 }
