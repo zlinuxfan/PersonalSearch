@@ -24,7 +24,7 @@ public class Crater {
 
         for (Resource resource: resources) {
 
-            if (counter >= 3) {
+            if (counter >= 100) {
                 break;
             }
 
@@ -58,7 +58,7 @@ public class Crater {
 
             pages.add(page);
 
-            CsvFileWriter_Page.write((String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
+            CsvFileWriter_Page.write(("data/result/" + String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
             pages.remove(0);
 
             counter++;
