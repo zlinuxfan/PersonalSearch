@@ -114,7 +114,7 @@ public class CsvFileWriter_Page {
                 fileWriter.append(addQuotes(page.getSiteUserID()));
                 fileWriter.append(DELIMITER);
                 fileWriter.append(textBoxesToCsv(page.getTextBoxes()));
-                fileWriter.append(crateIframe(560, 315, page.getPathYouTube(), 0));
+                fileWriter.append(addQuotes(crateIframe(560, 315, page.getPathYouTube(), 0)));
                 fileWriter.append(DELIMITER);
                 fileWriter.append(urlInfoListToCsv(page.getUrlInfoList()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
@@ -147,7 +147,7 @@ public class CsvFileWriter_Page {
            str = "";
        } else {
            str = String.format(
-                   "<iframe width=\"%d\" height=\"%d\" src=\"%s\" frameborder=\"%d\" allowfullscreen></iframe>",
+                   "<iframe width=\"\"%d\"\" height=\"\"%d\"\" src=\"\"%s\"\" frameborder=\"\"%d\"\" allowfullscreen></iframe>",
                    width, height, src, frameborder
            );
        }
@@ -177,7 +177,7 @@ public class CsvFileWriter_Page {
         return stringBuilder.toString();
     }
 
-    private static String textBoxesToCsv(ArrayList<OnceText> textBoxes) {
+    static String textBoxesToCsv(ArrayList<OnceText> textBoxes) {
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
         for (OnceText onceText: textBoxes) {

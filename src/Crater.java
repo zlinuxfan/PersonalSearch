@@ -3,28 +3,43 @@ import Utils.GuidOfElement;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Crater {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HH-mm-ss");
-    private static final ArrayList<String> textsOfElements = readFile("data/textsOfElements.txt");
+    private static final int NUMBER_TEXT_BOX = 3;
+    private static final int NUMBER_ELEMENT = 5;
+
+    private static final ArrayList<String> textsOfElements = readResource("data/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/resource.csv"));
     
     public static void main(String[] args) {
 
+        int startGuidOfElement = 256;
+
+        ArrayList<Page> pages = createPages(startGuidOfElement);
+
+        CsvFileWriter_Page.write("data/result/" +
+                startGuidOfElement +
+                "-" +
+                (startGuidOfElement + pages.size() - 2) +
+                ".csv", pages);
+    }
+
+
+    private static ArrayList<Page> createPages(int startGuidOfElement) {
+        GuidOfElement guidOfElement = new GuidOfElement(startGuidOfElement);
+        Page mainPage = CsvFileReader_Page.readCsvFile("data/mainResource.csv").get(0);
         Google google = new Google();
-        List<Page> pages = new ArrayList<>();
-        GuidOfElement guidOfElement = new GuidOfElement(247);
+        ArrayList<Page> pages = new ArrayList<>();
+        pages.add(mainPage);
 
         int counter = 0;
 
         for (Resource resource: resources) {
 
-            if (counter >= 2) {
+            if (counter >= 3) {
                 break;
             }
 
@@ -42,7 +57,15 @@ public class Crater {
                     .map(textBox -> new OnceText(textBox, false))
                     .collect(Collectors.toCollection(ArrayList::new));
 
+            for (int size = onceTexts.size(); size < NUMBER_TEXT_BOX; size++) {
+                onceTexts.add(new OnceText("", false));
+            }
+
             ArrayList<UrlInfo> urlInforms = elementOfPage.getUrlInfoList();
+
+            for (int size = urlInforms.size(); size < NUMBER_ELEMENT; size++) {
+                urlInforms.add(new UrlInfo("", "", "", ""));
+            }
 
             Page page = new Page.Builder(
                     String.valueOf(guidOfElement.next()),
@@ -52,8 +75,9 @@ public class Crater {
                     elementOfPage.getPath(),
                     onceTexts,
                     urlInforms
-                ).elementDescription(resource.getDescription())
+            ).elementDescription(resource.getDescription())
                     .elementTitle(resource.getTitle())
+                    .guidOfGroup(mainPage.getGuidOfGroup())
                     .build();
 
             pages.add(page);
@@ -64,14 +88,11 @@ public class Crater {
 
             counter++;
         }
-        CsvFileWriter_Page.write("data/result" +
-                guidOfElement.getStartGuid() +
-                "-" +
-                guidOfElement.getGuid() +
-                ".csv", pages);
+
+        return pages;
     }
 
-    private static ArrayList<String> readFile(String fileName) {
+    private static ArrayList<String> readResource(String fileName) {
         BufferedReader fileReader = null;
         ArrayList<String> textsOfElements = new ArrayList<>();
 

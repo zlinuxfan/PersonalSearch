@@ -48,8 +48,9 @@ class ElementOfPage {
 
         while (this.textBoxes.size() <= NUMBER_TEXT_BOX && urlInfoIterator.hasNext()) {
             try {
-                    if (!urlInfoIterator.next().isYoutube()) {
-                        text = getText(urlInfoIterator.next().getLink().toString());
+                UrlInfo next = urlInfoIterator.next();
+                if (!next.isYoutube()) {
+                        text = getText(next.getLink().toString());
                         if (!text.equals("")) {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();

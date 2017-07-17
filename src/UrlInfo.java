@@ -11,8 +11,8 @@ public class UrlInfo {
     UrlInfo(String source, String link, String heading, String description) {
         this.source = source;
         try {
-            this.link = new URL(link);
-            this.youtube = this.link.getHost().equals("www.youtube.com");
+            this.link = link.equals("") ? null : new URL(link);
+            this.youtube = this.link != null && this.link.getHost().equals("www.youtube.com");
         } catch (MalformedURLException e) {
             System.out.println("Do not create link from: " + link);
             e.printStackTrace();

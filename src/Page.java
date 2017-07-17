@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Page {
-    private String nameParagraph;
-    private String guidOfGroup;
-    private String guidOfParentGroup;
+    private String nameParagraph; // Название раздела
+    private String guidOfGroup; // GUID идентификатор группы элементов
+    private String guidOfParentGroup; //GUID идентификатор родительской группы элементов
     private String sectionTitle; // Заголовок раздела(title)
     private String sectionDescription; // Описание раздела(description)
     private String sectionKeywords; // Ключевые слова раздела(keywords)

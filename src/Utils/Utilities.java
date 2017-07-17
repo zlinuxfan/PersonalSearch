@@ -40,8 +40,10 @@ public class Utilities {
 
 //        System.setProperty("http.proxyHost", "176.104.218.40");
 //        System.setProperty("http.proxyPort", "8081");
-        System.setProperty("http.proxyHost", "95.80.98.41");
-        System.setProperty("http.proxyPort", "8080");
+//        System.setProperty("http.proxyHost", "159.203.63.183");
+//        System.setProperty("http.proxyPort", "3128");
+//        System.setProperty("http.proxyHost", "95.80.98.41");
+//        System.setProperty("http.proxyPort", "8080");
 
 //        Proxy proxy = new Proxy(
 //                Proxy.Type.HTTP,

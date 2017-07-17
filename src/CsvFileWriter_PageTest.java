@@ -21,6 +21,20 @@ public class CsvFileWriter_PageTest {
     }
 
     @org.junit.Test
+    public void textBoxesToCsv() {
+
+        ArrayList<OnceText> texts = new ArrayList<>();
+        OnceText onceText = new OnceText("text of text box", false);
+        texts.add(onceText);
+        OnceText onceText1 = new OnceText("text two of text box", false);
+        texts.add(onceText1);
+
+        String s = CsvFileWriter_Page.textBoxesToCsv(texts);
+
+        System.out.println(s);
+    }
+
+    @org.junit.Test
     public void urlInfoListToCsv() {
 
         UrlInfo urlInfo = new UrlInfo("google", "http://test.com", "heading", "description");
