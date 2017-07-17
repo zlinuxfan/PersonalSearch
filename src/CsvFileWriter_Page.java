@@ -57,67 +57,66 @@ public class CsvFileWriter_Page {
             fileWriter.append(NEW_LINE_SEPARATOR);
 
             for (Page page : pages) {
-                fileWriter.append("\"").append(page.getNameParagraph()).append("\"");
+                fileWriter.append(addQuotes(page.getNameParagraph()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getGuidOfGroup()).append("\"");
+                fileWriter.append(addQuotes(page.getGuidOfGroup()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getGuidOfParentGroup()).append("\"");
+                fileWriter.append(addQuotes(page.getGuidOfParentGroup()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getSectionTitle()).append("\"");
+                fileWriter.append(addQuotes(page.getSectionTitle()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getSectionDescription()).append("\"");
+                fileWriter.append(addQuotes(page.getSectionDescription()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getSectionKeywords()).append("\"");
+                fileWriter.append(addQuotes(page.getSectionKeywords()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getBriefDescriptionSection()).append("\"");
+                fileWriter.append(addQuotes(page.getBriefDescriptionSection()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getPathSection()).append("\"");
+                fileWriter.append(addQuotes(page.getPathSection()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getPartitionSortingSection()).append("\"");
+                fileWriter.append(addQuotes(page.getPartitionSortingSection()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getGuidOfElement()).append("\"");
+                fileWriter.append(addQuotes(page.getGuidOfElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getNameOfElement()).append("\"");
+                fileWriter.append(addQuotes(page.getNameOfElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getBriefDescriptionElement()).append("\"");
+                fileWriter.append(addQuotes(page.getBriefDescriptionElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getTextOfElement()).append("\"");
+                fileWriter.append(addQuotes(page.getTextOfElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getTags()).append("\"");
+                fileWriter.append(addQuotes(page.getTags()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getElementActiviti()).append("\"");
+                fileWriter.append(addQuotes(page.getElementActiviti()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getSortingOrderOfElement()).append("\"");
+                fileWriter.append(addQuotes(page.getSortingOrderOfElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getPathlElement()).append("\"");
+                fileWriter.append(addQuotes(page.getPathlElement()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getElementTitle()).append("\"");
+                fileWriter.append(addQuotes(page.getElementTitle()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getElementDescription()).append("\"");
+                fileWriter.append(addQuotes(page.getElementDescription()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getElementKeywords()).append("\"");
+                fileWriter.append(addQuotes(page.getElementKeywords()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.isIndexing() ? "1": "0").append("\"");
+                fileWriter.append(addQuotes(page.isIndexing() ? "1": "0"));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getData()).append("\"");
+                fileWriter.append(addQuotes(page.getData()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getDataOfPublication()).append("\"");
+                fileWriter.append(addQuotes(page.getDataOfPublication()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getDataOfPublicationEnd()).append("\"");
+                fileWriter.append(addQuotes(page.getDataOfPublicationEnd()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getPathImage()).append("\"");
+                fileWriter.append(addQuotes(page.getPathImage()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getPathImageSmall()).append("\"");
+                fileWriter.append(addQuotes(page.getPathImageSmall()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getShortcuts()).append("\"");
+                fileWriter.append(addQuotes(page.getShortcuts()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(page.getSiteUserID()).append("\"");
+                fileWriter.append(addQuotes(page.getSiteUserID()));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(textBoxesToCsv(page.getTextBoxes())).append("\"");
-                fileWriter.append("\"").append(crateIframe(560, 315, page.getPathYouTube(), 0)).append("\"");
+                fileWriter.append(textBoxesToCsv(page.getTextBoxes()));
+                fileWriter.append(crateIframe(560, 315, page.getPathYouTube(), 0));
                 fileWriter.append(DELIMITER);
-                fileWriter.append("\"").append(urlInfoListToCsv(page.getUrlInfoList())).append("\"");
-                fileWriter.append(DELIMITER);
+                fileWriter.append(urlInfoListToCsv(page.getUrlInfoList()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
 
@@ -137,14 +136,26 @@ public class CsvFileWriter_Page {
 
     }
 
-    private static String crateIframe(int width, int height, String src, int frameborder) {
-        return String.format(
-                "<iframe width=\"%d\" height=\"%d\" src=\"%s\" frameborder=\"%d\" allowfullscreen></iframe>",
-                width, height, src, frameborder
-        );
+    static String addQuotes(String line) {
+        return  line.equals("") ? "" : String.format("\"%s\"", line);
     }
 
-    private static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
+    static String crateIframe(int width, int height, String src, int frameborder) {
+       String str;
+
+       if (src.equals("")) {
+           str = "";
+       } else {
+           str = String.format(
+                   "<iframe width=\"%d\" height=\"%d\" src=\"%s\" frameborder=\"%d\" allowfullscreen></iframe>",
+                   width, height, src, frameborder
+           );
+       }
+
+       return str;
+    }
+
+    static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
         for (UrlInfo urlInfo: urlInfoList) {
@@ -172,7 +183,7 @@ public class CsvFileWriter_Page {
         for (OnceText onceText: textBoxes) {
             stringBuilder.append(
                     String.format("\"%s\"%s\"%s\"",
-                            onceText.getTextBox(), DELIMITER, onceText.isCheckBox() ? "1" : "0"
+                            onceText.getTextBox(), DELIMITER, onceText.isCheckBox() ? '1' : '0'
                     ))
                     .append(DELIMITER);
             if (counter == NUMBER_TEXT_BOX) {

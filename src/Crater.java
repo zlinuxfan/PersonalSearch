@@ -18,13 +18,13 @@ public class Crater {
 
         Google google = new Google();
         List<Page> pages = new ArrayList<>();
-        GuidOfElement guidOfElement = new GuidOfElement(236);
+        GuidOfElement guidOfElement = new GuidOfElement(247);
 
         int counter = 0;
 
         for (Resource resource: resources) {
 
-            if (counter >= 100) {
+            if (counter >= 2) {
                 break;
             }
 
@@ -58,14 +58,17 @@ public class Crater {
 
             pages.add(page);
 
-            CsvFileWriter_Page.write(("data/result/" + String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
-            pages.remove(0);
+// If need one page in one file;
+//            CsvFileWriter_Page.write(("data/result/" + String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
+//            pages.remove(0);
 
             counter++;
         }
-        
-//        CsvFileWriter_Page.write(sdf.format(System.currentTimeMillis())+".csv", pages);
-
+        CsvFileWriter_Page.write("data/result" +
+                guidOfElement.getStartGuid() +
+                "-" +
+                guidOfElement.getGuid() +
+                ".csv", pages);
     }
 
     private static ArrayList<String> readFile(String fileName) {

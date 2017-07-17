@@ -38,8 +38,23 @@ public class Utilities {
     public static Document getDocument(String url) {
         Document document = null;
 
+//        System.setProperty("http.proxyHost", "176.104.218.40");
+//        System.setProperty("http.proxyPort", "8081");
+        System.setProperty("http.proxyHost", "95.80.98.41");
+        System.setProperty("http.proxyPort", "8080");
+
+//        Proxy proxy = new Proxy(
+//                Proxy.Type.HTTP,
+//                InetSocketAddress.createUnresolved("178.22.148.122", 3129)
+//        );
+
         try {
-            document = Jsoup.connect(url).get();
+            document = Jsoup
+                    .connect(url)
+//                    .proxy(proxy)
+//                    .userAgent("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2") //
+//                    .header("Content-Language", "en-US") //
+                    .get();
         } catch (IOException e) {
             log.error("Jsoup.connect error: " + url);
         }
