@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CsvFileWriter_Page {
 
@@ -114,7 +115,7 @@ public class CsvFileWriter_Page {
                 fileWriter.append(addQuotes(page.getSiteUserID()));
                 fileWriter.append(DELIMITER);
                 fileWriter.append(textBoxesToCsv(page.getTextBoxes()));
-                fileWriter.append(addQuotes(crateIframe(560, 315, page.getPathYouTube(), 0)));
+                fileWriter.append(addQuotes(page.getIdYouTube()));
                 fileWriter.append(DELIMITER);
                 fileWriter.append(urlInfoListToCsv(page.getUrlInfoList()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
@@ -136,8 +137,8 @@ public class CsvFileWriter_Page {
 
     }
 
-    static String addQuotes(String line) {
-        return  line.equals("") ? "" : String.format("\"%s\"", line);
+    private static String addQuotes(String line) {
+        return (line == null | Objects.equals(line, "")) ? "" : String.format("\"%s\"", line);
     }
 
     static String crateIframe(int width, int height, String src, int frameborder) {

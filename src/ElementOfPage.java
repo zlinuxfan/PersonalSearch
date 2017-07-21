@@ -3,6 +3,7 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,11 +43,11 @@ class ElementOfPage {
     }
 
     private void createTextBox() {
-        System.out.println("Crate text boxes ...");
+        System.out.print("Crate text boxes ... ");
         Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator();
         String text;
 
-        while (this.textBoxes.size() <= NUMBER_TEXT_BOX && urlInfoIterator.hasNext()) {
+        while (this.textBoxes.size() < NUMBER_TEXT_BOX && urlInfoIterator.hasNext()) {
             try {
                 UrlInfo next = urlInfoIterator.next();
                 if (!next.isYoutube()) {
@@ -55,16 +56,22 @@ class ElementOfPage {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();
                         }
-
                     }
+                System.out.print(this.textBoxes.size() + " > ");
             } catch (NoSuchElementException e) {
                 log.error("java.util.NoSuchElementException.");
             }
         }
+        System.out.println();
     }
 
     private static String getText(String url) {
-        Document document = Utilities.getDocument(url);
+        Document document = null;
+        try {
+            document = Utilities.getDocument(url);
+        } catch (IOException e) {
+            log.error("    error: \"" + url + "\" сan not be processed.");
+        }
         return document != null ? document.select("div.content").text() : "";
     }
 }

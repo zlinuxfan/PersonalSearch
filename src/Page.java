@@ -1,3 +1,5 @@
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,12 @@ public class Page {
     private String siteUserID; // Идентификатор пользователя сайта
     private ArrayList<OnceText> textBoxes;
     private String pathYouTube;
+
+    public String getIdYouTube() {
+        return idYouTube;
+    }
+
+    private String idYouTube;
     private List<UrlInfo> urlInfoList;
 
     public static class Builder {
@@ -68,6 +76,7 @@ public class Page {
         private String siteUserID = "0"; // Идентификатор пользователя сайта
         private ArrayList<OnceText> textBoxes;
         private String pathYouTube;
+        private String idYouTube;
         private List<UrlInfo> urlInfoList;
 
         public Builder(String guidOfElement,
@@ -85,7 +94,19 @@ public class Page {
             this.pathElement = pathElement;
             this.textBoxes = textBoxes;
             this.pathYouTube = selectPathYouTube(urlInfoList);
+            this.idYouTube = !pathYouTube.equals("") ? crateIdYouTube(this.pathYouTube) : "";
             this.urlInfoList = urlInfoList;
+        }
+
+        private String crateIdYouTube(String pathYouTube) {
+            String[] pairs = pathYouTube.split("\\?");
+
+            try {
+                return URLDecoder.decode(pairs[1].substring(2), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return "";
         }
 
         private String selectPathYouTube(List<UrlInfo> urlInfoList) {
@@ -253,6 +274,7 @@ public class Page {
         this.siteUserID = builder.siteUserID;
         this.textBoxes = builder.textBoxes;
         this.pathYouTube = builder.pathYouTube;
+        this.idYouTube = builder.idYouTube;
         this.urlInfoList = builder.urlInfoList;
     }
 
@@ -370,10 +392,6 @@ public class Page {
 
     public ArrayList<OnceText> getTextBoxes() {
         return textBoxes;
-    }
-
-    public String getPathYouTube() {
-        return pathYouTube;
     }
 
     public List<UrlInfo> getUrlInfoList() {

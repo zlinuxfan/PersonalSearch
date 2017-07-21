@@ -1,10 +1,33 @@
-2017-07-17 14:28:40,076 ERROR Utils.Utilities  - Jsoup.connect error: http://balkon.guru/rasteniya/ovoschi/pravila-vyraschivaniya-zeleni-na-balkone-i-podokonnike.html
-2017-07-17 14:29:14,273 ERROR Utils.Utilities  - Jsoup.connect error: https://lady.mail.ru/article/467323-kak-vyrastit-zelen-na-podokonnike/
-2017-07-17 14:29:20,390 ERROR Utils.Utilities  - Jsoup.connect error: https://pustunchik.ua/online-school/biology/botany/gorod-na-pidvikonni
-2017-07-17 14:30:18,443 ERROR Utils.Utilities  - Jsoup.connect error: http://ecotonkosti.ru/kak-vyrastit-ogorod-na-podokonnike.html
-2017-07-17 18:50:18,328 ERROR Utils.Utilities  - Jsoup.connect error: http://tania-meduza.livejournal.com/23032.html
-2017-07-17 18:50:53,179 ERROR Utils.Utilities  - Jsoup.connect error: http://olgushka1971.ru/vyrashivanie-ovoshhej/kak-vyrastit-arahis-na-svoyom-ogorode
-2017-07-17 18:51:50,727 ERROR Utils.Utilities  - Jsoup.connect error: https://otvet.mail.ru/question/35768241
-2017-07-17 18:58:31,851 ERROR Utils.Utilities  - Jsoup.connect error: https://otvet.mail.ru/question/35768241
-2017-07-17 18:58:56,938 ERROR Utils.Utilities  - Jsoup.connect error: https://ogoogorod.ru/ogorod/morkov/poliv-morkovi.html
-2017-07-17 19:07:34,536 ERROR Utils.Utilities  - Jsoup.connect error: http://greeninhouse.ru/kak-vyrastit-gorox-v-domashnix-usloviyax.html
+2017-07-21 12:34:37,811 ERROR ElementOfPage  -     error: "http://www.aif.ru/dacha/ogorod/lichnyy_opyt_pyat_sekretov_vyraschivaniya_vkusnogo_schavelya" is not processed.
+2017-07-21 12:46:22,584 ERROR ElementOfPage  -     error: "https://ogorod.mirtesen.ru/blog/43342333449/next" сan not be processed.
+2017-07-21 12:47:01,369 ERROR ElementOfPage  -     error: "http://www.7ya.ru/article/Gryadki-na-dachnom-uchastke-Kak-vyrastit-svoj-pervyj-urozhaj/" сan not be processed.
+2017-07-21 13:08:10,124 ERROR ElementOfPage  -     error: "http://www.aif.ru/dacha/ogorod/lichnyy_opyt_pyat_sekretov_vyraschivaniya_vkusnogo_schavelya" сan not be processed.
+2017-07-21 14:04:38,503 ERROR ElementOfPage  -     error: "https://eteplica.ru/ovoshhi-v-teplicax/vyrashhivanie-shhavelya-v-teplice.html" сan not be processed.
+2017-07-21 14:05:21,650 ERROR ElementOfPage  -     error: "http://greensector.ru/sad-i-ogorod/kak-i-kogda-sazhat-chesnok-vesnojj.html" сan not be processed.
+2017-07-21 14:26:17,445 ERROR ElementOfPage  -     error: "http://belochka77.ru/vyirashhivanie-shhavelya-iz-semyan-rannyaya-zelen.html" сan not be processed.
+2017-07-21 14:26:23,424 ERROR ElementOfPage  -     error: "https://eteplica.ru/ovoshhi-v-teplicax/vyrashhivanie-shhavelya-v-teplice.html" сan not be processed.
+2017-07-21 14:26:36,474 ERROR ElementOfPage  -     error: "https://www.podmoskovje.com/brokkoli/" сan not be processed.
+2017-07-21 14:28:04,323 ERROR ElementOfPage  -     error: "http://www.superda4nik.ru/kogda-ubirat-zimnij-chesnok/" сan not be processed.
+2017-07-21 14:29:13,453 ERROR ElementOfPage  -     error: "http://kustroz.ru/ovoshhnye/urozhaj-chesnoka.html" сan not be processed.
+2017-07-21 14:29:48,813 ERROR ElementOfPage  -     error: "http://umsad.ru/morkov/kogda-sobirat-urozhaj-morkovi" сan not be processed.
+2017-07-21 14:30:47,461 ERROR ElementOfPage  -     error: "http://olgushka1971.ru/vyrashivanie-ovoshhej/kogda-ubirat-kapustu-na-hranenie-s-gryadki" сan not be processed.
+2017-07-21 14:31:43,325 ERROR ElementOfPage  -     error: "https://ogorodbezzabot.ru/ovoshti/hranenie-kornevogo-seldereja.html" сan not be processed.
+2017-07-21 14:41:28,524 ERROR ElementOfPage  -     error: "https://gusiyabloni.com/sadogorod/ovoshhi/tykva/tykva-butylochnaya-vyrashhivanie.html" сan not be processed.
+2017-07-21 14:42:10,390 ERROR ElementOfPage  -     error: "https://otvet.mail.ru/question/43126470" сan not be processed.
+2017-07-21 14:42:43,654 ERROR ElementOfPage  -     error: "http://olgushka1971.ru/vyrashivanie-ovoshhej/pochemu-ne-krasneyut-pomidory-v-teplitse" сan not be processed.
+2017-07-21 14:43:26,179 ERROR ElementOfPage  -     error: "https://www.kp.ru/daily/24511/662253/" сan not be processed.
+2017-07-21 14:44:06,284 ERROR ElementOfPage  -     error: "http://floweryvale.ru/our-garden/gorchat-kabachki.html" сan not be processed.
+2017-07-21 14:44:16,849 ERROR ElementOfPage  -     error: "https://eteplica.ru/ovoshhi-v-teplicax/pochemu-gorchat-ogurcy.html" сan not be processed.
+2017-07-21 14:44:48,537 ERROR ElementOfPage  -     error: "http://sovetysadovodam.ru/ovoshhi/pochemu-ogurcy-gorkie.html" сan not be processed.
+2017-07-21 14:45:20,876 ERROR ElementOfPage  -     error: "https://otvet.mail.ru/question/43869434" сan not be processed.
+2017-07-21 14:46:07,557 ERROR ElementOfPage  -     error: "https://otvet.mail.ru/question/44028988" сan not be processed.
+2017-07-21 14:46:52,949 ERROR ElementOfPage  -     error: "http://selomoe.ru/ogurcy/zhelteyut-v-teplice.html" сan not be processed.
+2017-07-21 14:47:48,779 ERROR ElementOfPage  -     error: "http://sadisibiri.ru/malina-spinat.html" сan not be processed.
+2017-07-21 14:48:21,561 ERROR ElementOfPage  -     error: "https://www.podmoskovje.com/shpinat-malina/" сan not be processed.
+2017-07-21 14:48:53,978 ERROR ElementOfPage  -     error: "http://floweryvale.ru/our-garden/why-tomatoes-crack.html" сan not be processed.
+2017-07-21 14:49:27,816 ERROR ElementOfPage  -     error: "http://sovetysadovodam.ru/ovoshhi/pochemu-treskayutsya-pomidory-pri-sozrevanii.html" сan not be processed.
+2017-07-21 14:50:13,042 ERROR ElementOfPage  -     error: "http://howtostore.ru/carrots-in-fridge/" сan not be processed.
+2017-07-21 14:50:47,233 ERROR ElementOfPage  -     error: "http://ovosheved.ru/morkov/xranenie-morkovi.html" сan not be processed.
+2017-07-21 14:50:57,494 ERROR ElementOfPage  -     error: "http://howtostore.ru/onion-in-apartment-and-in-garden/" сan not be processed.
+2017-07-21 14:51:30,763 ERROR ElementOfPage  -     error: "http://www.superda4nik.ru/kogda-ubirat-luk/" сan not be processed.
+2017-07-21 14:51:47,783 ERROR ElementOfPage  -     error: "http://www.spravedlivo.ru/5_70235.html" сan not be processed.

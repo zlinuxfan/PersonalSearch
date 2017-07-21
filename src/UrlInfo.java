@@ -1,5 +1,7 @@
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 
 public class UrlInfo {
     private URL link;
@@ -40,5 +42,16 @@ public class UrlInfo {
 
     public boolean isYoutube() {
         return youtube;
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        UrlInfo urlInfo = new UrlInfo("", "https://www.youtube.com/watch?v=yx95cFI9kZU", "", "");
+
+        System.out.println(urlInfo.getLink().getQuery());
+
+        String[] pairs = urlInfo.getLink().getQuery().split("\\?");
+
+        System.out.println(URLDecoder.decode(pairs[0].substring(2), "UTF-8"));
+
     }
 }

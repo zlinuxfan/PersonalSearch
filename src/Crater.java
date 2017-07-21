@@ -1,4 +1,6 @@
 import Utils.GuidOfElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class Crater {
 
+    private static Logger log = LoggerFactory.getLogger(Crater.class);
+
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
 
@@ -16,15 +20,20 @@ public class Crater {
     
     public static void main(String[] args) {
 
-        int startGuidOfElement = 256;
+        int startGuidOfElement = 339;
 
         ArrayList<Page> pages = createPages(startGuidOfElement);
 
-        CsvFileWriter_Page.write("data/result/" +
-                startGuidOfElement +
-                "-" +
-                (startGuidOfElement + pages.size() - 2) +
-                ".csv", pages);
+        if (pages.size() > 1) {
+            CsvFileWriter_Page.write("data/result/" +
+                    startGuidOfElement +
+                    "-" +
+                    (startGuidOfElement + pages.size() - 2) +
+                    ".csv", pages);
+        } else {
+            System.out.println("Error: pages is empty.");
+        }
+
     }
 
 
@@ -39,17 +48,32 @@ public class Crater {
 
         for (Resource resource: resources) {
 
-            if (counter >= 3) {
-                break;
-            }
+//            if (counter >= 3) {
+//                break;
+//            }
 
             System.out.println("Create page for request: " + resource.getNameRequest());
+            resource.setProcessedNameRequest(
+                    "#" +
+                            guidOfElement.getGuid() +
+                            resource.getNameRequest() + ";" +
+                            resource.getTitle() + ";" +
+                            resource.getDescription() + ";" +
+                            resource.getTextOfElement()
+            );
+
+            ArrayList<UrlInfo> urlInfos;
+            try {
+                urlInfos = google.find(resource.getNameRequest());
+            } catch (Exception e) {
+                log.error("    error: \"" + resource.getNameRequest() + "\" is not processed.");
+                continue;
+            }
 
             ElementOfPage elementOfPage = new ElementOfPage(
                     resource.getNameRequest(),
-                    google.find(resource.getNameRequest()
-                    ));
-
+                    urlInfos
+                    );
 
             ArrayList<OnceText> onceTexts = elementOfPage
                     .getTextBoxes()

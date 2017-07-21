@@ -1,5 +1,6 @@
 public class Resource {
     private String nameRequest;
+    private String processedNameRequest;
     private String title;
     private String description;
     private String phraseOfElement;
@@ -34,5 +35,9 @@ public class Resource {
 
     public void setTextOfElement(String textOfElement) {
         this.textOfElement = textOfElement;
+    }
+
+    public void setProcessedNameRequest(String processedNameRequest) {
+        this.processedNameRequest = processedNameRequest;
     }
 }
