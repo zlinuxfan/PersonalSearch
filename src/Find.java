@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
 interface Find {
-    ArrayList<UrlInfo> find(String requestName);
+    ArrayList<UrlInfo> find(String requestName) throws Exception;
 }

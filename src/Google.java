@@ -9,16 +9,15 @@ class Google implements Find {
     private static final String NAME = "google";
 
     @Override
-    public ArrayList<UrlInfo> find(String requestName) {
+    public ArrayList<UrlInfo> find(String requestName) throws Exception {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = Utilities.getDocument(url);
+        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
+        ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
         h3Descriptions = doc.select("span.st");
-
-        ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         for (int i = 0; i < h3s.size() && i < h3Descriptions.size(); i++) {
             urlInfoList.add(new UrlInfo(

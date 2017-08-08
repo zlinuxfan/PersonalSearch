@@ -1,0 +1,22 @@
+2017-08-05 12:13:05,394 ERROR Crater  -     error: "Как избавиться от страха " is not processed.java.net.SocketTimeoutException: connect timed out
+2017-08-05 12:27:25,266 ERROR ElementOfPage  -     error: "http://kak-izbavitsya-ot.com/prostudy.html" сan not be processed.
+2017-08-05 12:28:49,000 ERROR ElementOfPage  -     error: "https://www.passion.ru/beauty/kosmetologiya/kak-izbavitsya-ot-shramov-i-rubcov-na-lice-91492.htm?full" сan not be processed.
+2017-08-05 12:30:05,814 ERROR ElementOfPage  -     error: "http://www.womanhit.ru/health-and-beauty/health/652316-allergiyu-mozhno-vyilechit.html" сan not be processed.
+2017-08-05 12:31:48,875 ERROR ElementOfPage  -     error: "http://happiness-you.ru/10-glavnih-deystiy-kak-poborot-stesnitelnost/" сan not be processed.
+2017-08-05 12:34:09,907 ERROR ElementOfPage  -     error: "https://eda.ru/video/krupy/kak-svarit-ris-68" сan not be processed.
+2017-08-05 12:34:53,445 ERROR ElementOfPage  -     error: "https://fun.facenews.ua/articles/kak_pravilno_tselovatsja_veselye_video-244.html" сan not be processed.
+2017-08-05 12:35:24,813 ERROR ElementOfPage  -     error: "https://weekend.rambler.ru/read/kak-pravilno-celovatsya-po-russki-2017-06-03/" сan not be processed.
+2017-08-05 12:35:57,757 ERROR ElementOfPage  -     error: "https://help.mail.ru/mail-help/helpful/screenshot" сan not be processed.
+2017-08-05 12:35:57,768 ERROR ElementOfPage  -     error: "https://yandex.ru/support/common/troubleshooting/screenshot.html" сan not be processed.
+2017-08-05 12:46:36,919 ERROR ElementOfPage  -     error: "http://www.pobedish.ru/main/strah" сan not be processed.
+2017-08-05 12:47:38,521 ERROR ElementOfPage  -     error: "https://alcostad.ru/kak-ostanovit-ponos-v-domashnih-usloviyah-bystro-prosto-i-legko/" сan not be processed.
+2017-08-05 12:48:33,861 ERROR ElementOfPage  -     error: "http://kak-izbavitsya-ot.com/volos-na-lice.html" сan not be processed.
+2017-08-05 12:49:24,551 ERROR ElementOfPage  -     error: "http://24stoma.ru/maz-ot-shramov.html" сan not be processed.
+2017-08-05 12:52:16,859 ERROR ElementOfPage  -     error: "https://fun.facenews.ua/articles/kak_pravilno_tselovatsja_veselye_video-244.html" сan not be processed.
+2017-08-05 12:52:49,363 ERROR ElementOfPage  -     error: "http://www.neumeka.ru/kak_sdelat_skrinshot_print_screen.html" сan not be processed.
+2017-08-05 12:53:20,104 ERROR ElementOfPage  -     error: "http://www.neumeka.ru/kak_sdelat_skrinshot_print_screen.html" сan not be processed.
+2017-08-05 12:53:50,301 ERROR ElementOfPage  -     error: "https://help.mail.ru/mail-help/helpful/screenshot" сan not be processed.
+2017-08-05 12:53:50,308 ERROR ElementOfPage  -     error: "https://yandex.ru/support/common/troubleshooting/screenshot.html" сan not be processed.
+2017-08-05 13:05:28,184 ERROR ElementOfPage  -     error: "https://fun.facenews.ua/articles/kak_pravilno_tselovatsja_veselye_video-244.html" сan not be processed.
+2017-08-05 13:06:03,355 ERROR ElementOfPage  -     error: "https://help.mail.ru/mail-help/helpful/screenshot" сan not be processed.
+2017-08-05 13:06:03,364 ERROR ElementOfPage  -     error: "https://yandex.ru/support/common/troubleshooting/screenshot.html" сan not be processed.

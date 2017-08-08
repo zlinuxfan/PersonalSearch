@@ -1,10 +1,13 @@
 package Utils;
 
 public class GuidOfElement {
-    private int guid = 0;
+    private int guid;
+
+    private int startGuid;
 
     public GuidOfElement(int numberOfStartGuid) {
-        this.guid = numberOfStartGuid;
+        this.startGuid = numberOfStartGuid;
+        this.guid = numberOfStartGuid-1;
     }
 
     public int getGuid() {
@@ -16,4 +19,7 @@ public class GuidOfElement {
         return getGuid();
     }
 
+    public int getStartGuid() {
+        return startGuid;
+    }
 }
