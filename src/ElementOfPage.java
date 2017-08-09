@@ -52,10 +52,11 @@ class ElementOfPage {
             try {
                 UrlInfo next = urlInfoIterator.next();
                 if (!next.isYoutube() && !next.isBlackList()) {
-                        text = getText(next.getLink().toString());
+                        text = (getText(next.getLink().toString())).replace("\n", "");
                         if (!text.equals("") && text.length() < 10_000) {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();
+                            System.out.print(" [" + text.length() + "] ");
                         }
                     }
                 System.out.print(this.textBoxes.size()+ " > ");
