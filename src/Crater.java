@@ -1,4 +1,3 @@
-import Utils.GuidOfElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -6,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Crater {
@@ -14,40 +14,23 @@ public class Crater {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 15;
+    private static final int COUNTER_PAGES_IN_FILE = 20;
 
     private static final ArrayList<String> textsOfElements = readResource("data/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/resource.csv"));
     
     public static void main(String[] args) {
-
-        int startGuidOfElement = 61;
-
-        createPages(startGuidOfElement);
-
+        createPages();
     }
 
 
-    private static void createPages(int startGuidOfElement) {
-        GuidOfElement guidOfElement = new GuidOfElement(startGuidOfElement);
+    private static void createPages() {
 //        Page mainPage = CsvFileReader_Page.readCsvFile("data/mainResource.csv").get(0);
         Google google = new Google();
         ArrayList<Page> pages = new ArrayList<>();
-//        pages.add(mainPage);
-        int counter = resources.size();
         int counterFiles = 1;
 
         for (Resource resource: resources) {
-
-            System.out.println("(" + counter-- + ") Create page for request: " + resource.getNameRequest());
-            resource.setProcessedNameRequest(
-                    "#" +
-                            guidOfElement.getGuid() +
-                            resource.getNameRequest() + ";" +
-                            resource.getTitle() + ";" +
-                            resource.getDescription() + ";" +
-                            resource.getTextOfElement()
-            );
 
             ArrayList<UrlInfo> urlInfos;
             try {
@@ -142,12 +125,9 @@ public class Crater {
     }
 
     private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources) {
-        int counter = 0;
+        final Random random = new Random();
         for (Resource resource: rawResources) {
-            if (counter >= textsOfElements.size()) {
-                counter = 0;
-            }
-            resource.setTextOfElement(textsOfElements.get(counter++).replace("хх1хх", resource.getPhraseOfElement()));
+            resource.setTextOfElement(textsOfElements.get(random.nextInt()).replace("хх1хх", resource.getPhraseOfElement()));
         }
         return rawResources;
     }
