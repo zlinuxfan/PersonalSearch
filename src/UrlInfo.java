@@ -31,6 +31,15 @@ public class UrlInfo {
         blackLists.add("www.uznayvse.ru");
         blackLists.add("www.novostioede.ru");
         blackLists.add("www.foodclub.ru");
+        blackLists.add("eda5.ru");
+        blackLists.add("www.good-menu.ru");
+        blackLists.add("fitomania.com");
+        blackLists.add("www.foodclub.ru");
+        blackLists.add("www.arabio.ru");
+        blackLists.add("zakupka.tv");
+        blackLists.add("www.knorr.ru");
+        blackLists.add("www.povarenok.ru");
+        blackLists.add("notefood.ru");
 
     }
 

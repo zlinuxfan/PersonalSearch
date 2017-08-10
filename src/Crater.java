@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Crater {
@@ -12,12 +13,12 @@ public class Crater {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 15;
+    private static final int COUNTER_PAGES_IN_FILE = 3;
 
-    private static final String filePrefix = "pack_5_";
+    private static final String filePrefix = "pack_6-vk-1_";
 
-    private static final ArrayList<String> textsOfElements = Utilities.readResource("data/textsOfElements.txt");
-    private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/resource.csv"));
+    private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
+    private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/"+filePrefix+"/resource.csv"));
 
     public static void main(String[] args) {
         createPages();
@@ -28,16 +29,23 @@ public class Crater {
         Google google = new Google();
         ArrayList<Page> pages_1 = new ArrayList<>();
         ArrayList<Page> pages_2 = new ArrayList<>();
+        Random random = new Random();
 
         int counter = resources.size();
         int counterFiles = 1;
+        int timeOut;
+        int remainderPages = resources.size();
 
         for (Resource resource : resources) {
+            remainderPages--;
 
             System.out.println("(" + counter-- + ") Create page for request: " + resource.getNameRequest());
 
             ArrayList<UrlInfo> urlInfos;
             try {
+                timeOut = random.nextInt(120);
+                System.out.println("Timeout: " + timeOut + "sec ...");
+                Thread.sleep(timeOut * 1000);
                 urlInfos = google.find(resource.getNameRequest());
             } catch (Exception e) {
                 log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or capcha.");
@@ -87,20 +95,27 @@ public class Crater {
             pages_1.add(page_1);
             pages_2.add(page_2);
 
-            if (pages_1.size() == COUNTER_PAGES_IN_FILE || pages_1.size() == resources.size()) {
+            if (pages_1.size() == COUNTER_PAGES_IN_FILE || remainderPages == 0) {
                 String fileName = filePrefix +
                         ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
-                        ((counterFiles * COUNTER_PAGES_IN_FILE)) ;
-                CsvFileWriter_Page.write("data/result/" + fileName+"_1.csv", pages_1);
-                CsvFileWriter_Page.write("data/result/" + fileName+"_2.csv", pages_2);
+                        ((counterFiles * COUNTER_PAGES_IN_FILE));
+                CsvFileWriter_Page.write("data/" +filePrefix + "/result/" + fileName + "_1.csv", pages_1);
+                CsvFileWriter_Page.write("data/" +filePrefix + "/result/"  + fileName + "_2.csv", pages_2);
                 pages_1.clear();
                 pages_2.clear();
                 counterFiles++;
-                System.out.println("Files name: " + fileName + "_1.csv" + ", " +fileName + "_2.csv");
+                System.out.println("Files name: " + fileName + "_1.csv" + ", " + fileName + "_2.csv");
             }
         }
     }
+
+//    private static ArrayList[] dividedIntoTwo(ArrayList<?> src, int numberOfElements) {
+//        ArrayList[] dst = new ArrayList[2];
+//        ArrayList<?> dst_1 = new ArrayList<>();
+//        ArrayList<?> dst_2 = new ArrayList<>();
+//
+//        return dst;    }
 
     private static ArrayList[] createUrlInforms(ArrayList<UrlInfo> src) {
         ArrayList[] dst = new ArrayList[2];
@@ -131,6 +146,7 @@ public class Crater {
 
         return dst;
     }
+
     private static ArrayList[] createOnceTexts(ArrayList<OnceText> src) {
         ArrayList[] dst = new ArrayList[2];
         ArrayList<OnceText> dst_1 = new ArrayList<>();

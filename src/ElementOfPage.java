@@ -52,7 +52,10 @@ class ElementOfPage {
             try {
                 UrlInfo next = urlInfoIterator.next();
                 if (!next.isYoutube() && !next.isBlackList()) {
-                        text = (getText(next.getLink().toString())).replace("\n", "");
+                        text = ((getText(next.getLink().toString()))
+                                .replace("\n", ""))
+                                .replace(";", "")
+                                .replace("\"", "\"\"");
                         if (!text.equals("") && text.length() < 10_000) {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();
