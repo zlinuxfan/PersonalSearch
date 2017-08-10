@@ -1,8 +1,10 @@
-import Utils.GuidOfElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -15,23 +17,21 @@ public class Crater {
     private static final int NUMBER_ELEMENT = 5;
     private static final int COUNTER_PAGES_IN_FILE = 15;
 
+    private static final String filePrefix = "type_5_";
+
     private static final ArrayList<String> textsOfElements = readResource("data/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/resource.csv"));
 
     public static void main(String[] args) {
-
-        int startGuidOfElement = 61;
-
-        createPages(startGuidOfElement);
-
+        createPages();
     }
 
 
-    private static void createPages(int startGuidOfElement) {
-        GuidOfElement guidOfElement = new GuidOfElement(startGuidOfElement);
+    private static void createPages() {
 //        Page mainPage = CsvFileReader_Page.readCsvFile("data/mainResource.csv").get(0);
         Google google = new Google();
-        ArrayList<Page> pages = new ArrayList<>();
+        ArrayList<Page> pages_1 = new ArrayList<>();
+        ArrayList<Page> pages_2 = new ArrayList<>();
 //        pages.add(mainPage);
         int counter = resources.size();
         int counterFiles = 1;
@@ -39,14 +39,6 @@ public class Crater {
         for (Resource resource : resources) {
 
             System.out.println("(" + counter-- + ") Create page for request: " + resource.getNameRequest());
-            resource.setProcessedNameRequest(
-                    "#" +
-                            guidOfElement.getGuid() +
-                            resource.getNameRequest() + ";" +
-                            resource.getTitle() + ";" +
-                            resource.getDescription() + ";" +
-                            resource.getTextOfElement()
-            );
 
             ArrayList<UrlInfo> urlInfos;
             try {
@@ -61,53 +53,118 @@ public class Crater {
                     urlInfos
             );
 
-            ArrayList<OnceText> onceTexts = elementOfPage
+            ArrayList<OnceText> srcOnceTexts = elementOfPage
                     .getTextBoxes()
                     .stream()
                     .map(textBox -> new OnceText(textBox, false))
                     .collect(Collectors.toCollection(ArrayList::new));
 
-            for (int size = onceTexts.size(); size < NUMBER_TEXT_BOX; size++) {
-                onceTexts.add(new OnceText("", false));
-            }
+            ArrayList[] onceTexts = createOnceTexts(srcOnceTexts);
+            ArrayList[] urlInforms = createUrlInforms(elementOfPage.getUrlInfoList());
 
-            ArrayList<UrlInfo> urlInforms = elementOfPage.getUrlInfoList();
-
-            for (int size = urlInforms.size(); size < NUMBER_ELEMENT; size++) {
-                urlInforms.add(new UrlInfo("", "", "", ""));
-            }
-
-            Page page = new Page.Builder(
+            Page page_1 = new Page.Builder(
                     "",
                     resource.getNameRequest(),
                     "",
                     resource.getTextOfElement(),
                     elementOfPage.getPath(),
-                    onceTexts,
-                    urlInforms
+                    onceTexts[0],
+                    urlInforms[0]
             ).elementDescription(resource.getDescription())
                     .elementTitle(resource.getTitle())
                     .guidOfGroup("") //mainPage.getGuidOfGroup())
                     .build();
 
-            pages.add(page);
+            Page page_2 = new Page.Builder(
+                    "",
+                    resource.getNameRequest(),
+                    "",
+                    resource.getTextOfElement(),
+                    elementOfPage.getPath(),
+                    onceTexts[1],
+                    urlInforms[1]
+            ).elementDescription(resource.getDescription())
+                    .elementTitle(resource.getTitle())
+                    .guidOfGroup("") //mainPage.getGuidOfGroup())
+                    .build();
 
-            if (pages.size() == COUNTER_PAGES_IN_FILE || pages.size() == resources.size()) {
+            pages_1.add(page_1);
+            pages_2.add(page_2);
+
+            if (pages_1.size() == COUNTER_PAGES_IN_FILE || pages_1.size() == resources.size()) {
                 String fileName = ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
-                        ((counterFiles * COUNTER_PAGES_IN_FILE)) +
-                        ".csv";
-                CsvFileWriter_Page.write("data/result/" + fileName, pages);
-                pages.clear();
+                        ((counterFiles * COUNTER_PAGES_IN_FILE)) ;
+                CsvFileWriter_Page.write("data/result/" + filePrefix +fileName+"_1.csv", pages_1);
+                CsvFileWriter_Page.write("data/result/" + filePrefix +fileName+"_2.csv", pages_2);
+                pages_1.clear();
+                pages_2.clear();
                 counterFiles++;
                 System.out.println("File name: " + fileName);
             }
-
-// If need one page in one file;
-//            CsvFileWriter_Page.write(("data/result/" + String.valueOf(guidOfElement.getGuid()) + ".csv"), pages);
-//            pages.remove(0);
-
         }
+    }
+
+    private static ArrayList[] createUrlInforms(ArrayList<UrlInfo> src) {
+        ArrayList[] dst = new ArrayList[2];
+        ArrayList<UrlInfo> dst_1 = new ArrayList<>();
+        ArrayList<UrlInfo> dst_2 = new ArrayList<>();
+
+        if (src.size() >= NUMBER_ELEMENT) {
+            dst_1.addAll(src.subList(0, NUMBER_ELEMENT));
+            dst_2.addAll(src.subList(NUMBER_ELEMENT, src.size()));
+
+            for (int size = dst_2.size(); size < NUMBER_ELEMENT; size++) {
+                dst_2.add(new UrlInfo("", "", "", ""));
+            }
+
+            dst[0] = dst_1;
+            dst[1] = dst_2;
+        } else {
+            for (int size = src.size(); size < NUMBER_ELEMENT; size++) {
+                src.add(new UrlInfo("", "", "", ""));
+            }
+            for (int size = dst_2.size(); size < NUMBER_ELEMENT; size++) {
+                dst_2.add(new UrlInfo("", "", "", ""));
+            }
+
+            dst[0] = dst_1;
+            dst[1] = dst_2;
+        }
+
+        return dst;
+    }
+    private static ArrayList[] createOnceTexts(ArrayList<OnceText> src) {
+        ArrayList[] dst = new ArrayList[2];
+        ArrayList<OnceText> dst_1 = new ArrayList<>();
+        ArrayList<OnceText> dst_2 = new ArrayList<>();
+
+
+        if (src.size() >= NUMBER_TEXT_BOX) {
+            dst_1.addAll(src.subList(0, NUMBER_TEXT_BOX));
+            dst_2.addAll(src.subList(NUMBER_TEXT_BOX, src.size()));
+
+            for (int size = dst_2.size(); size < NUMBER_TEXT_BOX; size++) {
+                dst_2.add(new OnceText("", false));
+            }
+
+            dst[0] = dst_1;
+            dst[1] = dst_2;
+        } else {
+
+            for (int size = src.size(); size < NUMBER_TEXT_BOX; size++) {
+                src.add(new OnceText("", false));
+            }
+
+            for (int size = dst_2.size(); size < NUMBER_TEXT_BOX; size++) {
+                dst_2.add(new OnceText("", false));
+            }
+
+            dst[0] = src;
+            dst[1] = dst_2;
+        }
+
+        return dst;
     }
 
     private static ArrayList<String> readResource(String fileName) {

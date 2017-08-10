@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 class Google implements Find {
-    private static final int NUM_IN_REQUEST = 30;
+    private static final int NUM_IN_REQUEST = 50;
     private static final String NAME = "google";
 
     @Override

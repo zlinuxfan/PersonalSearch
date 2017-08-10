@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 class ElementOfPage {
-    private static final int NUMBER_TEXT_BOX = 3;
+    private static final int NUMBER_TEXT_BOX = 6;
     private static Logger log = LoggerFactory.getLogger(ElementOfPage.class);
 
     private String name;

@@ -27,6 +27,11 @@ public class UrlInfo {
         blackLists.add("health.mail.ru");
         blackLists.add("rivnefest.rv.ua");
         blackLists.add("woman365.ru");
+        blackLists.add("open-cook.ru");
+        blackLists.add("www.uznayvse.ru");
+        blackLists.add("www.novostioede.ru");
+        blackLists.add("www.foodclub.ru");
+
     }
 
     UrlInfo(String source, String link, String heading, String description) {
