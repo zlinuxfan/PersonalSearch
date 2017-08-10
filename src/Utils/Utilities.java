@@ -6,13 +6,12 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -73,5 +72,55 @@ public class Utilities {
         systemProperties.put("proxySet", "true");
         systemProperties.setProperty("http.proxyHost", proxy);
         systemProperties.setProperty("http.proxyPort", port);
+    }
+
+    public static ArrayList<String> readResource(String fileName) {
+        BufferedReader fileReader = null;
+        ArrayList<String> textsOfElements = new ArrayList<>();
+
+        try {
+            fileReader = new BufferedReader(new FileReader(fileName));
+            fileReader.readLine();
+            String line;
+
+            while ((line = fileReader.readLine()) != null) {
+                textsOfElements.add(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Error in FileReader !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                assert fileReader != null;
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Error while closing fileReader !!!");
+                e.printStackTrace();
+            }
+        }
+        return textsOfElements;
+    }
+
+    public static void writeResource(ArrayList<String> textsOfElements) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("data/textsOfElements.txt");
+            for (String str : textsOfElements) {
+                fileWriter.append(str);
+                fileWriter.append("\n");
+            }
+            System.out.println("File textOfElement.txt rewrite successfully !!!");
+        } catch (IOException e) {
+            System.out.println("Error in CsvFileWriter_Page !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                assert fileWriter != null;
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+            }
+        }
     }
 }

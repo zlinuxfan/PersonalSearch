@@ -1,10 +1,7 @@
+import Utils.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -17,22 +14,21 @@ public class Crater {
     private static final int NUMBER_ELEMENT = 5;
     private static final int COUNTER_PAGES_IN_FILE = 15;
 
-    private static final String filePrefix = "type_5_";
+    private static final String filePrefix = "pack_5_";
 
-    private static final ArrayList<String> textsOfElements = readResource("data/textsOfElements.txt");
+    private static final ArrayList<String> textsOfElements = Utilities.readResource("data/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/resource.csv"));
 
     public static void main(String[] args) {
         createPages();
     }
 
-
     private static void createPages() {
-//        Page mainPage = CsvFileReader_Page.readCsvFile("data/mainResource.csv").get(0);
+
         Google google = new Google();
         ArrayList<Page> pages_1 = new ArrayList<>();
         ArrayList<Page> pages_2 = new ArrayList<>();
-//        pages.add(mainPage);
+
         int counter = resources.size();
         int counterFiles = 1;
 
@@ -92,15 +88,16 @@ public class Crater {
             pages_2.add(page_2);
 
             if (pages_1.size() == COUNTER_PAGES_IN_FILE || pages_1.size() == resources.size()) {
-                String fileName = ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
+                String fileName = filePrefix +
+                        ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE)) ;
-                CsvFileWriter_Page.write("data/result/" + filePrefix +fileName+"_1.csv", pages_1);
-                CsvFileWriter_Page.write("data/result/" + filePrefix +fileName+"_2.csv", pages_2);
+                CsvFileWriter_Page.write("data/result/" + fileName+"_1.csv", pages_1);
+                CsvFileWriter_Page.write("data/result/" + fileName+"_2.csv", pages_2);
                 pages_1.clear();
                 pages_2.clear();
                 counterFiles++;
-                System.out.println("File name: " + fileName);
+                System.out.println("Files name: " + fileName + "_1.csv" + ", " +fileName + "_2.csv");
             }
         }
     }
@@ -167,56 +164,6 @@ public class Crater {
         return dst;
     }
 
-    private static ArrayList<String> readResource(String fileName) {
-        BufferedReader fileReader = null;
-        ArrayList<String> textsOfElements = new ArrayList<>();
-
-        try {
-            fileReader = new BufferedReader(new FileReader(fileName));
-            fileReader.readLine();
-            String line;
-
-            while ((line = fileReader.readLine()) != null) {
-                textsOfElements.add(line);
-            }
-        } catch (Exception e) {
-            System.out.println("Error in FileReader !!!");
-            e.printStackTrace();
-        } finally {
-            try {
-                assert fileReader != null;
-                fileReader.close();
-            } catch (IOException e) {
-                System.out.println("Error while closing fileReader !!!");
-                e.printStackTrace();
-            }
-        }
-        return textsOfElements;
-    }
-
-    private static void writeResource(ArrayList<String> textsOfElements) {
-        FileWriter fileWriter = null;
-        try {
-            fileWriter = new FileWriter("data/textsOfElements.txt");
-            for (String str : textsOfElements) {
-                fileWriter.append(str);
-                fileWriter.append("\n");
-            }
-            System.out.println("File textOfElement.txt rewrite successfully !!!");
-        } catch (IOException e) {
-            System.out.println("Error in CsvFileWriter_Page !!!");
-            e.printStackTrace();
-        } finally {
-            try {
-                assert fileWriter != null;
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
-            }
-        }
-    }
-
     private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources) {
 
         if (rawResources.size() > textsOfElements.size()) {
@@ -231,7 +178,7 @@ public class Crater {
             iterator.remove();
         }
 
-        writeResource(textsOfElements);
+        Utilities.writeResource(textsOfElements);
 
         return rawResources;
     }
