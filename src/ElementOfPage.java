@@ -54,6 +54,7 @@ class ElementOfPage {
                 if (!next.isYoutube() && !next.isBlackList()) {
                         text = ((getText(next.getLink().toString()))
                                 .replace("\n", ""))
+                                .replace("\r", "")
                                 .replace(";", "")
                                 .replace("\"", "\"\"");
                         if (!text.equals("") && text.length() < 10_000) {

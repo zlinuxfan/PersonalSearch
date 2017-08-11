@@ -13,9 +13,9 @@ public class Crater {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 3;
+    private static final int COUNTER_PAGES_IN_FILE = 15;
 
-    private static final String filePrefix = "pack_6-vk-1_";
+    private static final String filePrefix = "pack_6_cook";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/"+filePrefix+"/resource.csv"));
@@ -194,7 +194,7 @@ public class Crater {
             iterator.remove();
         }
 
-        Utilities.writeResource(textsOfElements);
+        Utilities.writeResource(textsOfElements, filePrefix);
 
         return rawResources;
     }
