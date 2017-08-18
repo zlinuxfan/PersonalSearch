@@ -27,13 +27,20 @@ public class CsvFileReader_Resource {
 
                 String[] tokens = line.split(DELIMITER);
 
-                if (tokens.length > 0) {
+                if (tokens.length > 3) {
                     resource.add(new Resource(
                             tokens[RESOURCE_NAME_REQUEST],
                             tokens[RESOURCE_TITLE],
                             tokens[RESOURCE_DESCRIPTION],
                             tokens[RESOURCE_TEXT_OF_ELEMENT]
                             ));
+                } else {
+                    resource.add(new Resource(
+                            tokens[RESOURCE_NAME_REQUEST],
+                            tokens[RESOURCE_TITLE],
+                            tokens[RESOURCE_TITLE],
+                            tokens[RESOURCE_DESCRIPTION]
+                    ));
                 }
             }
         }
