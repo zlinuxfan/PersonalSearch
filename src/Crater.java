@@ -13,12 +13,18 @@ public class Crater {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 15;
+    private static final int COUNTER_PAGES_IN_FILE = 90;
 
-    private static final String filePrefix = "pack_6_cook";
+    private static final boolean isTest = false;
+
+    private static final String filePrefix = "garden";
+    private static final String resourceManagement = "cycle";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
-    private static final ArrayList<Resource> resources = modifyResource(CsvFileReader_Resource.readCsvFile("data/"+filePrefix+"/resource.csv"));
+    private static final ArrayList<Resource> resources = modifyResource(
+            CsvFileReader_Resource.readCsvFile("data/"+filePrefix+"/resource.csv"),
+            resourceManagement
+    );
 
     public static void main(String[] args) {
         createPages();
@@ -33,6 +39,7 @@ public class Crater {
 
         int counter = resources.size();
         int counterFiles = 1;
+        int counterTest = 0;
         int timeOut;
         int remainderPages = resources.size();
 
@@ -96,7 +103,7 @@ public class Crater {
             pages_2.add(page_2);
 
             if (pages_1.size() == COUNTER_PAGES_IN_FILE || remainderPages == 0) {
-                String fileName = filePrefix +
+                String fileName = filePrefix + "_" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE));
@@ -107,6 +114,13 @@ public class Crater {
                 counterFiles++;
                 System.out.println("Files name: " + fileName + "_1.csv" + ", " + fileName + "_2.csv");
             }
+            if (isTest  && counterTest > COUNTER_PAGES_IN_FILE) {
+                break;
+            }
+            counterTest++;
+        }
+        if (ElementOfPage.getBedUrls().size() > 0) {
+            Utilities.writeResource(ElementOfPage.getBedUrls(), "/bedUrl.txt");
         }
     }
 
@@ -180,8 +194,42 @@ public class Crater {
         return dst;
     }
 
-    private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources) {
+    private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources, String type) {
+        ArrayList<Resource>resources;
+        switch (type) {
+            case "cycle":
+                resources = cycleModifyResource(rawResources);
+                break;
+            case "select":
+                // In a row, removing the used ones
+                resources = selectModifyResource(rawResources);
+                break;
+            case "random":
+                resources = randomModifyResource(rawResources);
+                break;
+            default:
+                throw new IllegalArgumentException("This type " + type + " is not supported");
+        }
+        return resources;
+    }
 
+    private static ArrayList<Resource> randomModifyResource(ArrayList<Resource> rawResources) {
+        throw new UnsupportedOperationException("Type \"random\" is not support.");
+    }
+
+    private static ArrayList<Resource> cycleModifyResource(ArrayList<Resource> rawResources) {
+        int counter = 0;
+        for (Resource resource: rawResources) {
+            if (counter >= textsOfElements.size()) {
+                counter = 0;
+            }
+            resource.setTextOfElement(textsOfElements.get(counter++).replace("хх1хх", resource.getPhraseOfElement()));
+        }
+
+        return rawResources;
+    }
+
+    private static ArrayList<Resource> selectModifyResource(ArrayList<Resource> rawResources) {
         if (rawResources.size() > textsOfElements.size()) {
             throw new IllegalArgumentException("Lacks data in file textOfElement.txt");
         }
@@ -194,8 +242,7 @@ public class Crater {
             iterator.remove();
         }
 
-        Utilities.writeResource(textsOfElements, filePrefix);
-
+        Utilities.writeResource(textsOfElements, filePrefix + "/textsOfElements.txt");
         return rawResources;
     }
 }
