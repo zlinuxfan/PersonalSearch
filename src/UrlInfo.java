@@ -1,7 +1,8 @@
-import java.io.UnsupportedEncodingException;
+import Utils.Utilities;
+
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class UrlInfo {
@@ -12,36 +13,7 @@ public class UrlInfo {
     private boolean youtube;
     private boolean blackList;
 
-    private static HashSet<String> blackLists = new HashSet<>();
-
-    static {
-        blackLists.add("kitchenmag.ru");
-        blackLists.add("lady.mail.ru");
-        blackLists.add("ovkuse.ru");
-        blackLists.add("pileshka.ru");
-        blackLists.add("sovkusom.ru");
-        blackLists.add("ok.ru");
-        blackLists.add("otvet.mail.ru");
-        blackLists.add("takprosto.cc");
-        blackLists.add("vk.com");
-        blackLists.add("health.mail.ru");
-        blackLists.add("rivnefest.rv.ua");
-        blackLists.add("woman365.ru");
-        blackLists.add("open-cook.ru");
-        blackLists.add("www.uznayvse.ru");
-        blackLists.add("www.novostioede.ru");
-        blackLists.add("www.foodclub.ru");
-        blackLists.add("eda5.ru");
-        blackLists.add("www.good-menu.ru");
-        blackLists.add("fitomania.com");
-        blackLists.add("www.foodclub.ru");
-        blackLists.add("www.arabio.ru");
-        blackLists.add("zakupka.tv");
-        blackLists.add("www.knorr.ru");
-        blackLists.add("www.povarenok.ru");
-        blackLists.add("notefood.ru");
-
-    }
+    private static HashSet<String> blackLists = getBlackList();
 
     UrlInfo(String source, String link, String heading, String description) {
         this.source = source;
@@ -82,14 +54,8 @@ public class UrlInfo {
         return blackList;
     }
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        UrlInfo urlInfo = new UrlInfo("", "https://www.youtube.com/watch?v=yx95cFI9kZU", "", "");
-
-        System.out.println(urlInfo.getLink().getQuery());
-
-        String[] pairs = urlInfo.getLink().getQuery().split("\\?");
-
-        System.out.println(URLDecoder.decode(pairs[0].substring(2), "UTF-8"));
-
+    private static HashSet<String> getBlackList() {
+        ArrayList<String> list = Utilities.readResource("data/bedUrl.txt");
+        return new HashSet<>(list);
     }
 }

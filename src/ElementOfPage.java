@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,12 +20,18 @@ class ElementOfPage {
     private List<String> textBoxes = new ArrayList<>();
     private ArrayList<UrlInfo> urlInfoList;
 
+    static private ArrayList<String> bedUrls = new ArrayList<>();
+
     ElementOfPage(String name, ArrayList<UrlInfo> urlInfoList) {
 
         this.name = name;
         this.path = (Utilities.toTransliteration(name)).replace(" ", "-");
         this.urlInfoList = urlInfoList;
         createTextBox();
+    }
+
+    public static ArrayList<String> getBedUrls() {
+        return bedUrls;
     }
 
     public String getName() {
@@ -74,11 +82,25 @@ class ElementOfPage {
 
     private static String getText(String url) {
         Document document = null;
+        URL bedUrl;
         try {
             document = Utilities.getDocument(url);
         } catch (IOException e) {
             log.error("    error: \"" + url + "\" сan not be processed.");
+            try {
+                bedUrl = new URL(url);
+                if (bedUrl.getHost() != null) {
+                    bedUrls.add(bedUrl.getHost());
+                }
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
         }
         return document != null ? document.select("div.content").text() : "";
+    }
+
+    public static void main(String[] args) throws MalformedURLException {
+        URL url = new URL("https://eteplica.ru/gryadki/rassada-v-pelenkax-vyrashhivanie-pikirovka-video-yulii-minyaevoj.html");
+        System.out.println(url.getHost());
     }
 }
