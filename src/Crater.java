@@ -17,7 +17,7 @@ public class Crater {
 
     private static final boolean isTest = false;
 
-    private static final String filePrefix = "garden";
+    private static final String filePrefix = "blanks";
     private static final String resourceManagement = "cycle";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");

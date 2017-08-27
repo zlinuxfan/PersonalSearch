@@ -109,7 +109,7 @@ public class Utilities {
                 fileWriter.append(str);
                 fileWriter.append("\n");
             }
-            System.out.println("File textOfElement.txt rewrite successfully !!!");
+            System.out.println("File" + textsOfElements + " rewrite successfully !!!");
         } catch (IOException e) {
             System.out.println("Error in CsvFileWriter_Page !!!");
             e.printStackTrace();
