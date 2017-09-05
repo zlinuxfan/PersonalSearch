@@ -17,8 +17,8 @@ public class Crater {
 
     private static final boolean isTest = false;
 
-    private static final String filePrefix = "blanks";
-    private static final String resourceManagement = "cycle";
+    private static final String filePrefix = "soup";
+    private static final String resourceManagement = "random";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(
@@ -214,7 +214,14 @@ public class Crater {
     }
 
     private static ArrayList<Resource> randomModifyResource(ArrayList<Resource> rawResources) {
-        throw new UnsupportedOperationException("Type \"random\" is not support.");
+        Random random = new Random();
+
+        for (Resource resource: rawResources) {
+
+            resource.setTextOfElement(textsOfElements.get(random.nextInt(textsOfElements.size())).replace("хх1хх", resource.getPhraseOfElement()));
+        }
+
+        return rawResources;
     }
 
     private static ArrayList<Resource> cycleModifyResource(ArrayList<Resource> rawResources) {
