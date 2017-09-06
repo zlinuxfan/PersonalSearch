@@ -17,12 +17,15 @@ public class Crater {
 
     private static final boolean isTest = false;
 
-    private static final String filePrefix = "cook/firstСourse_1";
+    private static final String filePath = "cook/";
+    private static final String filePrefix = "secondСourse_2";
     private static final String resourceManagement = "random";
 
-    private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
+    private static final ArrayList<String> textsOfElements = Utilities.readResource(
+            "data/" + filePath + filePrefix + "/textsOfElements.txt");
     private static final ArrayList<Resource> resources = modifyResource(
-            CsvFileReader_Resource.readCsvFile("data/"+filePrefix+"/resource.csv"),
+            CsvFileReader_Resource.readCsvFile(
+                    "data/" + filePath + filePrefix + "/resource.csv"),
             resourceManagement
     );
 
@@ -106,15 +109,15 @@ public class Crater {
                 String fileName = filePrefix + "_" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
-                        ((pages_1.size()));
-                CsvFileWriter_Page.write("data/" +filePrefix + "/result/" + fileName + "_1.csv", pages_1);
-                CsvFileWriter_Page.write("data/" +filePrefix + "/result/"  + fileName + "_2.csv", pages_2);
+                        (counterFiles * COUNTER_PAGES_IN_FILE +pages_1.size());
+                CsvFileWriter_Page.write("data/" + filePath + filePrefix + "/result/" + fileName + "_1.csv", pages_1);
+                CsvFileWriter_Page.write("data/" + filePath + filePrefix + "/result/" + fileName + "_2.csv", pages_2);
                 pages_1.clear();
                 pages_2.clear();
                 counterFiles++;
                 System.out.println("Files name: " + fileName + "_1.csv" + ", " + fileName + "_2.csv");
             }
-            if (isTest  && counterTest > COUNTER_PAGES_IN_FILE) {
+            if (isTest && counterTest > COUNTER_PAGES_IN_FILE) {
                 break;
             }
             counterTest++;
@@ -195,7 +198,7 @@ public class Crater {
     }
 
     private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources, String type) {
-        ArrayList<Resource>resources;
+        ArrayList<Resource> resources;
         switch (type) {
             case "cycle":
                 resources = cycleModifyResource(rawResources);
@@ -216,7 +219,7 @@ public class Crater {
     private static ArrayList<Resource> randomModifyResource(ArrayList<Resource> rawResources) {
         Random random = new Random();
 
-        for (Resource resource: rawResources) {
+        for (Resource resource : rawResources) {
 
             resource.setTextOfElement(textsOfElements.get(random.nextInt(textsOfElements.size())).replace("хх1хх", resource.getPhraseOfElement()));
         }
@@ -226,7 +229,7 @@ public class Crater {
 
     private static ArrayList<Resource> cycleModifyResource(ArrayList<Resource> rawResources) {
         int counter = 0;
-        for (Resource resource: rawResources) {
+        for (Resource resource : rawResources) {
             if (counter >= textsOfElements.size()) {
                 counter = 0;
             }
@@ -249,7 +252,7 @@ public class Crater {
             iterator.remove();
         }
 
-        Utilities.writeResource(textsOfElements, filePrefix + "/textsOfElements.txt");
+        Utilities.writeResource(textsOfElements, filePath + filePrefix + "/textsOfElements.txt");
         return rawResources;
     }
 }
