@@ -17,7 +17,7 @@ public class Crater {
 
     private static final boolean isTest = false;
 
-    private static final String filePrefix = "soup";
+    private static final String filePrefix = "cook/firstСourse_1";
     private static final String resourceManagement = "random";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource("data/" +filePrefix+ "/textsOfElements.txt");
@@ -106,7 +106,7 @@ public class Crater {
                 String fileName = filePrefix + "_" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
-                        ((counterFiles * COUNTER_PAGES_IN_FILE));
+                        ((pages_1.size()));
                 CsvFileWriter_Page.write("data/" +filePrefix + "/result/" + fileName + "_1.csv", pages_1);
                 CsvFileWriter_Page.write("data/" +filePrefix + "/result/"  + fileName + "_2.csv", pages_2);
                 pages_1.clear();
