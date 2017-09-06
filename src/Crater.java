@@ -13,12 +13,12 @@ public class Crater {
 
     private static final int NUMBER_TEXT_BOX = 3;
     private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 90;
+    private static final int COUNTER_PAGES_IN_FILE = 150;
 
     private static final boolean isTest = false;
 
     private static final String filePath = "cook/";
-    private static final String filePrefix = "secondСourse_2";
+    private static final String filePrefix = "secondCourse_2";
     private static final String resourceManagement = "random";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource(
@@ -30,7 +30,9 @@ public class Crater {
     );
 
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
         createPages();
+        System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
     }
 
     private static void createPages() {
