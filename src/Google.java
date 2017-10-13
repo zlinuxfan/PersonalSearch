@@ -46,10 +46,15 @@ class Google implements Find {
     * "pt":"Самбук абрикосовый. - YouTube","rid":"-ZefWrD1-hYtLM","rmt":0,"rt":0,"ru":"https://www.youtube.com/watch?v\u003db34HTfC-RZ8","s":"","st":"YouTube","th":168,"tu":"https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcQxfefauqsg95SbMTSweqlLa6nWI8zdgqmhApvitJrxDSAsEcAN","tw":300}
      */
 
-    public ArrayList<Picture> findPicture(String requestName, int numberPicture) throws IOException {
+    public ArrayList<Picture> findPicture(String requestName, int numberPicture) {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST + "&tbm=isch";
 
-        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
+        Document doc = null; //connectUrl(url);  //getDocument(url);
+        try {
+            doc = Utilities.getDocument(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Elements div_jsnames = doc.select("div.rg_meta");
         ArrayList<Picture> pictures = new ArrayList<>();
 
@@ -58,14 +63,18 @@ class Google implements Find {
 
         for (int index = 1; index <= numberPicture; index++) {
             mapper = new ObjectMapper();
-            rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
+            try {
+                rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
+                pictures.add(new Picture(
+                        requestName,
+                        rootNode.get("ou").asText(),
+                        rootNode.get("oh").asInt(),
+                        rootNode.get("ow").asInt()
+                ));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            pictures.add(new Picture(
-                    requestName,
-                    rootNode.get("ou").asText(),
-                    rootNode.get("oh").asInt(),
-                    rootNode.get("ow").asInt()
-            ));
         }
 
         return pictures;
