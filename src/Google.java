@@ -50,33 +50,35 @@ class Google implements Find {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST + "&tbm=isch";
 
         Document doc = null; //connectUrl(url);  //getDocument(url);
+        ArrayList<Picture> pictures = new ArrayList<>();
+
         try {
             doc = Utilities.getDocument(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Elements div_jsnames = doc.select("div.rg_meta");
-        ArrayList<Picture> pictures = new ArrayList<>();
 
-        ObjectMapper mapper;
-        JsonNode rootNode;
+        if (doc != null) {
+            Elements div_jsnames = doc.select("div.rg_meta");
 
-        for (int index = 1; index <= numberPicture; index++) {
-            mapper = new ObjectMapper();
-            try {
-                rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
-                pictures.add(new Picture(
-                        requestName,
-                        rootNode.get("ou").asText(),
-                        rootNode.get("oh").asInt(),
-                        rootNode.get("ow").asInt()
-                ));
-            } catch (IOException e) {
-                e.printStackTrace();
+            ObjectMapper mapper;
+            JsonNode rootNode;
+
+            for (int index = 1; index <= numberPicture; index++) {
+                mapper = new ObjectMapper();
+                try {
+                    rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
+                    pictures.add(new Picture(
+                            requestName,
+                            rootNode.get("ou").asText(),
+                            rootNode.get("oh").asInt(),
+                            rootNode.get("ow").asInt()
+                    ));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-
         }
-
         return pictures;
     }
 
