@@ -56,6 +56,12 @@ public class Page {
         this.pathImageSmall = pathImageSmall;
     }
 
+    public void setPathYouTube(String pathYouTube) {
+        this.pathYouTube = pathYouTube;
+        this.idYouTube = !pathYouTube.equals("") ? Builder.crateIdYouTube(this.pathYouTube) : "";
+    }
+
+
     public static class Builder {
         private String nameParagraph = "";
         private String guidOfGroup = "";
