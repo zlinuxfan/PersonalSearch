@@ -5,12 +5,22 @@ public class Resource {
     private String description;
     private String phraseOfElement;
     private String textOfElement;
+    private String commonQuestion;
 
     public Resource(String nameRequest, String title, String description, String phraseOfElement) {
         this.nameRequest = nameRequest;
         this.title = title;
         this.description = description;
         this.phraseOfElement = phraseOfElement;
+    }
+
+    public Resource(String nameRequest, String title, String description, String phraseOfElement, String commonQuestion) {
+        this(nameRequest, title, description, phraseOfElement);
+        this.commonQuestion = commonQuestion;
+    }
+
+    public String getCommonQuestion() {
+        return commonQuestion;
     }
 
     public String getNameRequest() {

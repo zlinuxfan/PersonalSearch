@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 class Google implements Find {
-    private static final int NUM_IN_REQUEST = 20;
+    private static final int NUM_IN_REQUEST = 60;
     private static final String NAME = "google";
 
     @Override
@@ -69,5 +69,9 @@ class Google implements Find {
         }
 
         return pictures;
+    }
+
+    public String findYouTube() {
+        return "";
     }
 }

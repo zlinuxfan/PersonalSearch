@@ -2,6 +2,7 @@ import Utils.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -11,14 +12,12 @@ public class Crater {
 
     private static Logger log = LoggerFactory.getLogger(Crater.class);
 
-    private static final int NUMBER_TEXT_BOX = 3;
-    private static final int NUMBER_ELEMENT = 5;
-    private static final int COUNTER_PAGES_IN_FILE = 150;
+    private static final int COUNTER_PAGES_IN_FILE = 3;
 
     private static final boolean isTest = false;
 
     private static final String filePath = "cook/";
-    private static final String filePrefix = "dessert";
+    private static final String filePrefix = "salads_2";
     private static final String resourceManagement = "random";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource(
@@ -38,8 +37,7 @@ public class Crater {
     private static void createPages() {
 
         Google google = new Google();
-        ArrayList<Page> pages_1 = new ArrayList<>();
-        ArrayList<Page> pages_2 = new ArrayList<>();
+        ArrayList<Page> pages = new ArrayList<>();
         Random random = new Random();
 
         int counter = resources.size();
@@ -55,7 +53,7 @@ public class Crater {
 
             ArrayList<UrlInfo> urlInfos;
             try {
-                timeOut = random.nextInt(120);
+                timeOut = random.nextInt(50);
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
                 urlInfos = google.find(resource.getNameRequest());
@@ -75,128 +73,60 @@ public class Crater {
                     .map(textBox -> new OnceText(textBox, false))
                     .collect(Collectors.toCollection(ArrayList::new));
 
-            ArrayList[] onceTexts = createOnceTexts(srcOnceTexts);
-            ArrayList[] urlInforms = createUrlInforms(elementOfPage.getUrlInfoList());
+            srcOnceTexts.get(0).setCheckBox(false);
 
-            Page page_1 = new Page.Builder(
+            ArrayList<Picture> pictures = new ArrayList<>();
+            try {
+                pictures = google.findPicture(resource.getNameRequest(), 3);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Page page = new Page.Builder(
                     "",
                     resource.getNameRequest(),
                     "",
                     resource.getTextOfElement(),
                     elementOfPage.getPath(),
-                    onceTexts[0],
-                    urlInforms[0]
+                    srcOnceTexts,
+                    elementOfPage.getUrlInfoList()
             ).elementDescription(resource.getDescription())
                     .elementTitle(resource.getTitle())
                     .guidOfGroup("") //mainPage.getGuidOfGroup())
+                    .pathImage(pictures.size() > 0 ? pictures.get(0).getUrl() : "")
                     .build();
 
-            Page page_2 = new Page.Builder(
-                    "",
-                    resource.getNameRequest(),
-                    "",
-                    resource.getTextOfElement(),
-                    elementOfPage.getPath(),
-                    onceTexts[1],
-                    urlInforms[1]
-            ).elementDescription(resource.getDescription())
-                    .elementTitle(resource.getTitle())
-                    .guidOfGroup("") //mainPage.getGuidOfGroup())
-                    .build();
+            page.setPathImageSmall(page.getPathImage());
 
-            pages_1.add(page_1);
-            pages_2.add(page_2);
+            if (page.getIdYouTube().isEmpty()) {
+                page.setPathYouTube(google.findYouTube());
+            }
 
-            if (pages_1.size() == COUNTER_PAGES_IN_FILE || remainderPages == 0) {
+            if (page.getIdYouTube().isEmpty() || page.getPathImage().isEmpty() || page.getTextBoxes().size() == 0) {
+                page.setIndexing(false);
+            }
+
+            pages.add(page);
+
+            if (pages.size() == COUNTER_PAGES_IN_FILE || remainderPages == 0) {
                 String fileName = filePrefix + "_" +
                         ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + 1) +
                         "-" +
-                        ((counterFiles * COUNTER_PAGES_IN_FILE) +pages_1.size());
-                CsvFileWriter_Page.write("data/" + filePath + filePrefix + "/result/" + fileName + "_1.csv", pages_1);
-                CsvFileWriter_Page.write("data/" + filePath + filePrefix + "/result/" + fileName + "_2.csv", pages_2);
-                pages_1.clear();
-                pages_2.clear();
+                        ((counterFiles * COUNTER_PAGES_IN_FILE) - COUNTER_PAGES_IN_FILE + pages.size());
+                CsvFileWriter_Page.write("data/" + filePath + filePrefix + "/result/" + fileName + ".csv", pages);
+                pages.clear();
                 counterFiles++;
-                System.out.println("Files name: " + fileName + "_1.csv" + ", " + fileName + "_2.csv");
+                System.out.println("Files name: " + fileName + ".csv");
             }
             if (isTest && counterTest > COUNTER_PAGES_IN_FILE) {
                 break;
             }
             counterTest++;
         }
+
         if (ElementOfPage.getBedUrls().size() > 0) {
-            Utilities.writeResource(ElementOfPage.getBedUrls(), "/bedUrl.txt");
+            Utilities.writeResource(ElementOfPage.getBedUrls(), "/bedUrl.txt", true);
         }
-    }
-
-//    private static ArrayList[] dividedIntoTwo(ArrayList<?> src, int numberOfElements) {
-//        ArrayList[] dst = new ArrayList[2];
-//        ArrayList<?> dst_1 = new ArrayList<>();
-//        ArrayList<?> dst_2 = new ArrayList<>();
-//
-//        return dst;    }
-
-    private static ArrayList[] createUrlInforms(ArrayList<UrlInfo> src) {
-        ArrayList[] dst = new ArrayList[2];
-        ArrayList<UrlInfo> dst_1 = new ArrayList<>();
-        ArrayList<UrlInfo> dst_2 = new ArrayList<>();
-
-        if (src.size() >= NUMBER_ELEMENT) {
-            dst_1.addAll(src.subList(0, NUMBER_ELEMENT));
-            dst_2.addAll(src.subList(NUMBER_ELEMENT, src.size()));
-
-            for (int size = dst_2.size(); size < NUMBER_ELEMENT; size++) {
-                dst_2.add(new UrlInfo("", "", "", ""));
-            }
-
-            dst[0] = dst_1;
-            dst[1] = dst_2;
-        } else {
-            for (int size = src.size(); size < NUMBER_ELEMENT; size++) {
-                src.add(new UrlInfo("", "", "", ""));
-            }
-            for (int size = dst_2.size(); size < NUMBER_ELEMENT; size++) {
-                dst_2.add(new UrlInfo("", "", "", ""));
-            }
-
-            dst[0] = dst_1;
-            dst[1] = dst_2;
-        }
-
-        return dst;
-    }
-
-    private static ArrayList[] createOnceTexts(ArrayList<OnceText> src) {
-        ArrayList[] dst = new ArrayList[2];
-        ArrayList<OnceText> dst_1 = new ArrayList<>();
-        ArrayList<OnceText> dst_2 = new ArrayList<>();
-
-
-        if (src.size() >= NUMBER_TEXT_BOX) {
-            dst_1.addAll(src.subList(0, NUMBER_TEXT_BOX));
-            dst_2.addAll(src.subList(NUMBER_TEXT_BOX, src.size()));
-
-            for (int size = dst_2.size(); size < NUMBER_TEXT_BOX; size++) {
-                dst_2.add(new OnceText("", false));
-            }
-
-            dst[0] = dst_1;
-            dst[1] = dst_2;
-        } else {
-
-            for (int size = src.size(); size < NUMBER_TEXT_BOX; size++) {
-                src.add(new OnceText("", false));
-            }
-
-            for (int size = dst_2.size(); size < NUMBER_TEXT_BOX; size++) {
-                dst_2.add(new OnceText("", false));
-            }
-
-            dst[0] = src;
-            dst[1] = dst_2;
-        }
-
-        return dst;
     }
 
     private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources, String type) {
@@ -254,7 +184,7 @@ public class Crater {
             iterator.remove();
         }
 
-        Utilities.writeResource(textsOfElements, filePath + filePrefix + "/textsOfElements.txt");
+        Utilities.writeResource(textsOfElements, filePath + filePrefix + "/textsOfElements.txt", false);
         return rawResources;
     }
 }

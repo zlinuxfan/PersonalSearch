@@ -104,10 +104,10 @@ public class Utilities {
         return textsOfElements;
     }
 
-    public static void writeResource(ArrayList<String> textsOfElements, String fileName) {
+    public static void writeResource(ArrayList<String> textsOfElements, String fileName, boolean append) {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("data/" + fileName);
+            fileWriter = new FileWriter("data/" + fileName, append);
             for (String str : textsOfElements) {
                 fileWriter.append(str);
                 fileWriter.append("\n");

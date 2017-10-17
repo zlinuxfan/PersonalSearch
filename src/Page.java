@@ -40,8 +40,21 @@ public class Page {
         return idYouTube;
     }
 
+    public void setIndexing(boolean indexing) {
+        this.indexing = indexing;
+    }
+
     private String idYouTube;
     private List<UrlInfo> urlInfoList;
+
+    public void setPathYouTube(String pathYouTube) {
+        this.pathYouTube = pathYouTube;
+        this.idYouTube = !pathYouTube.equals("") ? Builder.crateIdYouTube(this.pathYouTube) : "";
+    }
+
+    public void setPathImageSmall(String pathImageSmall) {
+        this.pathImageSmall = pathImageSmall;
+    }
 
     public static class Builder {
         private String nameParagraph = "";
@@ -52,8 +65,8 @@ public class Page {
         private String sectionKeywords = ""; // Ключевые слова раздела(keywords)
         private String briefDescriptionSection = ""; //Описание раздела
         private String pathSection = ""; // Путь для раздела
-        private String partitionSortingSection = ""; // Порядок сортировки раздела
 
+        private String partitionSortingSection = ""; // Порядок сортировки раздела
         private String guidOfElement = ""; // GUID идентификатор элемента
         private String nameOfElement = ""; // название элемента
         private String briefDescriptionElement = ""; //Описание элемента
@@ -65,8 +78,8 @@ public class Page {
         private String elementTitle = ""; // Заголовок (title)
         private String elementDescription = ""; // Значение мета-тега description для страницы с элементом
         private String elementKeywords = ""; // Значение мета-тега keywords для страницы с элементом
-        private boolean indexing = true; // Флаг индексации
 
+        private boolean indexing = true; // Флаг индексации
         private String data = "02.07.2017 20:49:57";
         private String dataOfPublication = "0000-00-00 00:00:00";
         private String dataOfPublicationEnd  = "0000-00-00 00:00:00"; // Дата завершения публикации;
@@ -77,6 +90,7 @@ public class Page {
         private ArrayList<OnceText> textBoxes;
         private String pathYouTube;
         private String idYouTube;
+
         private List<UrlInfo> urlInfoList;
 
         public Builder(String guidOfElement,
@@ -98,13 +112,15 @@ public class Page {
             this.urlInfoList = urlInfoList;
         }
 
-        private String crateIdYouTube(String pathYouTube) {
+        private static String crateIdYouTube(String pathYouTube) {
             String[] pairs = pathYouTube.split("\\?");
 
-            try {
-                return URLDecoder.decode(pairs[1].substring(2), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            if (pairs.length > 1) {
+                try {
+                    return URLDecoder.decode(pairs[1].substring(2), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
             return "";
         }

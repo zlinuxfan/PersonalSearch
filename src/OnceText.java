@@ -1,5 +1,6 @@
 class OnceText {
     private String textBox;
+
     private boolean checkBox;
 
     public OnceText(String textBox, boolean checkBox) {
@@ -13,5 +14,9 @@ class OnceText {
 
     public boolean isCheckBox() {
         return checkBox;
+    }
+
+    public void setCheckBox(boolean checkBox) {
+        this.checkBox = checkBox;
     }
 }

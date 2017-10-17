@@ -11,6 +11,7 @@ public class CsvFileReader_Resource {
     private static final int RESOURCE_TITLE = 1;
     private static final int RESOURCE_DESCRIPTION = 2;
     private static final int RESOURCE_TEXT_OF_ELEMENT = 3;
+    private static final int RESOURCE_COMMON_QUESTION = 4;
 
     public static ArrayList<Resource> readCsvFile(String fileName) {
 
@@ -27,7 +28,15 @@ public class CsvFileReader_Resource {
 
                 String[] tokens = line.split(DELIMITER);
 
-                if (tokens.length > 3) {
+                if (tokens.length == 5) {
+                    resource.add(new Resource(
+                            tokens[RESOURCE_NAME_REQUEST],
+                            tokens[RESOURCE_TEXT_OF_ELEMENT],
+                            tokens[RESOURCE_TITLE],
+                            tokens[RESOURCE_DESCRIPTION],
+                            tokens[RESOURCE_COMMON_QUESTION]
+                    ));
+                } else if (tokens.length == 4) {
                     resource.add(new Resource(
                             tokens[RESOURCE_NAME_REQUEST],
                             tokens[RESOURCE_TITLE],
