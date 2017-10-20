@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,12 +13,12 @@ public class Crater {
 
     private static Logger log = LoggerFactory.getLogger(Crater.class);
 
-    private static final int COUNTER_PAGES_IN_FILE = 3;
+    private static final int COUNTER_PAGES_IN_FILE = 97;
 
     private static final boolean isTest = false;
 
     private static final String filePath = "cook/";
-    private static final String filePrefix = "salads_2";
+    private static final String filePrefix = "salads_3";
     private static final String resourceManagement = "random";
 
     private static final ArrayList<String> textsOfElements = Utilities.readResource(
@@ -30,6 +31,7 @@ public class Crater {
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
+        System.out.println("Star work: " + Utilities.convertToTime(startTime));
         createPages();
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
     }
@@ -52,13 +54,18 @@ public class Crater {
             System.out.println("(" + counter-- + ") Create page for request: " + resource.getNameRequest());
 
             ArrayList<UrlInfo> urlInfos;
+            ArrayList<Picture> pictures;
+
             try {
+                pictures = google.findPicture(resource.getNameRequest(), 3);
+
                 timeOut = random.nextInt(50);
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
+
                 urlInfos = google.find(resource.getNameRequest());
             } catch (Exception e) {
-                log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or capcha.");
+                log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or captcha.");
                 continue;
             }
 
@@ -74,13 +81,6 @@ public class Crater {
                     .collect(Collectors.toCollection(ArrayList::new));
 
             srcOnceTexts.get(0).setCheckBox(false);
-
-            ArrayList<Picture> pictures = new ArrayList<>();
-            try {
-                pictures = google.findPicture(resource.getNameRequest(), 3);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             Page page = new Page.Builder(
                     "",
@@ -99,10 +99,21 @@ public class Crater {
             page.setPathImageSmall(page.getPathImage());
 
             if (page.getIdYouTube().isEmpty()) {
-                page.setPathYouTube(google.findYouTube());
+                try {
+                    System.out.println("Timeout YouTube: " + timeOut + "sec ...");
+                    try {
+                        Thread.sleep(timeOut * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    page.setPathYouTube(google.findYouTube(resource.getNameRequest(), 1, 10).get(0));
+                } catch (IOException e) {
+                    log.error("For \"" + resource.getNameRequest() + "\" do not create youTube Id.");
+                    page.setIndexing(false);
+                }
             }
 
-            if (page.getIdYouTube().isEmpty() || page.getPathImage().isEmpty() || page.getTextBoxes().size() == 0) {
+            if (page.getPathImage().isEmpty() || page.getTextBoxes().size() == 0) {
                 page.setIndexing(false);
             }
 
@@ -127,6 +138,11 @@ public class Crater {
         if (ElementOfPage.getBedUrls().size() > 0) {
             Utilities.writeResource(ElementOfPage.getBedUrls(), "/bedUrl.txt", true);
         }
+
+        HashSet<String> clearBedUrl = new HashSet<>(Utilities.readResource("/bedUrl.txt"));
+        ArrayList<String> clearBedUrlList = new ArrayList<>();
+        clearBedUrl.addAll(clearBedUrlList);
+        Utilities.writeResource(clearBedUrlList, "/bedUrl.txt", false);
     }
 
     private static ArrayList<Resource> modifyResource(ArrayList<Resource> rawResources, String type) {
@@ -165,7 +181,7 @@ public class Crater {
             if (counter >= textsOfElements.size()) {
                 counter = 0;
             }
-            resource.setTextOfElement(textsOfElements.get(counter++).replace("хх1хх", resource.getPhraseOfElement()));
+            resource.setTextOfElement(textsOfElements.get(counter++).replace("хх1хх", resource.getCommonQuestion()));
         }
 
         return rawResources;

@@ -71,7 +71,19 @@ class Google implements Find {
         return pictures;
     }
 
-    public String findYouTube() {
-        return "";
+    public ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws IOException {
+        String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage ;
+
+        Elements h3r;
+        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
+        ArrayList<String> youTubeUrls = new ArrayList<>();
+
+        h3r = doc.select("h3.r a");
+
+        for (int index = 1; index <= numberAds; index++) {
+            youTubeUrls.add(h3r.get(0).select("a").first().attr("href"));
+        }
+
+        return youTubeUrls;
     }
 }

@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Google_Test {
@@ -20,6 +21,11 @@ public class Google_Test {
         for (Picture picture : request) {
             System.out.println(picture.getUrl());
         }
+    }
+
+    @Test
+    public void findYouTube() throws IOException {
+        ArrayList<String> youTubeUrls = google.findYouTube("Как приготовить самбук абрикосовый", 3, 10);
 
     }
 

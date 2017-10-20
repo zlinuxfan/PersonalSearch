@@ -49,7 +49,6 @@ public class CsvFileWriter_Page {
     public static void write(String fileName, List<Page> pages) {
         FileWriter fileWriter = null;
 
-
         try {
             fileWriter = new FileWriter(fileName);
             //Write the CSV file header
