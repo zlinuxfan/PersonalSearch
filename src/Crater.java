@@ -57,9 +57,9 @@ public class Crater {
             ArrayList<Picture> pictures;
 
             try {
-                pictures = google.findPicture(resource.getNameRequest(), 3);
+                pictures = google.findPicture(resource.getNameRequest(), 10);
 
-                timeOut = random.nextInt(50);
+                timeOut = random.nextInt(70);
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
 
@@ -81,6 +81,13 @@ public class Crater {
                     .collect(Collectors.toCollection(ArrayList::new));
 
             srcOnceTexts.get(0).setCheckBox(false);
+            String pathImage = "";
+            for (Picture picture : pictures) {
+                if (picture.getProtocol().equals("http")) {
+                    pathImage = picture.getUrl();
+                    break;
+                }
+            }
 
             Page page = new Page.Builder(
                     "",
@@ -93,10 +100,9 @@ public class Crater {
             ).elementDescription(resource.getDescription())
                     .elementTitle(resource.getTitle())
                     .guidOfGroup("") //mainPage.getGuidOfGroup())
-                    .pathImage(pictures.size() > 0 ? pictures.get(0).getUrl() : "")
+                    .pathImage(pathImage)
+                    .pathImageSmall(pathImage)
                     .build();
-
-            page.setPathImageSmall(page.getPathImage());
 
             if (page.getIdYouTube().isEmpty()) {
                 try {
@@ -139,9 +145,9 @@ public class Crater {
             Utilities.writeResource(ElementOfPage.getBedUrls(), "/bedUrl.txt", true);
         }
 
-        HashSet<String> clearBedUrl = new HashSet<>(Utilities.readResource("/bedUrl.txt"));
+        HashSet<String> blackBedUrl = new HashSet<>(Utilities.readResource("data/bedUrl.txt"));
         ArrayList<String> clearBedUrlList = new ArrayList<>();
-        clearBedUrl.addAll(clearBedUrlList);
+        clearBedUrlList.addAll(blackBedUrl);
         Utilities.writeResource(clearBedUrlList, "/bedUrl.txt", false);
     }
 
@@ -196,7 +202,7 @@ public class Crater {
 
         for (Resource resource : rawResources) {
             String text = iterator.next();
-            resource.setTextOfElement(text.replace("хх1хх", resource.getPhraseOfElement()));
+            resource.setTextOfElement(text.replace("хх1хх", resource.getCommonQuestion()));
             iterator.remove();
         }
 

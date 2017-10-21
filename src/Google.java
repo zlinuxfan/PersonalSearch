@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 class Google implements Find {
@@ -68,11 +69,15 @@ class Google implements Find {
                 mapper = new ObjectMapper();
                 try {
                     rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
+
+                    String urlPic = rootNode.get("ou").asText();
+
                     pictures.add(new Picture(
                             requestName,
-                            rootNode.get("ou").asText(),
+                            urlPic,
                             rootNode.get("oh").asInt(),
-                            rootNode.get("ow").asInt()
+                            rootNode.get("ow").asInt(),
+                            new URL(urlPic).getProtocol()
                     ));
                 } catch (IOException e) {
                     e.printStackTrace();

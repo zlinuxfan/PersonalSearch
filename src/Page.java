@@ -47,11 +47,6 @@ public class Page {
     private String idYouTube;
     private List<UrlInfo> urlInfoList;
 
-    public void setPathYouTube(String pathYouTube) {
-        this.pathYouTube = pathYouTube;
-        this.idYouTube = !pathYouTube.equals("") ? Builder.crateIdYouTube(this.pathYouTube) : "";
-    }
-
     public void setPathImageSmall(String pathImageSmall) {
         this.pathImageSmall = pathImageSmall;
     }
