@@ -169,7 +169,7 @@ public class Crater {
 
         for (Resource resource : rawResources) {
 
-            resource.setTextOfElement(textsOfElements.get(random.nextInt(textsOfElements.size())).replace("хх1хх", resource.getPhraseOfElement()));
+            resource.setTextOfElement(textsOfElements.get(random.nextInt(textsOfElements.size())).replace("хх1хх", resource.getCommonQuestion()));
         }
 
         return rawResources;
@@ -196,7 +196,7 @@ public class Crater {
 
         for (Resource resource : rawResources) {
             String text = iterator.next();
-            resource.setTextOfElement(text.replace("хх1хх", resource.getPhraseOfElement()));
+            resource.setTextOfElement(text.replace("хх1хх", resource.getCommonQuestion()));
             iterator.remove();
         }
 
