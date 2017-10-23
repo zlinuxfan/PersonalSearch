@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 class Google implements Find {
@@ -46,28 +47,43 @@ class Google implements Find {
     * "pt":"Самбук абрикосовый. - YouTube","rid":"-ZefWrD1-hYtLM","rmt":0,"rt":0,"ru":"https://www.youtube.com/watch?v\u003db34HTfC-RZ8","s":"","st":"YouTube","th":168,"tu":"https://encrypted-tbn0.gstatic.com/images?q\u003dtbn:ANd9GcQxfefauqsg95SbMTSweqlLa6nWI8zdgqmhApvitJrxDSAsEcAN","tw":300}
      */
 
-    public ArrayList<Picture> findPicture(String requestName, int numberPicture) throws IOException {
+    public ArrayList<Picture> findPicture(String requestName, int numberPicture) {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST + "&tbm=isch";
 
-        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
-        Elements div_jsnames = doc.select("div.rg_meta");
+        Document doc = null; //connectUrl(url);  //getDocument(url);
         ArrayList<Picture> pictures = new ArrayList<>();
 
-        ObjectMapper mapper;
-        JsonNode rootNode;
-
-        for (int index = 1; index <= numberPicture; index++) {
-            mapper = new ObjectMapper();
-            rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
-
-            pictures.add(new Picture(
-                    requestName,
-                    rootNode.get("ou").asText(),
-                    rootNode.get("oh").asInt(),
-                    rootNode.get("ow").asInt()
-            ));
+        try {
+            doc = Utilities.getDocument(url);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        if (doc != null) {
+            Elements div_jsnames = doc.select("div.rg_meta");
+
+            ObjectMapper mapper;
+            JsonNode rootNode;
+
+            for (int index = 1; index <= numberPicture; index++) {
+                mapper = new ObjectMapper();
+                try {
+                    rootNode = mapper.readValue(div_jsnames.get(index).text(), JsonNode.class);
+
+                    String urlPic = rootNode.get("ou").asText();
+
+                    pictures.add(new Picture(
+                            requestName,
+                            urlPic,
+                            rootNode.get("oh").asInt(),
+                            rootNode.get("ow").asInt(),
+                            new URL(urlPic).getProtocol()
+                    ));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return pictures;
     }
 
