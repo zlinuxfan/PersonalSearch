@@ -90,7 +90,7 @@ public class CsvFileReader_Page {
                                     tokens[textOfElement],
                                     tokens[pathlElement],
                                     getOnceTexts(tokens),
-                                    getUrlInfoes(tokens)
+                                    getUrlInfos(tokens)
                             ).nameParagraph(tokens[nameParagraph])
                                     .guidOfGroup(tokens[guidOfGroup])
                                     .guidOfParentGroup(tokens[guidOfParentGroup])
@@ -150,7 +150,7 @@ public class CsvFileReader_Page {
         return onceTexts;
     }
 
-    private static ArrayList<UrlInfo> getUrlInfoes(String[] tokens) {
+    private static ArrayList<UrlInfo> getUrlInfos(String[] tokens) {
         ArrayList<UrlInfo> urlInfos = new ArrayList<>();
 
         UrlInfo urlInfo1 = new UrlInfo(SOURCE, tokens[urlInfo_link1], tokens[urlInfo_title1], tokens[urlInfo_description1]);
