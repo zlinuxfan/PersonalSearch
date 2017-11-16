@@ -1,4 +1,5 @@
 import Utils.Utilities;
+import com.UrlInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.nodes.Document;
@@ -18,7 +19,7 @@ class Google implements Find {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
+        Document doc = Utilities.connectUrl(url); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
@@ -87,14 +88,18 @@ class Google implements Find {
         return pictures;
     }
 
-    public ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws IOException {
+    public ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws Exception {
         String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage ;
 
         Elements h3r;
-        Document doc = Utilities.getDocument(url); //connectUrl(url);  //getDocument(url);
+        Document doc = Utilities.connectUrl(url); //connectUrl(url);  //getDocument(url);
         ArrayList<String> youTubeUrls = new ArrayList<>();
 
         h3r = doc.select("h3.r a");
+
+        if (h3r.size() < 1) {
+            return youTubeUrls;
+        }
 
         for (int index = 1; index <= numberAds; index++) {
             youTubeUrls.add(h3r.get(0).select("a").first().attr("href"));

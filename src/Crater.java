@@ -1,8 +1,10 @@
 import Utils.Utilities;
+import com.OnceText;
+import com.Page;
+import com.UrlInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -113,7 +115,7 @@ public class Crater {
                         e.printStackTrace();
                     }
                     page.setPathYouTube(google.findYouTube(resource.getNameRequest(), 1, 10).get(0));
-                } catch (IOException e) {
+                } catch (Exception e) {
                     log.error("For \"" + resource.getNameRequest() + "\" do not create youTube Id.");
                     page.setIndexing(false);
                 }

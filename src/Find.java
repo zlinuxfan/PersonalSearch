@@ -1,3 +1,5 @@
+import com.UrlInfo;
+
 import java.util.ArrayList;
 
 interface Find {

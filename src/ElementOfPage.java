@@ -1,4 +1,5 @@
 import Utils.Utilities;
+import com.UrlInfo;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

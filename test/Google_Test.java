@@ -1,6 +1,6 @@
+import com.UrlInfo;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Google_Test {
@@ -24,7 +24,7 @@ public class Google_Test {
     }
 
     @Test
-    public void findYouTube() throws IOException {
+    public void findYouTube() throws Exception {
         ArrayList<String> youTubeUrls = google.findYouTube("Как приготовить самбук абрикосовый", 3, 10);
 
     }

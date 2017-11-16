@@ -1,3 +1,7 @@
+import com.OnceText;
+import com.Page;
+import com.UrlInfo;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +47,60 @@ public class CsvFileWriter_Page {
             PAGE_HEADER += "\"" + headerElements[0] + i + "-1\"" + DELIMITER +
                             "\"" + headerElements[1] + i + "-1\"" + DELIMITER +
                             "\"" + headerElements[2] + i + "-1\"" + DELIMITER;
+        }
+    }
+
+    public static void  writeOnly(String fileName, List<Page> pages) {
+        FileWriter fileWriter = null;
+        String[] headerElements = {"Заголовок", "Ссылка", "Описание"};
+        String urls = "";
+
+        for (int i = 2; i <= 5; i++) {
+            urls += "\"" + headerElements[0] + i + "-1\"" + DELIMITER +
+                    "\"" + headerElements[1] + i + "-1\"" + DELIMITER +
+                    "\"" + headerElements[2] + i + "-1\"" + DELIMITER;
+        }
+
+        try {
+            fileWriter = new FileWriter(fileName);
+            //Write the CSV file header
+            fileWriter.append("\"GUID идентификатор элемента\"");
+            fileWriter.append(DELIMITER);
+            fileWriter.append("\"Название элемента\"");
+            fileWriter.append(DELIMITER);
+            fileWriter.append("\"Путь для раздела\"");
+            fileWriter.append(DELIMITER);
+            fileWriter.append("\"Адрес (youtube)\"");
+            fileWriter.append(DELIMITER);
+            fileWriter.append(urls);
+
+            //Add a new line separator after the header
+            fileWriter.append(NEW_LINE_SEPARATOR);
+
+            for (Page page : pages) {
+                fileWriter.append(addQuotes(page.getGuidOfElement()));
+                fileWriter.append(DELIMITER);
+                fileWriter.append(addQuotes(page.getNameOfElement()));
+                fileWriter.append(DELIMITER);
+                fileWriter.append(addQuotes(page.getPathlElement()));
+                fileWriter.append(DELIMITER);
+                fileWriter.append(addQuotes(page.getIdYouTube()));
+                fileWriter.append(DELIMITER);
+                fileWriter.append(urlInfoListToCsvOnly(page.getUrlInfoList()));
+                fileWriter.append(NEW_LINE_SEPARATOR);
+            }
+            System.out.println("CSV file was created successfully !!!");
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter_Page !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                assert fileWriter != null;
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+            }
         }
     }
 
@@ -155,6 +213,11 @@ public class CsvFileWriter_Page {
        return str;
     }
 
+    static String urlInfoListToCsvOnly(List<UrlInfo> urlInfoList) {
+        urlInfoList.remove(0);
+        return urlInfoListToCsv(urlInfoList);
+    }
+
     static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
@@ -178,6 +241,9 @@ public class CsvFileWriter_Page {
     }
 
     static String textBoxesToCsv(ArrayList<OnceText> textBoxes) {
+        if (textBoxes == null) {
+            return "";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
         for (OnceText onceText: textBoxes) {
