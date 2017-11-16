@@ -29,7 +29,10 @@ public class Run {
         long startTime = System.currentTimeMillis();
         System.out.println("Star work: " + Utilities.convertToTime(startTime));
 
-//        removeWrapping("AddFields/data/" + inPutFileName);
+        File dataFile = new File(outPutPath + tempFileName);
+        if (!dataFile.exists()) {
+            removeWrapping("AddFields/data/" + inPutFileName);
+        }
 
         ArrayList<Page> pages = readPagesInFile(outPutPath + tempFileName);
 

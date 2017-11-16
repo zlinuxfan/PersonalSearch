@@ -7,11 +7,11 @@ public class CsvFileReader_Resource {
     private static final String DELIMITER = ";";
 
     // attributes index
-    private static final int RESOURCE_NAME_REQUEST = 0;
-    private static final int RESOURCE_TITLE = 1;
-    private static final int RESOURCE_DESCRIPTION = 2;
-    private static final int RESOURCE_TEXT_OF_ELEMENT = 3;
-    private static final int RESOURCE_COMMON_QUESTION = 4;
+    private static final int RESOURCE_NAME_REQUEST = 0; //Название;
+    private static final int RESOURCE_TEXT_OF_ELEMENT = 1; //Заголовок;
+    private static final int RESOURCE_TITLE = 2; //Title;
+    private static final int RESOURCE_DESCRIPTION = 3; //Description;
+    private static final int RESOURCE_COMMON_QUESTION = 4; //Общий вопрос
 
     public static ArrayList<Resource> readCsvFile(String fileName) {
 
