@@ -1,4 +1,4 @@
-import Utils.Utilities;
+import Utils.*;
 import com.Page;
 import com.UrlInfo;
 import org.apache.commons.csv.CSVFormat;
@@ -200,7 +200,7 @@ public class Run {
         for (CSVRecord record : records) {
 
             if (headers.size() != record.size()) {
-                System.out.println("Error in " + counterLine + " line." + "Number row in header: " + headers.size() + " > number in line: " + record.size() + ".");
+                System.out.println("Error in " + counterLine + " line." + "Number row in header: " + headers.size() + " > number row in line: " + record.size() + ".");
                 continue;
             }
             ArrayList<UrlInfo> urlInfos = new ArrayList<>();
