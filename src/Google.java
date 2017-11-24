@@ -1,4 +1,4 @@
-import Utils.Utilities;
+import Utils.*;
 import com.UrlInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

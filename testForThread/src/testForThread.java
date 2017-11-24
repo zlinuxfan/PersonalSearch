@@ -1,39 +1,126 @@
 import Utils.Utilities;
 import com.Page;
-import org.jsoup.nodes.Document;
+import com.ps.Page.PageReader;
 
-import java.net.Proxy;
+import java.io.*;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class testForThread {
-    private static BlockingQueue<ArrayList<Page>> rawPages = new ArrayBlockingQueue<>(3000);
-    private static BlockingQueue<ArrayList<Page>> pages = new ArrayBlockingQueue<>(3000);
-    private static BlockingQueue<ArrayList<Proxy>> proxys = new ArrayBlockingQueue<>(30);
+    private static BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(3000);
+    private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(3000);
+    private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
+
+    private static final String tempFile = "testForThread/data/result/temp.csv";
+    private static final String inPutFileName = "unloadingOfGarden11-15_utf.csv";
+    private static final String inPutPath = "testForThread/data/";
+    private static final String outPutFileName = inPutFileName + ".out";
+    private static final String outPutPath = "testForThread/data/result/";
+
+    private static long startTime;
 
     private static void init() {
+        startTime = System.currentTimeMillis();
+        checkTempFile(tempFile);
     }
 
     public static void main(String[] args) {
         init();
-//        GoogleThread googleThread = new GoogleThread(
-//                20,
-//                rawPages,
-//                pages,
-//                true);
+        fillRawPage();
+        fillProxies();
 
-        String url = "https://www.google.com.ua/search?q=Как%правильно%сварить%рис&num=20";
-//        String url = "https://www.google.com";
+        GoogleThread googleThread = new GoogleThread(
+                60,
+                rawPages,
+                pages,
+                proxies,
+                true
+        );
 
-        int port = 0;
-        String proxy = "";
+        googleThread.run();
+
+        System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static void fillProxies() {
         try {
-            Document document = Utilities.connectUrl(url);
-            System.out.println(document.text());
-        } catch (Exception e) {
+            proxies.put(new InetSocketAddress("62.109.8.114", 443));
+            proxies.put(new InetSocketAddress("149.154.71.37", 443));
+            proxies.put(new InetSocketAddress("82.146.40.45", 443));
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+    private static void fillRawPage() {
+        ArrayList<Page> pages;
+
+        try {
+            PageReader pageReader = new PageReader(tempFile);
+            pages = pageReader.read();
+            rawPages.addAll(pages);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void checkTempFile(String tempFile) {
+
+        if (! (new File(tempFile)).exists()) {
+            removeWrapping(tempFile);
+        }
+    }
+
+    private static void removeWrapping(String tempFile) {
+        BufferedWriter bufferedWriter = null;
+        BufferedReader bufferedReader = null;
+
+        StringBuilder cleanLine = new StringBuilder();
+        String header = "";
+        String line;
+
+        try {
+            bufferedReader = new BufferedReader(new FileReader(inPutPath + inPutFileName));
+            header = bufferedReader.readLine();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                if (!line.isEmpty()) {
+                    if (line.startsWith(";") || line.startsWith("\"")) {
+                        cleanLine.append(System.lineSeparator());
+                        cleanLine.append(line);
+                    } else {
+                        cleanLine.append(line);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert bufferedReader != null;
+                bufferedReader.close();
+            } catch (IOException e) {
+                System.out.println("Error while closing fileReader !!!");
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
+            bufferedWriter.write(header);
+            bufferedWriter.write(cleanLine.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

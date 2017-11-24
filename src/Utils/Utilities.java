@@ -2,6 +2,7 @@ package Utils;
 
 import com.Page;
 import com.UrlInfo;
+import com.ps.proxy.ProxyAuthenticator;
 import org.apache.log4j.PropertyConfigurator;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -18,6 +19,9 @@ public class Utilities {
     private static final String DELIMITER = ";";
     private static final int NUMBER_ELEMENT = 5;
     private static final String NEW_LINE_SEPARATOR = "\n";
+
+    private static final String authUser = "ZYWhsnVNY";
+    private static final String authPassword = "e9kcdGk9d";
 
     static {
         String log4jConfPath = "conf/log4j.properties";
@@ -59,6 +63,29 @@ public class Utilities {
                     .timeout(5000)
                     .get();
         return document;
+    }
+
+    public static Document getDocument(String host, InetSocketAddress addressProxy) throws IOException {
+        Authenticator.setDefault(new ProxyAuthenticator(authUser, authPassword));
+
+        Proxy httpProxy = new Proxy(Proxy.Type.HTTP, addressProxy);
+
+        String response;
+        StringBuilder output = new StringBuilder();
+
+        URL url = new URL(host);
+        URLConnection urlConn = url.openConnection(httpProxy);
+        urlConn.setRequestProperty(
+                "User-Agent",
+                "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;     rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13 (.NET CLR 3.5.30729)");
+        urlConn.connect();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+        while ((response = reader.readLine()) !=null) {
+            output.append(response);
+        }
+
+        return  Jsoup.parse(String.valueOf(output));
     }
 
     public static Document getDocument(String url, String proxy, int port) throws IOException {

@@ -1,7 +1,5 @@
-import com.UrlInfo;
-
-import java.util.ArrayList;
+import com.Page;
 
 interface Find {
-    ArrayList<UrlInfo> find(String requestName) throws Exception;
+    Page find(Page page) throws Exception;
 }

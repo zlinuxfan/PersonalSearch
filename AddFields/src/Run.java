@@ -19,10 +19,10 @@ public class Run {
     private static Logger log = LoggerFactory.getLogger(Run.class);
     private static Random random = new Random();
     //    private static final int COUNTER_PAGES_IN_FILE = 97;
-    private static final String outPutFileName = "unloadingOfGarden11-15_utf.csv";
     //    private static final String outPutFileName = "test.csv";
     private static final String tempFileName = "temp.csv";
-    private static final String inPutFileName = outPutFileName;
+    private static final String inPutFileName = "meeting-utf.csv";
+    private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
 
     public static void main(String[] args) {
@@ -61,7 +61,7 @@ public class Run {
             while ((line = reader.readLine()) != null) {
 
                 if (!line.isEmpty()) {
-                    if (line.startsWith(";ID")) {
+                    if (line.startsWith(";") || line.startsWith("\"")) {
                         cleanLine.append(System.lineSeparator());
                         cleanLine.append(line);
                     } else {
