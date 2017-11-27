@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -34,6 +35,7 @@ public class Run {
             removeWrapping("AddFields/data/" + inPutFileName);
         }
 
+        //TODO remote possessed pages
         ArrayList<Page> pages = readPagesInFile(outPutPath + tempFileName);
 
         File file = new File(outPutPath + outPutFileName);
@@ -82,21 +84,7 @@ public class Run {
             }
         }
 
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(outPutPath + tempFileName));
-            bufferedWriter.write(header);
-            bufferedWriter.write(cleanLine.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        writeToFile(header, cleanLine.toString());
     }
 
     private static void cratePagesAndWrite(ArrayList<Page> pages) {
@@ -104,7 +92,10 @@ public class Run {
         Google google = new Google();
         ArrayList<UrlInfo> urlInfos;
 
-        for (Page page : pages) {
+        Iterator<Page> pageIterators = pages.listIterator();
+
+        while (pageIterators.hasNext()) {
+            Page page = pageIterators.next();
             System.out.println("(" + NumberPages-- + " ) Make: " + page.getNameOfElement() + " ...");
 
             try {
@@ -124,6 +115,8 @@ public class Run {
 //                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");
                 e.printStackTrace();
                 page.setIndexing(false);
+            } finally {
+
             }
 
             try {
@@ -137,6 +130,7 @@ public class Run {
             }
 
 
+
             int index = 0;
             while (urlInfos.size() < index || page.getUrlInfoList().size() < 5) {
                 if (!urlInfos.get(index).isYoutube()) {
@@ -146,7 +140,7 @@ public class Run {
             }
 
             Utilities.writePageInFile(outPutPath + outPutFileName, page, true);
-
+            pages.remove(page);
         }
     }
 
@@ -230,5 +224,24 @@ public class Run {
         }
 
         return pages;
+    }
+
+    private static void writeToFile(String header, String dataToFile) {
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(outPutPath + tempFileName));
+            bufferedWriter.write(header);
+            bufferedWriter.write(dataToFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
