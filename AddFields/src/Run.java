@@ -1,17 +1,17 @@
-import Utils.*;
+import Utils.Utilities;
 import com.Page;
 import com.UrlInfo;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 import static java.lang.Thread.sleep;
 
@@ -26,26 +26,61 @@ public class Run {
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
 
+    private static ArrayList<String> header = new ArrayList<>();
+
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
         System.out.println("Star work: " + Utilities.convertToTime(startTime));
 
-        File dataFile = new File(outPutPath + tempFileName);
-        if (!dataFile.exists()) {
+        if (! new File(outPutPath + tempFileName).exists()) {
             removeWrapping("AddFields/data/" + inPutFileName);
         }
 
-        //TODO remote possessed pages
-        ArrayList<Page> pages = readPagesInFile(outPutPath + tempFileName);
+        header = readHeader(outPutPath + tempFileName);
+
+        ArrayList<Page> rawPages = readPagesInFile(outPutPath + tempFileName);
+        ArrayList<Page> downPages = new ArrayList<>();
+
+        if (new File(outPutPath + outPutFileName).exists()) {
+            downPages = readPagesInF(outPutPath + "temp.guid.txt");
+            rawPages.removeAll(downPages);
+        }
+
+        System.out.println("rawPages: " + rawPages.size() + ". DownPages: " + downPages.size());
 
         File file = new File(outPutPath + outPutFileName);
         if (!file.exists()) {
             Utilities.writeShortHeaderInFile(outPutPath + outPutFileName);
         }
 
-        cratePagesAndWrite(pages);
+        cratePagesAndWrite(rawPages);
 
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static ArrayList<String> readHeader(String fileName) {
+        Reader in = null;
+        try {
+            in = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Iterable<CSVRecord> header = null;
+        try {
+            assert in != null;
+            header = CSVFormat.DEFAULT.withDelimiter(';').parse(in);
+        } catch (IOException e) {
+            System.out.println("Can not parse header in csv file." + Arrays.toString(e.getStackTrace()));
+        }
+
+        ArrayList<String> headers = new ArrayList<>();
+
+        assert header != null;
+        for (String fieldName : header.iterator().next()) {
+            headers.add(fieldName);
+        }
+        return headers;
     }
 
     private static void removeWrapping(String inPutFileName) {
@@ -90,57 +125,67 @@ public class Run {
     private static void cratePagesAndWrite(ArrayList<Page> pages) {
         int NumberPages = pages.size();
         Google google = new Google();
-        ArrayList<UrlInfo> urlInfos;
+        Iterator<Page> pageIterator = pages.listIterator();
 
-        Iterator<Page> pageIterators = pages.listIterator();
-
-        while (pageIterators.hasNext()) {
-            Page page = pageIterators.next();
+        while (pageIterator.hasNext()) {
+            Page page = pageIterator.next();
             System.out.println("(" + NumberPages-- + " ) Make: " + page.getNameOfElement() + " ...");
 
             try {
-                if (page.getIdYouTube().isEmpty()) {
-                    System.out.println("youtube is empty ...");
-                    ArrayList<String> youTubes = google.findYouTube(page.getNameOfElement(), 1, 10);
-
-                    if (!youTubes.isEmpty()) {
-                        page.setPathYouTube(youTubes.get(0));
-                        System.out.println("make youtube link ...");
-                    } else {
-                        System.out.println("This is absent youtube link.");
-                    }
-                    makeDelay();
-                }
-            } catch (Exception e) {
-//                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");
-                e.printStackTrace();
-                page.setIndexing(false);
-            } finally {
-
-            }
-
-            try {
-                urlInfos = google.find(page.getNameOfElement());
-                makeDelay();
+                fillPage(page, google);
             } catch (Exception e) {
 //                log.error("    error: \"" + page.getNameOfElement() + "\" is not processed. Check internet or captcha.");
                 System.out.println("    error: \"" + page.getNameOfElement() + "\" is not processed. Check internet or captcha.");
                 e.printStackTrace();
+                // not work
+//                CsvFileWriter_Page.write(outPutPath + tempFileName + "_", pages);
                 break;
             }
 
+            checkYouTube(page, google);
 
+            Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
+            Utilities.writeStringInFile(outPutPath + "temp.guid.txt", page, true);
+            pageIterator.remove();
+        }
+    }
 
-            int index = 0;
-            while (urlInfos.size() < index || page.getUrlInfoList().size() < 5) {
-                if (!urlInfos.get(index).isYoutube()) {
-                    page.addUrlList(urlInfos.get(index));
+    private static void fillPage(Page page, Google google) throws Exception {
+
+        ArrayList<UrlInfo> urlInfos = google.find(page.getNameOfElement());
+        makeDelay();
+
+        int index = 0;
+        while (urlInfos.size() > index) {
+            if (page.getUrlInfoList().size() < 5 && !urlInfos.get(index).isYoutube()) {
+                page.addUrlList(urlInfos.get(index));
+            } else {
+                if (page.getIdYouTube().isEmpty() && urlInfos.get(index).isYoutube()) {
+                    page.setPathYouTube(urlInfos.get(index).getLink().toString());
                 }
-                index++;
             }
+            index++;
+        }
+    }
 
-            Utilities.writePageInFile(outPutPath + outPutFileName, page, true);
-            pages.remove(page);
+    private static void checkYouTube(Page page, Google google) {
+        try {
+            if (page.getIdYouTube().isEmpty()) {
+                System.out.println("youtube is empty ...");
+                ArrayList<String> youTubes = google.findYouTube(page.getNameOfElement(), 1, 10);
+
+                if (!youTubes.isEmpty()) {
+                    page.setPathYouTube(youTubes.get(0));
+                    System.out.println("make youtube link ...");
+                } else {
+                    System.out.println("This is absent youtube link.");
+                }
+                makeDelay();
+            }
+        } catch (Exception e) {
+//                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");
+            e.printStackTrace();
+            page.setIndexing(false);
         }
     }
 
@@ -152,6 +197,49 @@ public class Run {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void writePagesIntoFile(String fileName, ArrayList<Page> pages) {
+
+            try (
+                    BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName));
+
+                    CSVPrinter csvPrinter = new CSVPrinter(
+                            writer,
+                            CSVFormat.DEFAULT.withHeader("ID", "Name", "Designation", "Company"))
+            ) {
+                for (Page page : pages) {
+                    csvPrinter.printRecord(page.toString());
+                }
+                csvPrinter.printRecord("1", "Sundar Pichai ♥", "CEO", "Google");
+                csvPrinter.printRecord("2", "Satya Nadella", "CEO", "Microsoft");
+                csvPrinter.printRecord("3", "Tim cook", "CEO", "Apple");
+
+                csvPrinter.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    private static ArrayList<Page> readPagesInF(String fileName) {
+        ArrayList<String> guids = Utilities.readResource(fileName);
+        ArrayList<Page> pages = new ArrayList<>();
+
+        for (String guid : guids) {
+
+            pages.add(
+                    new Page.Builder(
+                            guid,
+                            "", //("Название элемента"),
+                            "", //("Описание элемента"),
+                            "", //("Текст для элемента"),
+                            "", //("Путь к элементу"),
+                            null,
+                            new ArrayList<>()
+                    ).build());
+        }
+
+        return pages;
     }
 
     private static ArrayList<Page> readPagesInFile(String fileName) {
@@ -198,14 +286,17 @@ public class Run {
                 continue;
             }
             ArrayList<UrlInfo> urlInfos = new ArrayList<>();
-            urlInfos.add(
-                    new UrlInfo(
-                            "file.csv",
-                            record.get("Ссылка1-1"),
-                            record.get("Заголовок1-1"),
-                            record.get("Описание1-1")
-                    )
-            );
+
+            if (record.isMapped("Ссылка1-1")) {
+                urlInfos.add(
+                        new UrlInfo(
+                                "file.csv",
+                                record.get("Ссылка1-1"),
+                                record.get("Заголовок1-1"),
+                                record.get("Описание1-1")
+                        )
+                );
+            }
 
             pages.add(
                     new Page.Builder(
@@ -223,21 +314,27 @@ public class Run {
             counterLine++;
         }
 
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return pages;
     }
 
     private static void writeToFile(String header, String dataToFile) {
-        BufferedWriter bufferedWriter = null;
+        FileWriter fileWriter = null;
         try {
-            bufferedWriter = new BufferedWriter(new FileWriter(outPutPath + tempFileName));
-            bufferedWriter.write(header);
-            bufferedWriter.write(dataToFile);
+            fileWriter = new FileWriter(outPutPath + tempFileName);
+            fileWriter.append(header);
+            fileWriter.append(dataToFile);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
+                if (fileWriter != null) {
+                    fileWriter.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

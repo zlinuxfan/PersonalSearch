@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Page {
     private String nameParagraph; // Название раздела
@@ -69,6 +70,29 @@ public class Page {
 
     public void addUrlList(UrlInfo urlInfo) {
         this.urlInfoList.add(urlInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + this.guidOfElement.hashCode();
+
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (! Page.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+
+        Page thisObj = (Page) obj;
+
+        return Objects.equals(this.getGuidOfElement(), thisObj.getGuidOfElement());
     }
 
 

@@ -12,5 +12,6 @@
     <orderEntry type="library" name="commons-csv-1.5" level="project" />
     <orderEntry type="library" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" name="slf4j-api-1.7.25" level="project" />
+    <orderEntry type="module" module-name="Common" />
   </component>
 </module>

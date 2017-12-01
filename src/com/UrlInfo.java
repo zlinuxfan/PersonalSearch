@@ -21,7 +21,7 @@ public class UrlInfo {
     public UrlInfo(String source, String link, String heading, String description) {
         this.source = source;
         try {
-            this.link = link.equals("") ? null : new URL(link);
+            this.link = (link == null || link.equals("")) ? null : new URL(link);
             this.youtube = this.link != null && this.link.getHost().equals("www.youtube.com");
             this.blackList = this.link != null && blackLists.contains(this.link.getHost());
         } catch (MalformedURLException e) {

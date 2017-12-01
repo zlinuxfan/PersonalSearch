@@ -16,7 +16,7 @@ public class Utilities_Test {
     }
     @Test
     public void getDocument() throws Exception {
-        String host = "https://www.google.com.ua/search?q=Как%правильно%сварить%рис&num=20";
+        String host = "http://www.google.com.ua/search?q=Как%правильно%сварить%рис&num=20";
         InetSocketAddress inetSocketAddress = new InetSocketAddress(
                 "62.109.8.114",
                 443

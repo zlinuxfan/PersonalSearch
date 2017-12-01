@@ -6,20 +6,27 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
 class Google implements Find {
-    private static final int NUM_IN_REQUEST = 60;
+    private static final int NUM_IN_REQUEST = 15;
     private static final String NAME = "google";
+    private static final InetSocketAddress inetSocketAddress = new InetSocketAddress(
+            "62.109.8.114",
+            443
+    );
 
     @Override
     public ArrayList<UrlInfo> find(String requestName) throws Exception {
+
+
         //&tbm=isch
-        String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST;
+        String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = Utilities.connectUrl(url); //connectUrl(url);  //getDocument(url);
+        Document doc = Utilities.getDocument(url, inetSocketAddress); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
@@ -49,13 +56,13 @@ class Google implements Find {
      */
 
     public ArrayList<Picture> findPicture(String requestName, int numberPicture) {
-        String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST + "&tbm=isch";
+        String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST + "&tbm=isch";
 
         Document doc = null; //connectUrl(url);  //getDocument(url);
         ArrayList<Picture> pictures = new ArrayList<>();
 
         try {
-            doc = Utilities.getDocument(url);
+            doc = Utilities.getDocument(url, inetSocketAddress);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,10 +96,10 @@ class Google implements Find {
     }
 
     public ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws Exception {
-        String url = "https://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage ;
+        String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage ;
 
         Elements h3r;
-        Document doc = Utilities.connectUrl(url); //connectUrl(url);  //getDocument(url);
+        Document doc = Utilities.getDocument(url, inetSocketAddress); //connectUrl(url);  //getDocument(url);
         ArrayList<String> youTubeUrls = new ArrayList<>();
 
         h3r = doc.select("h3.r a");

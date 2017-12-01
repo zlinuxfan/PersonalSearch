@@ -20,8 +20,8 @@ public class Utilities {
     private static final int NUMBER_ELEMENT = 5;
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    private static final String authUser = "ZYWhsnVNY";
-    private static final String authPassword = "e9kcdGk9d";
+    private static final String authUser = "S4auACAuB";
+    private static final String authPassword = "LxCJqdkmI";
 
     static {
         String log4jConfPath = "conf/log4j.properties";
@@ -196,6 +196,8 @@ public class Utilities {
         return String.format("%02d:%02d:%02d", hour, minute, second);
     }
 
+
+
     public static void writeShortHeaderInFile(String fileName) {
 
         FileWriter fileWriter = null;
@@ -207,6 +209,7 @@ public class Utilities {
                     "\"" + headerElements[1] + i + "-1\"" + DELIMITER +
                     "\"" + headerElements[2] + i + "-1\"" + DELIMITER;
         }
+        urls = urls.substring(0, urls.length()-1);
 
         try {
             fileWriter = new FileWriter(fileName);
@@ -237,7 +240,7 @@ public class Utilities {
         }
     }
 
-    public static void writePageInFile(String fileName, Page page, boolean append) {
+    public static void writeShortPageInFile(String fileName, Page page, boolean append) {
         FileWriter fileWriter = null;
 
         try {
@@ -251,7 +254,7 @@ public class Utilities {
             fileWriter.append(DELIMITER);
             fileWriter.append(addQuotes(page.getIdYouTube()));
             fileWriter.append(DELIMITER);
-            fileWriter.append(urlInfoListToCsvOnly(page.getUrlInfoList()));
+            fileWriter.append(urlInfoListWithoutSecondUrlToCsvOnly(page.getUrlInfoList()));
             fileWriter.append(NEW_LINE_SEPARATOR);
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter_Page !!!");
@@ -271,7 +274,7 @@ public class Utilities {
         return (line == null | Objects.equals(line, "")) ? "" : String.format("\"%s\"", line);
     }
 
-    static String urlInfoListToCsvOnly(List<UrlInfo> urlInfoList) {
+    static String urlInfoListWithoutSecondUrlToCsvOnly(List<UrlInfo> urlInfoList) {
         urlInfoList.remove(0);
         return urlInfoListToCsv(urlInfoList);
     }
@@ -295,6 +298,28 @@ public class Utilities {
             }
             counter++;
         }
+
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
         return stringBuilder.toString();
+    }
+
+    public static void writeStringInFile(String fileName, Page page, boolean append) {
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(fileName, append);
+            fileWriter.append(page.getGuidOfElement());
+            fileWriter.append(System.lineSeparator());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                assert fileWriter != null;
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+            }
+        }
     }
 }

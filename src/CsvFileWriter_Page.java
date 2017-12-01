@@ -195,7 +195,7 @@ public class CsvFileWriter_Page {
     }
 
     private static String addQuotes(String line) {
-        return (line == null | Objects.equals(line, "")) ? "" : String.format("\"%s\"", line);
+        return (line == null | Objects.equals(line, "")) ? ";" : String.format("\"%s\"", line);
     }
 
     static String crateIframe(int width, int height, String src, int frameborder) {
@@ -221,6 +221,9 @@ public class CsvFileWriter_Page {
     static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
+
+
+
         for (UrlInfo urlInfo: urlInfoList) {
             if (urlInfo.isYoutube()) {
                 continue;
@@ -237,12 +240,16 @@ public class CsvFileWriter_Page {
             }
             counter++;
         }
+
+       while (urlInfoList.size() < NUMBER_ELEMENT) {
+            urlInfoList.add(new UrlInfo("", "", "", ""));
+        }
         return stringBuilder.toString();
     }
 
     static String textBoxesToCsv(ArrayList<OnceText> textBoxes) {
         if (textBoxes == null) {
-            return "";
+            return ";";
         }
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
