@@ -1,6 +1,8 @@
 package com;
 
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,19 +155,37 @@ public class Page {
         }
 
         private static String crateIdYouTube(String pathYouTube) {
-            String[] pairs = pathYouTube.split("\\?");
-
-            if (pairs.length > 1) {
-                try {
-                    return URLDecoder.decode(pairs[1].substring(2), "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+            URL url = null;
+            String[] split;
+            try {
+                url = new URL(URLDecoder.decode(checkUrlString(pathYouTube), "UTF-8"));
+            } catch (MalformedURLException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+///watch%3Fv%3DUwoOfibZoYA&sa=U&ved=0ahUKEwi54Py2_OjXAhUhSJoKHUdvB_wQtwIIFzAA&usg=AOvVaw3eyJFRRnFSZWJIF
+            if (url != null && url.getQuery() != null) {
+                split = (url.getQuery()).split("&");
+                return !split[0].isEmpty() ? split[0].substring(2) : "";
             }
             return "";
         }
 
+        public static String checkUrlString(String pathYouTube) {
+
+            String str = pathYouTube.substring(0, 4);
+
+            while (! str.equals("http")) {
+                pathYouTube = pathYouTube.substring(1, pathYouTube.length()-1);
+                str = pathYouTube.substring(0, 4);
+            }
+
+            return pathYouTube;
+        }
+
         private String selectPathYouTube(List<UrlInfo> urlInfoList) {
+            if (urlInfoList == null) {
+                return "";
+            }
             for (UrlInfo urlInfo: urlInfoList) {
                 if (urlInfo.isYoutube()) {
                     return urlInfo.getLink().toString();

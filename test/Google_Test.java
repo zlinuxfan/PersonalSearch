@@ -4,10 +4,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class Google_Test {
+    @Test
+    public void find1() throws Exception {
+    }
+
     private Google google = new Google();
     @Test
     public void find() throws Exception {
-        ArrayList<UrlInfo> urlInfos = google.find("Как приготовить самбук абрикосовый");
+        ArrayList<UrlInfo> urlInfos = google.find("Новогодние цвета 2015");
 
         for (UrlInfo urlInfo : urlInfos) {
             System.out.println(urlInfo.getLink());

@@ -1,4 +1,4 @@
-import Utils.*;
+import Utils.Utilities;
 import com.UrlInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,10 +11,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 class Google implements Find {
-    private static final int NUM_IN_REQUEST = 15;
+    private static final int NUM_IN_REQUEST = 20;
     private static final String NAME = "google";
     private static final InetSocketAddress inetSocketAddress = new InetSocketAddress(
-            "62.109.8.114",
+            "94.250.255.31",
             443
     );
 
@@ -32,10 +32,17 @@ class Google implements Find {
         h3s = doc.select("h3.r a");
         h3Descriptions = doc.select("span.st");
 
-        for (int i = 0; i < h3s.size() && i < h3Descriptions.size(); i++) {
+        String link;
+
+        // первые ссылки - херня, поэтому начинаем с 3
+        for (int i = 3; i < h3s.size() && i < h3Descriptions.size(); i++) {
+            link = h3s.get(i).select("a").first().attr("href");
+            if (! link.contains("http")) {
+                break;
+            }
             urlInfoList.add(new UrlInfo(
                     NAME,
-                    h3s.get(i).select("a").first().attr("abs:href"),
+                    link,
                     h3s.get(i).text(),
                     h3Descriptions.get(i).text()
             ));

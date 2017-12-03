@@ -1,0 +1,24 @@
+package com;
+
+import org.junit.Test;
+
+public class Page_Test {
+
+    private Page page = new Page.Builder(
+            "56FD43F9-F50B-B646-FFA5-54A071D11398",
+            "",
+            "",
+            "",
+            "",
+            null,
+            null
+    ).build();
+
+    @Test
+    public void setPathYouTube() throws Exception {
+        page.setPathYouTube("/url?q=https://www.youtube.com/watch%3Fv%3DUwoOfibZoYA&sa=U&ved=0ahUKEwi54Py2_OjXAhUhSJoKHUdvB_wQtwIIFzAA&usg=AOvVaw3eyJFRRnFSZWJIFSiWIF5q");
+
+        System.out.println(page.getIdYouTube());
+    }
+
+}

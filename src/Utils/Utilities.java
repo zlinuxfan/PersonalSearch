@@ -299,7 +299,9 @@ public class Utilities {
             counter++;
         }
 
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        if (! stringBuilder.toString().isEmpty()) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
 
         return stringBuilder.toString();
     }
