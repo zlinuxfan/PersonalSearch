@@ -11,16 +11,27 @@ import java.net.URL;
 import java.util.ArrayList;
 
 class Google implements Find {
-    private static final int NUM_IN_REQUEST = 20;
+    private static final int NUM_IN_REQUEST = 10;
     private static final String NAME = "google";
     private static final InetSocketAddress inetSocketAddress = new InetSocketAddress(
-            "94.250.255.31",
+            "62.109.8.114",
             443
     );
 
+    public String counterSite(String requestName) throws IOException {
+
+        String url = "http://www.google.com.ua/search?q=site%3A" + requestName + "&oq=site%3A"+requestName +"&num=" + NUM_IN_REQUEST;
+
+        System.out.println(url);
+        Document doc = Utilities.getDocument(url);
+
+        Elements idResults = doc.select("#resultStats");
+
+        return idResults.text();
+    }
+
     @Override
     public ArrayList<UrlInfo> find(String requestName) throws Exception {
-
 
         //&tbm=isch
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + NUM_IN_REQUEST;
