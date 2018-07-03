@@ -3,15 +3,15 @@ import com.Page;
 import com.UrlInfo;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Random;
 
 import static java.lang.Thread.sleep;
 
@@ -22,7 +22,7 @@ public class Run {
     //    private static final int COUNTER_PAGES_IN_FILE = 97;
     //    private static final String outPutFileName = "test.csv";
     private static final String tempFileName = "temp.csv";
-    private static final String inPutFileName = "preparation-utf.csv";
+    private static final String inPutFileName = "dzhem-utf-work.csv";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
 
@@ -36,7 +36,7 @@ public class Run {
             removeWrapping("AddFields/data/" + inPutFileName);
         }
 
-        header = readHeader(outPutPath + tempFileName);
+        header = readHeader("AddFields/data/" + inPutFileName);
 
         ArrayList<Page> rawPages = readPagesInFile(outPutPath + tempFileName);
         ArrayList<Page> downPages = new ArrayList<>();
@@ -80,18 +80,24 @@ public class Run {
         for (String fieldName : header.iterator().next()) {
             headers.add(fieldName);
         }
+
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return headers;
     }
 
     private static void removeWrapping(String inPutFileName) {
         BufferedReader reader = null;
-        BufferedWriter bufferedWriter = null;
         StringBuilder cleanLine = new StringBuilder();
-        String header = "";
 
         try {
             reader = new BufferedReader(new FileReader(inPutFileName));
-            header = reader.readLine();
+            // skip header
+            reader.readLine();
 
             String line;
 
@@ -102,6 +108,7 @@ public class Run {
                         cleanLine.append(System.lineSeparator());
                         cleanLine.append(line);
                     } else {
+                        cleanLine.append(System.lineSeparator());
                         cleanLine.append(line);
                     }
                 }
@@ -119,7 +126,7 @@ public class Run {
             }
         }
 
-        writeToFile(header, cleanLine.toString());
+        writeToFile("", cleanLine.toString());
     }
 
     private static void cratePagesAndWrite(ArrayList<Page> pages) {
@@ -191,35 +198,13 @@ public class Run {
     }
 
     private static void makeDelay() {
-        long timeOut = random.nextInt(57);
+        long timeOut = random.nextInt(33);
         System.out.println("Timeout: " + timeOut + "sec ...");
         try {
             sleep(timeOut * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void writePagesIntoFile(String fileName, ArrayList<Page> pages) {
-
-            try (
-                    BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName));
-
-                    CSVPrinter csvPrinter = new CSVPrinter(
-                            writer,
-                            CSVFormat.DEFAULT.withHeader("ID", "Name", "Designation", "Company"))
-            ) {
-                for (Page page : pages) {
-                    csvPrinter.printRecord(page.toString());
-                }
-                csvPrinter.printRecord("1", "Sundar Pichai ♥", "CEO", "Google");
-                csvPrinter.printRecord("2", "Satya Nadella", "CEO", "Microsoft");
-                csvPrinter.printRecord("3", "Tim cook", "CEO", "Apple");
-
-                csvPrinter.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
     }
 
     private static ArrayList<Page> readPagesInF(String fileName) {
@@ -252,26 +237,12 @@ public class Run {
             e.printStackTrace();
         }
 
-        Iterable<CSVRecord> header = null;
-        try {
-            assert in != null;
-            header = CSVFormat.DEFAULT.withDelimiter(';').parse(in);
-        } catch (IOException e) {
-            System.out.println("Can not parse header in csv file." + Arrays.toString(e.getStackTrace()));
-        }
-
-        ArrayList<String> headers = new ArrayList<>();
         ArrayList<Page> pages = new ArrayList<>();
-        int counterLine = 1;
 
-        assert header != null;
-        for (String fieldName : header.iterator().next()) {
-            headers.add(fieldName);
-        }
-
-        String[] headerStrings = new String[headers.size()];
-        headerStrings = headers.toArray(headerStrings);
+        String[] headerStrings = new String[header.size()];
+        headerStrings = header.toArray(headerStrings);
         CSVParser records = null;
+
         try {
             records = CSVFormat.DEFAULT.withDelimiter(';').withHeader(headerStrings).parse(in);
         } catch (IOException e) {
@@ -282,10 +253,6 @@ public class Run {
 
         for (CSVRecord record : records) {
 
-            if (headers.size() != record.size()) {
-                System.out.println("Error in " + counterLine + " line." + "Number row in header: " + headers.size() + " > number row in line: " + record.size() + ".");
-                continue;
-            }
             ArrayList<UrlInfo> urlInfos = new ArrayList<>();
 
             if (record.isMapped("Ссылка1-1")) {
@@ -303,16 +270,14 @@ public class Run {
                     new Page.Builder(
                             record.get("GUID идентификатор элемента"),
                             record.get("Название элемента"),
-                            record.get("Описание элемента"),
-                            record.get("Текст для элемента"),
+                            "",
+                            "",
                             record.get("Путь к элементу"),
                             null,
                             urlInfos
                     ).idYouTube(
                             record.get("Адрес (youtube)")
                     ).build());
-
-            counterLine++;
         }
 
         try {
@@ -329,6 +294,7 @@ public class Run {
         try {
             fileWriter = new FileWriter(outPutPath + tempFileName);
             fileWriter.append(header);
+            fileWriter.append(System.lineSeparator());
             fileWriter.append(dataToFile);
         } catch (IOException e) {
             e.printStackTrace();
