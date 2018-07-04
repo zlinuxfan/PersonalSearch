@@ -22,7 +22,7 @@ public class Run {
     //    private static final int COUNTER_PAGES_IN_FILE = 97;
     //    private static final String outPutFileName = "test.csv";
     private static final String tempFileName = "temp.csv";
-    private static final String inPutFileName = "kompoty-utf-work.csv";
+    private static final String inPutFileName = "shashlyk-utf-work.csv";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
 
@@ -272,7 +272,7 @@ public class Run {
                             record.get("Название элемента"),
                             "",
                             "",
-                            record.get("Путь к элементу"),
+                            "",
                             null,
                             urlInfos
                     ).idYouTube(

@@ -311,8 +311,8 @@ public class Utilities {
 
         try {
             fileWriter = new FileWriter(fileName, append);
-            fileWriter.append(page.getGuidOfElement());
             fileWriter.append(System.lineSeparator());
+            fileWriter.append(page.getGuidOfElement());
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

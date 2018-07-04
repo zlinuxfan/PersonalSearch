@@ -43,7 +43,7 @@ public class UrlInfo {
             link = link.substring(1, link.length()-1);
             str = link.substring(0, 4);
         }
-        return link;
+        return link.split("&")[0];
     }
 
     public UrlInfo(String source, String link, String heading, String description, String requestName) {
