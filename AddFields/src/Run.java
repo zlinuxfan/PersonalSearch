@@ -22,7 +22,7 @@ public class Run {
     //    private static final int COUNTER_PAGES_IN_FILE = 97;
     //    private static final String outPutFileName = "test.csv";
     private static final String tempFileName = "temp.csv";
-    private static final String inPutFileName = "shashlyk-utf-work.csv";
+    private static final String inPutFileName = "sousy-utf-work.csv";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
 
@@ -160,8 +160,7 @@ public class Run {
     private static void fillPage(Page page, Google google) throws Exception {
 
         ArrayList<UrlInfo> urlInfos = google.find(page.getNameOfElement());
-        makeDelay();
-
+//        makeDelay();
 
         int index = 0;
         while (urlInfos.size() > index) {

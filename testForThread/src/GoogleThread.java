@@ -1,3 +1,4 @@
+import Utils.Utilities;
 import com.Page;
 import com.UrlInfo;
 import org.jsoup.Connection;
@@ -23,9 +24,10 @@ class GoogleThread implements Find, Runnable {
     private boolean bypass = false;
     private static final String NAME = "google";
     private boolean running = false;
+    private InetSocketAddress currentProxy;
 
-    private static final String authUser = "ZYWhsnVNY";
-    private static final String authPassword = "e9kcdGk9d";
+    private static final String authUser = "LYpeSb6ha";
+    private static final String authPassword = "PmhaXqKFI";
 
     private BlockingQueue<Page> rawPage = null;
     private BlockingQueue<Page> page = null;
@@ -51,7 +53,7 @@ class GoogleThread implements Find, Runnable {
         String url = "https://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = getDocument(url); //getDocument(url, this.proxies.take()); //connectUrl(url);  //getDocument(url);
+        Document doc = Utilities.getDocument(url, currentProxy); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
@@ -86,11 +88,11 @@ class GoogleThread implements Find, Runnable {
 
     @Override
     public void run() {
-        int counter = 0;
         this.running = true;
         Page currentPage = null;
         try {
             currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
+            currentProxy = this.proxies.take();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -142,7 +144,7 @@ class GoogleThread implements Find, Runnable {
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage;
 
         Elements h3r;
-        Document doc = getDocument(url);
+        Document doc = Utilities.getDocument(url, currentProxy);
         ArrayList<String> youTubeUrls = new ArrayList<>();
 
         h3r = doc.select("h3.r a");
@@ -159,7 +161,7 @@ class GoogleThread implements Find, Runnable {
     }
 
     private static void makeDelay() {
-        long timeOut = random.nextInt(37);
+        long timeOut = random.nextInt(57);
         try {
             sleep(timeOut * 1000);
         } catch (InterruptedException e) {
@@ -188,8 +190,7 @@ class GoogleThread implements Find, Runnable {
     private Document getDocument(String urlStr, InetSocketAddress inetSocketAddress) throws IOException {
         Authenticator.setDefault(new ProxyAuthenticator(authUser, authPassword));
 
-        SocketAddress addr = inetSocketAddress;
-        Proxy httpProxy = new Proxy(Proxy.Type.HTTP, addr);
+        Proxy httpProxy = new Proxy(Proxy.Type.HTTP, inetSocketAddress);
 
         URLConnection urlConn = null;
         BufferedReader reader = null;

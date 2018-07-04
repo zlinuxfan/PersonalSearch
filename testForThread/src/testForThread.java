@@ -16,7 +16,7 @@ public class testForThread {
 
     private static final String tempFile = "testForThread/data/result/temp.csv";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "varenie-utf8-work2.csv";
+    private static final String inPutFileName = "sousy-utf-work.csv";
     private static final String inPutPath = "testForThread/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "testForThread/data/result/";
@@ -37,7 +37,7 @@ public class testForThread {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(7);
+        createCheckThreadPool(1);
 
         while (counterPage < numberOfPage) {
             try {
