@@ -8,19 +8,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 import static java.lang.Thread.sleep;
 
-public class Run {
+public class RunInThread {
 
-    private static Logger log = LoggerFactory.getLogger(Run.class);
+    private static Logger log = LoggerFactory.getLogger(RunInThread.class);
     private static Random random = new Random();
-    //    private static final int COUNTER_PAGES_IN_FILE = 97;
-    //    private static final String outPutFileName = "test.csv";
     private static final String tempFileName = "temp.csv";
     private static final String inPutFileName = "kompoty-utf-work.csv";
     private static final String outPutFileName = inPutFileName + ".out";
@@ -32,30 +33,48 @@ public class Run {
         long startTime = System.currentTimeMillis();
         System.out.println("Star work: " + Utilities.convertToTime(startTime));
 
-        if (! new File(outPutPath + tempFileName).exists()) {
+        BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(1000);
+        BlockingQueue<Page> pages = new ArrayBlockingQueue<>(1000);
+        BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(10);
+
+        rawPages.addAll(prepareRawPages());
+        GoogleThread googleThread = new GoogleThread(
+                10,
+                rawPages,
+                pages,
+                proxies,
+                true
+        );
+
+        googleThread.run();
+//        cratePagesAndWrite(rawPages);
+
+        System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static ArrayList<Page> prepareRawPages() {
+        ArrayList<Page> downPages = new ArrayList<>();
+        ArrayList<Page> rawPages;
+
+        if (!new File(outPutPath + tempFileName).exists()) {
             removeWrapping("AddFields/data/" + inPutFileName);
         }
-
         header = readHeader("AddFields/data/" + inPutFileName);
-
-        ArrayList<Page> rawPages = readPagesInFile(outPutPath + tempFileName);
-        ArrayList<Page> downPages = new ArrayList<>();
+        rawPages = readPagesInFile(outPutPath + tempFileName);
 
         if (new File(outPutPath + outPutFileName).exists()) {
             downPages = readPagesInF(outPutPath + "temp.guid.txt");
             rawPages.removeAll(downPages);
         }
 
-        System.out.println("rawPages: " + rawPages.size() + ". DownPages: " + downPages.size());
-
         File file = new File(outPutPath + outPutFileName);
         if (!file.exists()) {
             Utilities.writeShortHeaderInFile(outPutPath + outPutFileName);
         }
 
-        cratePagesAndWrite(rawPages);
+        System.out.println("rawPages: " + rawPages.size() + ". DownPages: " + downPages.size());
 
-        System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+        return rawPages;
     }
 
     private static ArrayList<String> readHeader(String fileName) {
