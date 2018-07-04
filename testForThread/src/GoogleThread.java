@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 import static java.lang.Thread.sleep;
 
 
-class GoogleThread implements Find, Runnable { ;
+class GoogleThread implements Find, Runnable {
+    ;
     private int numInRequest;
     private boolean bypass = false;
     private static final String NAME = "google";
@@ -87,26 +88,78 @@ class GoogleThread implements Find, Runnable { ;
     public void run() {
         int counter = 0;
         this.running = true;
-        System.out.println("start google thread.");
+        Page currentPage = null;
+        try {
+            currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        while (counter++ < 3){
+        while (currentPage != null && counter++ < 3) {
             try {
-                this.page.put(this.find(this.rawPage.poll(3000, TimeUnit.MILLISECONDS)));
+                currentPage = this.find(currentPage);
+                if (currentPage.getIdYouTube().isEmpty()) {
+                    System.out.println("youtube is empty ...");
+                    createYouTube(currentPage);
+                }
+                this.page.put(currentPage);
+                currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
                 if (bypass) {
                     makeDelay();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("---: " + counter);
         }
 
         this.running = false;
     }
 
+    private void createYouTube(Page page) {
+        try {
+            ArrayList<String> youTubes = this.findYouTube(
+                    page.getNameOfElement(),
+                    1,
+                    10
+            );
+
+            if (!youTubes.isEmpty()) {
+                page.setPathYouTube(youTubes.get(0));
+            }
+
+            if (bypass) {
+                makeDelay();
+            }
+        } catch (Exception e) {
+//                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");
+            e.printStackTrace();
+            page.setIndexing(false);
+        }
+    }
+
+
+    private ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws Exception {
+        String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage;
+
+        Elements h3r;
+        Document doc = getDocument(url);
+        ArrayList<String> youTubeUrls = new ArrayList<>();
+
+        h3r = doc.select("h3.r a");
+
+        if (h3r.size() < 1) {
+            return youTubeUrls;
+        }
+
+        for (int index = 1; index <= numberAds; index++) {
+            youTubeUrls.add(h3r.get(0).select("a").first().attr("href"));
+        }
+
+        return youTubeUrls;
+    }
+
     private static void makeDelay() {
-        long timeOut = random.nextInt(57);
-        System.out.println("Timeout: " + timeOut + "sec ...");
+        long timeOut = random.nextInt(37);
         try {
             sleep(timeOut * 1000);
         } catch (InterruptedException e) {
@@ -142,7 +195,7 @@ class GoogleThread implements Find, Runnable { ;
         BufferedReader reader = null;
         String response = "";
         StringBuilder output = new StringBuilder();
-        URL url= new URL(urlStr);
+        URL url = new URL(urlStr);
 
 //Pass the Proxy instance defined above, to the openConnection() method
         urlConn = url.openConnection(httpProxy);
@@ -152,7 +205,7 @@ class GoogleThread implements Find, Runnable { ;
         urlConn.connect();
         reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
         response = reader.readLine();
-        while (response!=null) {
+        while (response != null) {
             output.append(response);
             response = reader.readLine();
         }

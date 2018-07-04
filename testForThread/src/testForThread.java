@@ -7,6 +7,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class testForThread {
     private static BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(3000);
@@ -14,56 +15,63 @@ public class testForThread {
     private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
 
     private static final String tempFile = "testForThread/data/result/temp.csv";
-    private static final String inPutFileName = "unloadingOfGarden11-15_utf.csv";
+    private static final String tempGuidFile = "temp.guid.csv";
+    private static final String inPutFileName = "varenie-utf8-work2.csv";
     private static final String inPutPath = "testForThread/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "testForThread/data/result/";
+    private static int numberOfPage;
 
     private static long startTime;
 
     private static void init() {
         startTime = System.currentTimeMillis();
         checkTempFile(tempFile);
-    }
-
-    public static void main(String[] args) {
-        init();
         fillRawPage();
         fillProxies();
 
+        numberOfPage = rawPages.size();
+    }
 
-        GoogleThread googleThread_1 = new GoogleThread(
-                60,
-                rawPages,
-                pages,
-                proxies,
-                true
-        );
+    public static void main(String[] args) {
+        Page page;
+        int counterPage = 0;
+        init();
+        createCheckThreadPool(7);
 
-        GoogleThread googleThread_2 = new GoogleThread(
-                60,
-                rawPages,
-                pages,
-                proxies,
-                true
-        );
-
-        GoogleThread googleThread_3 = new GoogleThread(
-                60,
-                rawPages,
-                pages,
-                proxies,
-                true
-        );
-
-        Thread thread_1 = new Thread(googleThread_1);
-        thread_1.start();
-        Thread thread_2 = new Thread(googleThread_2);
-        thread_2.start();
-        Thread thread_3 = new Thread(googleThread_3);
-        thread_3.start();
+        while (counterPage < numberOfPage) {
+            try {
+                page = pages.poll(3000, TimeUnit.MILLISECONDS);
+                if (page != null) {
+                    Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
+                    Utilities.writeStringInFile(outPutPath + tempGuidFile, page, true);
+                    counterPage++;
+                    System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static void createCheckThreadPool(int numberCheckThreadPool) {
+        GoogleThread[] googleThreads = new GoogleThread[numberCheckThreadPool];
+
+        for (int i = 0; i < numberCheckThreadPool; i++) {
+            googleThreads[i] = new GoogleThread(
+                    20,
+                    rawPages,
+                    pages,
+                    proxies,
+                    true
+            );
+        }
+
+        for (GoogleThread googleThread : googleThreads) {
+            new Thread(googleThread).start();
+        }
     }
 
     private static void fillProxies() {
@@ -85,6 +93,7 @@ public class testForThread {
 
     private static void fillRawPage() {
         ArrayList<Page> pages;
+        ArrayList<Page> downPages;
 
         try {
             PageReader pageReader = new PageReader(tempFile);
@@ -93,11 +102,17 @@ public class testForThread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (new File(outPutPath + outPutFileName).exists() &&
+                new File(outPutPath + tempGuidFile).exists()) {
+            downPages = readPagesInF(outPutPath + tempGuidFile);
+            rawPages.removeAll(downPages);
+        }
     }
 
     private static void checkTempFile(String tempFile) {
 
-        if (! (new File(tempFile)).exists()) {
+        if (!(new File(tempFile)).exists()) {
             removeWrapping(tempFile);
         }
     }
@@ -116,12 +131,8 @@ public class testForThread {
 
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.isEmpty()) {
-                    if (line.startsWith(";") || line.startsWith("\"")) {
-                        cleanLine.append(System.lineSeparator());
-                        cleanLine.append(line);
-                    } else {
-                        cleanLine.append(line);
-                    }
+                    cleanLine.append(System.lineSeparator());
+                    cleanLine.append(line);
                 }
             }
         } catch (IOException e) {
@@ -151,5 +162,26 @@ public class testForThread {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static ArrayList<Page> readPagesInF(String fileName) {
+        ArrayList<String> guids = Utilities.readResource(fileName);
+        ArrayList<Page> pages = new ArrayList<>();
+
+        for (String guid : guids) {
+
+            pages.add(
+                    new Page.Builder(
+                            guid,
+                            "", //("Название элемента"),
+                            "", //("Описание элемента"),
+                            "", //("Текст для элемента"),
+                            "", //("Путь к элементу"),
+                            null,
+                            new ArrayList<>()
+                    ).build());
+        }
+
+        return pages;
     }
 }

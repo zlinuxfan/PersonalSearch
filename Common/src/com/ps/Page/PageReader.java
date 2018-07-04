@@ -15,20 +15,31 @@ import java.util.Arrays;
 
 public class PageReader {
     private static final char DELIMITER = ';';
-    private Reader in = null;
+    private String fileName;
 
     public PageReader(String file) throws FileNotFoundException {
-        this.in = new FileReader(file);
+        this.fileName = file;
     }
 
     public ArrayList<Page> read() throws IOException {
+
+        Reader in = null;
+        try {
+            in = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         CSVParser records = null;
         String[] headers = readHeader();
         ArrayList<Page> pages = new ArrayList<>();
 
         try {
+            assert in != null;
             records = CSVFormat.DEFAULT.withDelimiter(';').withHeader(headers).parse(in);
+
+            // skip header
+            records.iterator().next();
 
             for (CSVRecord record : records) {
 
@@ -38,22 +49,25 @@ public class PageReader {
                 }
 
                 ArrayList<UrlInfo> urlInfos = new ArrayList<>();
-                urlInfos.add(
-                        new UrlInfo(
-                                "file.csv",
-                                record.get("Ссылка1-1"),
-                                record.get("Заголовок1-1"),
-                                record.get("Описание1-1")
-                        )
-                );
+
+                if (record.isMapped("Ссылка1-1")) {
+                    urlInfos.add(
+                            new UrlInfo(
+                                    "file.csv",
+                                    record.get("Ссылка1-1"),
+                                    record.get("Заголовок1-1"),
+                                    record.get("Описание1-1")
+                            )
+                    );
+                }
 
                 pages.add(
                         new Page.Builder(
                                 record.get("GUID идентификатор элемента"),
                                 record.get("Название элемента"),
-                                record.get("Описание элемента"),
-                                record.get("Текст для элемента"),
-                                record.get("Путь к элементу"),
+                                null,
+                                null,
+                                null,
                                 null,
                                 urlInfos
                         ).idYouTube(
@@ -77,19 +91,25 @@ public class PageReader {
     }
 
     private String[] readHeader() throws IOException {
-        CSVParser header = null;
-        ArrayList<String> headers = new ArrayList<>();
 
+        Reader in = null;
         try {
-            header = CSVFormat.DEFAULT.withDelimiter(DELIMITER).parse(in);
+            in = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Iterable<CSVRecord> header = null;
+        try {
+            assert in != null;
+            header = CSVFormat.DEFAULT.withDelimiter(';').parse(in);
         } catch (IOException e) {
             System.out.println("Can not parse header in csv file." + Arrays.toString(e.getStackTrace()));
         }
 
-        if (header == null) {
-            throw new IOException("Can not read header in csv file");
-        }
+        ArrayList<String> headers = new ArrayList<>();
 
+        assert header != null;
         for (String fieldName : header.iterator().next()) {
             headers.add(fieldName);
         }
