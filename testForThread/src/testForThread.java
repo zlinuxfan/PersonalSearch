@@ -31,6 +31,7 @@ public class testForThread {
         fillRawPage();
         fillProxies();
 
+
         GoogleThread googleThread_1 = new GoogleThread(
                 60,
                 rawPages,
@@ -68,8 +69,15 @@ public class testForThread {
     private static void fillProxies() {
         try {
             proxies.put(new InetSocketAddress("62.109.8.114", 443));
+            proxies.put(new InetSocketAddress("94.250.255.31", 443));
             proxies.put(new InetSocketAddress("149.154.71.37", 443));
             proxies.put(new InetSocketAddress("82.146.40.45", 443));
+            proxies.put(new InetSocketAddress("188.120.246.178", 443));
+            proxies.put(new InetSocketAddress("78.24.223.92", 443));
+            proxies.put(new InetSocketAddress("185.127.166.200", 443));
+            proxies.put(new InetSocketAddress("37.230.138.173", 443));
+            proxies.put(new InetSocketAddress("185.127.165.122", 443));
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
