@@ -95,7 +95,7 @@ class GoogleThread implements Find, Runnable {
             e.printStackTrace();
         }
 
-        while (currentPage != null && counter++ < 3) {
+        while (currentPage != null) {
             try {
                 currentPage = this.find(currentPage);
                 if (currentPage.getIdYouTube().isEmpty()) {
