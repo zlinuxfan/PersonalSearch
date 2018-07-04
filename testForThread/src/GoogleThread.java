@@ -1,5 +1,6 @@
 import com.Page;
 import com.UrlInfo;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -11,6 +12,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -48,7 +50,7 @@ class GoogleThread implements Find, Runnable { ;
         String url = "https://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = getDocument(url, this.proxies.take()); //connectUrl(url);  //getDocument(url);
+        Document doc = getDocument(url); //getDocument(url, this.proxies.take()); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
@@ -89,7 +91,7 @@ class GoogleThread implements Find, Runnable { ;
 
         while (counter++ < 3){
             try {
-                this.page.put(this.find(this.rawPage.take()));
+                this.page.put(this.find(this.rawPage.poll(3000, TimeUnit.MILLISECONDS)));
                 if (bypass) {
                     makeDelay();
                 }
@@ -114,6 +116,20 @@ class GoogleThread implements Find, Runnable { ;
 
     public boolean isRunning() {
         return running;
+    }
+
+    private Document getDocument(String url) throws IOException {
+        Document document;
+
+        document = Jsoup
+                .connect(url)
+                .method(Connection.Method.GET)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 " +
+                        "(KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 OPR/42.0.2393.94")
+                .followRedirects(true)
+                .timeout(5000)
+                .get();
+        return document;
     }
 
     private Document getDocument(String urlStr, InetSocketAddress inetSocketAddress) throws IOException {

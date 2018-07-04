@@ -31,7 +31,7 @@ public class testForThread {
         fillRawPage();
         fillProxies();
 
-        GoogleThread googleThread = new GoogleThread(
+        GoogleThread googleThread_1 = new GoogleThread(
                 60,
                 rawPages,
                 pages,
@@ -39,7 +39,28 @@ public class testForThread {
                 true
         );
 
-        googleThread.run();
+        GoogleThread googleThread_2 = new GoogleThread(
+                60,
+                rawPages,
+                pages,
+                proxies,
+                true
+        );
+
+        GoogleThread googleThread_3 = new GoogleThread(
+                60,
+                rawPages,
+                pages,
+                proxies,
+                true
+        );
+
+        Thread thread_1 = new Thread(googleThread_1);
+        thread_1.start();
+        Thread thread_2 = new Thread(googleThread_2);
+        thread_2.start();
+        Thread thread_3 = new Thread(googleThread_3);
+        thread_3.start();
 
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
     }
