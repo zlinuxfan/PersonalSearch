@@ -187,7 +187,7 @@ public class Run {
                 } else {
                     System.out.println("This is absent youtube link.");
                 }
-                makeDelay();
+//                makeDelay();
             }
         } catch (Exception e) {
 //                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");

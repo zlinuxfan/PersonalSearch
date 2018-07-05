@@ -14,9 +14,11 @@ public class testForThread {
     private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(3000);
     private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
 
+    private static GoogleThread[] googleThreads;
+
     private static final String tempFile = "testForThread/data/result/temp.csv";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "sousy-utf-work.csv";
+    private static final String inPutFileName = "lechenie1utf-work.csv";
     private static final String inPutPath = "testForThread/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "testForThread/data/result/";
@@ -37,9 +39,9 @@ public class testForThread {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(1);
+        createCheckThreadPool(7);
 
-        while (counterPage < numberOfPage) {
+        while (googleThreads[0].isRunning() && counterPage < numberOfPage) {
             try {
                 page = pages.poll(3000, TimeUnit.MILLISECONDS);
                 if (page != null) {
@@ -57,7 +59,7 @@ public class testForThread {
     }
 
     private static void createCheckThreadPool(int numberCheckThreadPool) {
-        GoogleThread[] googleThreads = new GoogleThread[numberCheckThreadPool];
+        googleThreads = new GoogleThread[numberCheckThreadPool];
 
         for (int i = 0; i < numberCheckThreadPool; i++) {
             googleThreads[i] = new GoogleThread(

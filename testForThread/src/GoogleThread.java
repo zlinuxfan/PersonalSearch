@@ -19,15 +19,12 @@ import static java.lang.Thread.sleep;
 
 
 class GoogleThread implements Find, Runnable {
-    ;
+
     private int numInRequest;
     private boolean bypass = false;
     private static final String NAME = "google";
     private boolean running = false;
     private InetSocketAddress currentProxy;
-
-    private static final String authUser = "LYpeSb6ha";
-    private static final String authPassword = "PmhaXqKFI";
 
     private BlockingQueue<Page> rawPage = null;
     private BlockingQueue<Page> page = null;
@@ -50,10 +47,11 @@ class GoogleThread implements Find, Runnable {
 
     @Override
     public Page find(Page page) throws Exception {
-        String url = "https://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
+        String url = "http://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = Utilities.getDocument(url, currentProxy); //connectUrl(url);  //getDocument(url);
+        System.out.println(url);
+        Document doc = Utilities.getDocument(url, new InetSocketAddress("149.154.71.37", 443)); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
@@ -89,6 +87,7 @@ class GoogleThread implements Find, Runnable {
     @Override
     public void run() {
         this.running = true;
+        int counterError = 0;
         Page currentPage = null;
         try {
             currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
@@ -97,7 +96,7 @@ class GoogleThread implements Find, Runnable {
             e.printStackTrace();
         }
 
-        while (currentPage != null) {
+        while (currentPage != null && counterError < 3) {
             try {
                 currentPage = this.find(currentPage);
                 if (currentPage.getIdYouTube().isEmpty()) {
@@ -110,6 +109,7 @@ class GoogleThread implements Find, Runnable {
                     makeDelay();
                 }
             } catch (Exception e) {
+                counterError++;
                 e.printStackTrace();
             }
         }
@@ -188,7 +188,6 @@ class GoogleThread implements Find, Runnable {
     }
 
     private Document getDocument(String urlStr, InetSocketAddress inetSocketAddress) throws IOException {
-        Authenticator.setDefault(new ProxyAuthenticator(authUser, authPassword));
 
         Proxy httpProxy = new Proxy(Proxy.Type.HTTP, inetSocketAddress);
 
@@ -214,16 +213,3 @@ class GoogleThread implements Find, Runnable {
     }
 }
 
-class ProxyAuthenticator extends Authenticator {
-
-    private String user, password;
-
-    public ProxyAuthenticator(String user, String password) {
-        this.user = user;
-        this.password = password;
-    }
-
-    protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(user, password.toCharArray());
-    }
-}
