@@ -1,15 +1,10 @@
 import Utils.Utilities;
 import com.Page;
 import com.UrlInfo;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.*;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -50,7 +45,6 @@ class GoogleThread implements Find, Runnable {
         String url = "http://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
-        System.out.println(url);
         Document doc = Utilities.getDocument(url, new InetSocketAddress("149.154.71.37", 443)); //connectUrl(url);  //getDocument(url);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
@@ -62,7 +56,7 @@ class GoogleThread implements Find, Runnable {
         for (int i = 0; i < h3s.size() && i < h3Descriptions.size(); i++) {
             urlInfoList.add(new UrlInfo(
                     NAME,
-                    h3s.get(i).select("a").first().attr("abs:href"),
+                    h3s.get(i).select("a").first().attr("href"),
                     h3s.get(i).text(),
                     h3Descriptions.get(i).text(),
                     page.getNameOfElement()
@@ -90,7 +84,7 @@ class GoogleThread implements Find, Runnable {
         int counterError = 0;
         Page currentPage = null;
         try {
-            currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
+            currentPage = this.rawPage.take();
             currentProxy = this.proxies.take();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -171,45 +165,6 @@ class GoogleThread implements Find, Runnable {
 
     public boolean isRunning() {
         return running;
-    }
-
-    private Document getDocument(String url) throws IOException {
-        Document document;
-
-        document = Jsoup
-                .connect(url)
-                .method(Connection.Method.GET)
-                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 " +
-                        "(KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 OPR/42.0.2393.94")
-                .followRedirects(true)
-                .timeout(5000)
-                .get();
-        return document;
-    }
-
-    private Document getDocument(String urlStr, InetSocketAddress inetSocketAddress) throws IOException {
-
-        Proxy httpProxy = new Proxy(Proxy.Type.HTTP, inetSocketAddress);
-
-        URLConnection urlConn = null;
-        BufferedReader reader = null;
-        String response = "";
-        StringBuilder output = new StringBuilder();
-        URL url = new URL(urlStr);
-
-//Pass the Proxy instance defined above, to the openConnection() method
-        urlConn = url.openConnection(httpProxy);
-        urlConn.setRequestProperty(
-                "User-Agent",
-                "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;     rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13 (.NET CLR 3.5.30729)");
-        urlConn.connect();
-        reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-        response = reader.readLine();
-        while (response != null) {
-            output.append(response);
-            response = reader.readLine();
-        }
-        return Jsoup.parse(String.valueOf(output));
     }
 }
 

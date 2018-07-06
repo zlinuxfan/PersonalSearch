@@ -41,7 +41,7 @@ public class testForThread {
         init();
         createCheckThreadPool(7);
 
-        while (googleThreads[0].isRunning() && counterPage < numberOfPage) {
+        while (isRunThreads() && counterPage < numberOfPage) {
             try {
                 page = pages.poll(3000, TimeUnit.MILLISECONDS);
                 if (page != null) {
@@ -56,6 +56,16 @@ public class testForThread {
         }
 
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static boolean isRunThreads() {
+        boolean isRun = false;
+
+        for (GoogleThread googleThread : googleThreads) {
+            isRun = googleThread.isRunning();
+        }
+
+        return isRun;
     }
 
     private static void createCheckThreadPool(int numberCheckThreadPool) {
@@ -73,6 +83,12 @@ public class testForThread {
 
         for (GoogleThread googleThread : googleThreads) {
             new Thread(googleThread).start();
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
