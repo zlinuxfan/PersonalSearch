@@ -306,13 +306,13 @@ public class Utilities {
         return stringBuilder.toString();
     }
 
-    public static void writeStringInFile(String fileName, Page page, boolean append) {
+    public static void writeStringInFile(String fileName, String str, boolean append) {
         FileWriter fileWriter = null;
 
         try {
             fileWriter = new FileWriter(fileName, append);
+            fileWriter.append(str);
             fileWriter.append(System.lineSeparator());
-            fileWriter.append(page.getGuidOfElement());
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

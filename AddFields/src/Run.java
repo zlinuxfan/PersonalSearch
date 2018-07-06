@@ -152,7 +152,7 @@ public class Run {
             checkYouTube(page, google);
 
             Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
-            Utilities.writeStringInFile(outPutPath + "temp.guid.txt", page, true);
+            Utilities.writeStringInFile(outPutPath + "temp.guid.txt", page.getGuidOfElement(), true);
             pageIterator.remove();
         }
     }

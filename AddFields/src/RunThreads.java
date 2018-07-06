@@ -1,7 +1,8 @@
+
 import Utils.Utilities;
 import com.Page;
 import com.ps.Page.PageReader;
-
+import com.ps.Threads.GoogleThread;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -9,20 +10,21 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class testForThread {
+public class RunThreads {
     private static BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(3000);
     private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(3000);
     private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
 
     private static GoogleThread[] googleThreads;
 
-    private static final String tempFile = "testForThread/data/result/temp.csv";
+    private static final String tempFile = "AddFields/data/result/temp.csv";
     private static final String tempGuidFile = "temp.guid.csv";
     private static final String inPutFileName = "lechenie1utf-work.csv";
-    private static final String inPutPath = "testForThread/data/";
+    private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
-    private static final String outPutPath = "testForThread/data/result/";
+    private static final String outPutPath = "AddFields/data/result/";
     private static int numberOfPage;
+    private static String header = "";
 
     private static long startTime;
 
@@ -39,21 +41,21 @@ public class testForThread {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(7);
+        createCheckThreadPool(3);
 
-        while (isRunThreads() && counterPage < numberOfPage) {
+        do {
             try {
                 page = pages.poll(3000, TimeUnit.MILLISECONDS);
                 if (page != null) {
                     Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
-                    Utilities.writeStringInFile(outPutPath + tempGuidFile, page, true);
+                    Utilities.writeStringInFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
                     counterPage++;
                     System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        } while (isRunThreads() && counterPage < numberOfPage);
 
         System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
     }
@@ -125,6 +127,9 @@ public class testForThread {
                 new File(outPutPath + tempGuidFile).exists()) {
             downPages = readPagesInF(outPutPath + tempGuidFile);
             rawPages.removeAll(downPages);
+        } else {
+            Utilities.writeStringInFile(outPutPath + outPutFileName, header, true);
+            Utilities.writeStringInFile(outPutPath + tempGuidFile, header, true);
         }
     }
 
@@ -140,7 +145,6 @@ public class testForThread {
         BufferedReader bufferedReader = null;
 
         StringBuilder cleanLine = new StringBuilder();
-        String header = "";
         String line;
 
         try {

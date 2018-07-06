@@ -1,3 +1,5 @@
+package com.ps.Threads;
+
 import Utils.Utilities;
 import com.Page;
 import com.UrlInfo;
@@ -13,17 +15,17 @@ import java.util.concurrent.TimeUnit;
 import static java.lang.Thread.sleep;
 
 
-class GoogleThread implements Find, Runnable {
+public class GoogleThread implements com.ps.Threads.Find, Runnable {
 
     private int numInRequest;
-    private boolean bypass = false;
+    private boolean bypass;
     private static final String NAME = "google";
     private boolean running = false;
     private InetSocketAddress currentProxy;
 
-    private BlockingQueue<Page> rawPage = null;
-    private BlockingQueue<Page> page = null;
-    private BlockingQueue<InetSocketAddress> proxies = null;
+    private BlockingQueue<Page> rawPage;
+    private BlockingQueue<Page> page;
+    private BlockingQueue<InetSocketAddress> proxies;
 
     private static Random random = new Random();
 
@@ -84,7 +86,7 @@ class GoogleThread implements Find, Runnable {
         int counterError = 0;
         Page currentPage = null;
         try {
-            currentPage = this.rawPage.take();
+            currentPage = this.rawPage.poll(30, TimeUnit.MILLISECONDS);
             currentProxy = this.proxies.take();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -98,7 +100,7 @@ class GoogleThread implements Find, Runnable {
                     createYouTube(currentPage);
                 }
                 this.page.put(currentPage);
-                currentPage = this.rawPage.poll(3000, TimeUnit.MILLISECONDS);
+                currentPage = this.rawPage.poll(1100, TimeUnit.MILLISECONDS);
                 if (bypass) {
                     makeDelay();
                 }

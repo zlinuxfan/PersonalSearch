@@ -1,3 +1,5 @@
+package com.ps.Threads;
+
 import com.Page;
 
 interface Find {
