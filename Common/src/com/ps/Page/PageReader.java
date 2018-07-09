@@ -1,7 +1,5 @@
 package com.ps.Page;
 
-import com.Page;
-import com.UrlInfo;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;

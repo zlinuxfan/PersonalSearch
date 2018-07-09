@@ -1,6 +1,6 @@
 package com.ps.searchEngines;
 
-import com.UrlInfo;
+import com.ps.Page.UrlInfo;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;

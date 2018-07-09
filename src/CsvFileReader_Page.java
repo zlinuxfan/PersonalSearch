@@ -1,6 +1,6 @@
-import com.OnceText;
-import com.Page;
-import com.UrlInfo;
+import com.ps.Page.OnceText;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -46,14 +46,14 @@ public class CsvFileReader_Page {
     private static final int shortcuts = 27; // Ярлыки
     private static final int siteUserID = 28; // Идентификатор пользователя сайта
 
-    //ArrayList<com.OnceText> textBoxes
+    //ArrayList<com.ps.Page.OnceText> textBoxes
     private static final int textBox1 = 29;
     private static final int textBox2 = 30;
     private static final int textBox2_check = 31;
     private static final int textBox1_check = 32;
     private static final int pathYouTube = 32;
 
-    //List<com.UrlInfo> urlInfo's;
+    //List<com.ps.Page.UrlInfo> urlInfo's;
     private static final int urlInfo_title1 = 33;
     private static final int urlInfo_link1 = 34;
     private static final int urlInfo_description1 = 35;
@@ -70,7 +70,7 @@ public class CsvFileReader_Page {
     private static final int urlInfo_link5 = 46;
     private static final int urlInfo_description5 = 47;
 
-    //ArrayList<com.OnceText> textBoxes tail
+    //ArrayList<com.ps.Page.OnceText> textBoxes tail
     private static final int textBox3 = 48;
     private static final int textBox3_check = 49;
 

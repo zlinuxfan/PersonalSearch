@@ -1,5 +1,6 @@
 package Utils;
 
+import com.ps.Utils.Utilities;
 import com.ps.proxy.ProxyAuthenticator;
 import org.jsoup.nodes.Document;
 import org.junit.Test;

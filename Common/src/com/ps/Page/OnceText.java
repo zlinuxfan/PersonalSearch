@@ -1,4 +1,4 @@
-package com;
+package com.ps.Page;
 
 public class OnceText {
     private String textBox;

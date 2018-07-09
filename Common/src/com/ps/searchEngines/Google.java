@@ -1,7 +1,7 @@
 package com.ps.searchEngines;
 
-import Utils.Utilities;
-import com.UrlInfo;
+import com.ps.Utils.Utilities;
+import com.ps.Page.UrlInfo;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 

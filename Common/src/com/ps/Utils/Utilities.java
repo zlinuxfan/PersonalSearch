@@ -1,7 +1,7 @@
-package Utils;
+package com.ps.Utils;
 
-import com.Page;
-import com.UrlInfo;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
 import com.ps.proxy.ProxyAuthenticator;
 import org.apache.log4j.PropertyConfigurator;
 import org.jsoup.Connection;

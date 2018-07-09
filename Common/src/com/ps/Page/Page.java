@@ -1,4 +1,4 @@
-package com;
+package com.ps.Page;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

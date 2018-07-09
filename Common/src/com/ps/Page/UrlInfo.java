@@ -1,8 +1,7 @@
-package com;
+package com.ps.Page;
 
-import Utils.Utilities;
+import com.ps.Utils.Utilities;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;

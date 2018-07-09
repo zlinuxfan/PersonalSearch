@@ -1,4 +1,4 @@
-package Utils;
+package com.ps.config;
 
 public class CraterConfig extends Config {
 

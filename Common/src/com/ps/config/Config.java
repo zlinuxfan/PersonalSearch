@@ -1,4 +1,4 @@
-package Utils;
+package com.ps.config;
 
 import java.io.File;
 import java.io.FileInputStream;

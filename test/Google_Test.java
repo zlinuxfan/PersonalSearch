@@ -1,4 +1,4 @@
-import com.UrlInfo;
+import com.ps.Page.UrlInfo;
 import com.ps.searchEngines.Google;
 import com.ps.searchEngines.Picture;
 import org.junit.Test;

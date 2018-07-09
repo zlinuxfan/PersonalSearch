@@ -1,4 +1,4 @@
-import Utils.Utilities;
+import com.ps.Utils.Utilities;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;

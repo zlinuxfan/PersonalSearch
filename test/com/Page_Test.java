@@ -1,5 +1,6 @@
 package com;
 
+import com.ps.Page.Page;
 import org.junit.Test;
 
 public class Page_Test {

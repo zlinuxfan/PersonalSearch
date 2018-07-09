@@ -1,7 +1,7 @@
-import Utils.Utilities;
-import com.OnceText;
-import com.Page;
-import com.UrlInfo;
+import com.ps.Utils.Utilities;
+import com.ps.Page.OnceText;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
 import com.ps.searchEngines.Google;
 import com.ps.searchEngines.Picture;
 import org.slf4j.Logger;

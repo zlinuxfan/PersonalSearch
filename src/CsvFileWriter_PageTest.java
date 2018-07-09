@@ -1,5 +1,5 @@
-import com.OnceText;
-import com.UrlInfo;
+import com.ps.Page.OnceText;
+import com.ps.Page.UrlInfo;
 
 import java.net.MalformedURLException;
 import java.net.URL;

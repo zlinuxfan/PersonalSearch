@@ -1,6 +1,6 @@
-import Utils.Utilities;
-import com.Page;
-import com.UrlInfo;
+import com.ps.Utils.Utilities;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
 import com.ps.searchEngines.Google;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;

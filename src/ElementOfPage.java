@@ -1,5 +1,5 @@
-import Utils.Utilities;
-import com.UrlInfo;
+import com.ps.Utils.Utilities;
+import com.ps.Page.UrlInfo;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

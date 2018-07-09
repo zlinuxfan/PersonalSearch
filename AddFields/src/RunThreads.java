@@ -1,6 +1,6 @@
 
-import Utils.Utilities;
-import com.Page;
+import com.ps.Utils.Utilities;
+import com.ps.Page.Page;
 import com.ps.Page.PageReader;
 import com.ps.Threads.PageMaker;
 import com.ps.searchEngines.Find;

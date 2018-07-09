@@ -1,6 +1,6 @@
-import com.OnceText;
-import com.Page;
-import com.UrlInfo;
+import com.ps.Page.OnceText;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
 
 import java.io.FileWriter;
 import java.io.IOException;
