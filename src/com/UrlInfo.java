@@ -18,35 +18,17 @@ public class UrlInfo {
 
     private static HashSet<String> blackLists = getBlackList();
 
-    public UrlInfo(String source, String link, String heading, String description) {
+    public UrlInfo(String source, URL link, String heading, String description) {
         this.source = source;
-        try {
-            String normalLink = (checkUrlString(link));
-            this.link = (normalLink == null || normalLink.equals("")) ? null : new URL(normalLink);
-            this.youtube = this.link != null && this.link.getHost().equals("www.youtube.com");
-            this.blackList = this.link != null && blackLists.contains(this.link.getHost());
-        } catch (MalformedURLException e) {
-            System.out.println("Do not create link from: " + link);
-            e.printStackTrace();
-        }
+        this.link = link;
+        this.youtube = this.link != null && this.link.getHost().equals("www.youtube.com");
+        this.blackList = this.link != null && blackLists.contains(this.link.getHost());
 
         this.description = description;
         this.heading = heading;
     }
 
-    private String checkUrlString(String link) {
-        if (link == null || link.isEmpty()) {
-            return link;
-        }
-        String str = link.substring(0, 4);
-        while (link.length() > 5 && ! str.equals("http")) {
-            link = link.substring(1, link.length()-1);
-            str = link.substring(0, 4);
-        }
-        return link.split("&")[0];
-    }
-
-    public UrlInfo(String source, String link, String heading, String description, String requestName) {
+    public UrlInfo(String source, URL link, String heading, String description, String requestName) {
         this(source, link, heading, description);
         this.requestName = requestName;
     }

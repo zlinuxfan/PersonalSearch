@@ -88,6 +88,18 @@ public class Utilities {
         return  Jsoup.parse(String.valueOf(output));
     }
 
+    public static String checkUrlString(String link) {
+        if (link == null || link.isEmpty()) {
+            return link;
+        }
+        String str = link.substring(0, 4);
+        while (link.length() > 5 && ! str.equals("http")) {
+            link = link.substring(1, link.length()-1);
+            str = link.substring(0, 4);
+        }
+        return link.split("&")[0];
+    }
+
     public static Document getDocument(String url, String proxy, int port) throws IOException {
         Document document;
 

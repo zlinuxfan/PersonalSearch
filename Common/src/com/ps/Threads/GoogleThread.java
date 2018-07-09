@@ -7,6 +7,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
-
+//TODO rename to PageMaker
 public class GoogleThread implements com.ps.Threads.Find, Runnable {
 
     private int numInRequest;
@@ -44,25 +46,32 @@ public class GoogleThread implements com.ps.Threads.Find, Runnable {
 
     @Override
     public Page find(Page page) throws Exception {
-        String url = "http://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
+        String urlString = "http://www.google.com.ua/search?q=" + page.getNameOfElement().replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
-        Document doc = Utilities.getDocument(url, new InetSocketAddress("149.154.71.37", 443)); //connectUrl(url);  //getDocument(url);
+//        Document doc = Utilities.getDocument(urlString);
+        Document doc = Utilities.getDocument(urlString, currentProxy);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
         h3Descriptions = doc.select("span.st");
+        URL url = null;
 
         System.out.println("google find [" + page.getNameOfElement() + "] ... ");
 
         for (int i = 0; i < h3s.size() && i < h3Descriptions.size(); i++) {
-            urlInfoList.add(new UrlInfo(
-                    NAME,
-                    h3s.get(i).select("a").first().attr("href"),
-                    h3s.get(i).text(),
-                    h3Descriptions.get(i).text(),
-                    page.getNameOfElement()
-            ));
+            try {
+                url = new URL(Utilities.checkUrlString(h3s.get(i).select("a").first().attr("href")));
+                urlInfoList.add(new UrlInfo(
+                        NAME,
+                        url,
+                        h3s.get(i).text(),
+                        h3Descriptions.get(i).text(),
+                        page.getNameOfElement()
+                ));
+            } catch (MalformedURLException ex) {
+                System.out.println("Do not create link from: " + url);
+            }
         }
 
         int index = 0;
@@ -96,7 +105,6 @@ public class GoogleThread implements com.ps.Threads.Find, Runnable {
             try {
                 currentPage = this.find(currentPage);
                 if (currentPage.getIdYouTube().isEmpty()) {
-                    System.out.println("youtube is empty ...");
                     createYouTube(currentPage);
                 }
                 this.page.put(currentPage);
@@ -106,6 +114,14 @@ public class GoogleThread implements com.ps.Threads.Find, Runnable {
                 }
             } catch (Exception e) {
                 counterError++;
+                System.out.println("Proxy: " + currentProxy.getHostName() + "->");
+                if (currentPage != null) {
+                    try {
+                        this.rawPage.put(currentPage);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                 e.printStackTrace();
             }
         }
@@ -135,11 +151,11 @@ public class GoogleThread implements com.ps.Threads.Find, Runnable {
         }
     }
 
-
     private ArrayList<String> findYouTube(String requestName, int numberAds, int numberRequestInPage) throws Exception {
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numberRequestInPage;
 
         Elements h3r;
+//        Document doc = Utilities.getDocument(url);
         Document doc = Utilities.getDocument(url, currentProxy);
         ArrayList<String> youTubeUrls = new ArrayList<>();
 

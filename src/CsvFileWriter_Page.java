@@ -4,6 +4,8 @@ import com.UrlInfo;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -242,8 +244,12 @@ public class CsvFileWriter_Page {
         }
 
        while (urlInfoList.size() < NUMBER_ELEMENT) {
-            urlInfoList.add(new UrlInfo("", "", "", ""));
-        }
+           try {
+               urlInfoList.add(new UrlInfo("", new URL(""), "", ""));
+           } catch (MalformedURLException e) {
+               e.printStackTrace();
+           }
+       }
         return stringBuilder.toString();
     }
 

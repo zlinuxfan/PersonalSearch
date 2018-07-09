@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -43,20 +44,21 @@ class Google implements Find {
         h3s = doc.select("h3.r a");
         h3Descriptions = doc.select("span.st");
 
-        String link;
+        URL link;
 
         // первые ссылки - херня, поэтому начинаем с 3
         for (int i = 3; i < h3s.size() && i < h3Descriptions.size(); i++) {
-            link = h3s.get(i).select("a").first().attr("href");
-            if (! link.contains("http")) {
-                break;
-            }
+            try {
+            link = new URL(h3s.get(i).select("a").first().attr("href"));
+
             urlInfoList.add(new UrlInfo(
                     NAME,
                     link,
                     h3s.get(i).text(),
                     h3Descriptions.get(i).text()
-            ));
+            )); } catch (MalformedURLException ex) {
+                    System.out.println("Do not create link from: " + url);
+                }
         }
         System.out.println("google find ...");
         return urlInfoList;

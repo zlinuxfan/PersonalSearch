@@ -19,7 +19,7 @@ public class RunThreads {
 
     private static final String tempFile = "AddFields/data/result/temp.csv";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "lechenie1utf-work.csv";
+    private static final String inPutFileName = "kak-lechit-utf-work.csv";
     private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
@@ -41,7 +41,7 @@ public class RunThreads {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(3);
+        createCheckThreadPool(5);
 
         do {
             try {
@@ -98,7 +98,7 @@ public class RunThreads {
         try {
             proxies.put(new InetSocketAddress("62.109.8.114", 443));
             proxies.put(new InetSocketAddress("94.250.255.31", 443));
-            proxies.put(new InetSocketAddress("149.154.71.37", 443));
+//            proxies.put(new InetSocketAddress("149.154.71.37", 443));
             proxies.put(new InetSocketAddress("82.146.40.45", 443));
             proxies.put(new InetSocketAddress("188.120.246.178", 443));
             proxies.put(new InetSocketAddress("78.24.223.92", 443));

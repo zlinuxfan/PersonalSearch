@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -54,7 +55,7 @@ public class PageReader {
                     urlInfos.add(
                             new UrlInfo(
                                     "file.csv",
-                                    record.get("Ссылка1-1"),
+                                    new URL(record.get("Ссылка1-1")),
                                     record.get("Заголовок1-1"),
                                     record.get("Описание1-1")
                             )

@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -255,14 +257,18 @@ public class Run {
             ArrayList<UrlInfo> urlInfos = new ArrayList<>();
 
             if (record.isMapped("Ссылка1-1")) {
-                urlInfos.add(
-                        new UrlInfo(
-                                "file.csv",
-                                record.get("Ссылка1-1"),
-                                record.get("Заголовок1-1"),
-                                record.get("Описание1-1")
-                        )
-                );
+                try {
+                    urlInfos.add(
+                            new UrlInfo(
+                                    "file.csv",
+                                    new URL(record.get("Ссылка1-1")),
+                                    record.get("Заголовок1-1"),
+                                    record.get("Описание1-1")
+                            )
+                    );
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
 
             pages.add(

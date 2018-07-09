@@ -5,6 +5,8 @@ import com.UrlInfo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class CsvFileReader_Page {
@@ -157,11 +159,20 @@ public class CsvFileReader_Page {
     private static ArrayList<UrlInfo> getUrlInfos(String[] tokens) {
         ArrayList<UrlInfo> urlInfos = new ArrayList<>();
 
-        UrlInfo urlInfo1 = new UrlInfo(SOURCE, tokens[urlInfo_link1], tokens[urlInfo_title1], tokens[urlInfo_description1]);
-        UrlInfo urlInfo2 = new UrlInfo(SOURCE, tokens[urlInfo_link2], tokens[urlInfo_title2], tokens[urlInfo_description2]);
-        UrlInfo urlInfo3 = new UrlInfo(SOURCE, tokens[urlInfo_link3], tokens[urlInfo_title3], tokens[urlInfo_description3]);
-        UrlInfo urlInfo4 = new UrlInfo(SOURCE, tokens[urlInfo_link4], tokens[urlInfo_title4], tokens[urlInfo_description4]);
-        UrlInfo urlInfo5 = new UrlInfo(SOURCE, tokens[urlInfo_link5], tokens[urlInfo_title5], tokens[urlInfo_description5]);
+        UrlInfo urlInfo1 = null;
+        UrlInfo urlInfo2 = null;
+        UrlInfo urlInfo3 = null;
+        UrlInfo urlInfo4 = null;
+        UrlInfo urlInfo5 = null;
+        try {
+            urlInfo1 = new UrlInfo(SOURCE, new URL(tokens[urlInfo_link1]), tokens[urlInfo_title1], tokens[urlInfo_description1]);
+            urlInfo2 = new UrlInfo(SOURCE, new URL(tokens[urlInfo_link2]), tokens[urlInfo_title2], tokens[urlInfo_description2]);
+            urlInfo3 = new UrlInfo(SOURCE, new URL(tokens[urlInfo_link2]), tokens[urlInfo_title3], tokens[urlInfo_description3]);
+            urlInfo4 = new UrlInfo(SOURCE, new URL(tokens[urlInfo_link4]), tokens[urlInfo_title4], tokens[urlInfo_description4]);
+            urlInfo5 = new UrlInfo(SOURCE, new URL(tokens[urlInfo_link5]), tokens[urlInfo_title5], tokens[urlInfo_description5]);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         urlInfos.add(urlInfo1);
         urlInfos.add(urlInfo2);
