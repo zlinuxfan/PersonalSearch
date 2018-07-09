@@ -1,6 +1,7 @@
 import Utils.Utilities;
 import com.Page;
 import com.UrlInfo;
+import com.ps.searchEngines.Google;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -133,7 +135,7 @@ public class Run {
 
     private static void cratePagesAndWrite(ArrayList<Page> pages) {
         int NumberPages = pages.size();
-        Google google = new Google();
+        Google google = new Google(10);
         Iterator<Page> pageIterator = pages.listIterator();
 
         while (pageIterator.hasNext()) {
@@ -161,7 +163,7 @@ public class Run {
 
     private static void fillPage(Page page, Google google) throws Exception {
 
-        ArrayList<UrlInfo> urlInfos = google.find(page.getNameOfElement());
+        ArrayList<UrlInfo> urlInfos = google.find(page.getNameOfElement(), new InetSocketAddress("localhost", 1111));
 //        makeDelay();
 
         int index = 0;
@@ -181,7 +183,7 @@ public class Run {
         try {
             if (page.getIdYouTube().isEmpty()) {
                 System.out.println("youtube is empty ...");
-                ArrayList<String> youTubes = google.findYouTube(page.getNameOfElement(), 1, 10);
+                ArrayList<String> youTubes = google.findYouTube(page.getNameOfElement(), 1, new InetSocketAddress("localhost", 1111));
 
                 if (!youTubes.isEmpty()) {
                     page.setPathYouTube(youTubes.get(0));
@@ -222,7 +224,8 @@ public class Run {
                             "", //("Текст для элемента"),
                             "", //("Путь к элементу"),
                             null,
-                            new ArrayList<>()
+                            new ArrayList<>(),
+                            5
                     ).build());
         }
 
@@ -279,7 +282,8 @@ public class Run {
                             "",
                             "",
                             null,
-                            urlInfos
+                            urlInfos,
+                            5
                     ).idYouTube(
                             record.get("Адрес (youtube)")
                     ).build());

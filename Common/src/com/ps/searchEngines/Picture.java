@@ -1,3 +1,5 @@
+package com.ps.searchEngines;
+
 public class Picture {
     private final String name;
     private final String url;

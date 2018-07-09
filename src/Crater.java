@@ -2,9 +2,12 @@ import Utils.Utilities;
 import com.OnceText;
 import com.Page;
 import com.UrlInfo;
+import com.ps.searchEngines.Google;
+import com.ps.searchEngines.Picture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,6 +19,7 @@ public class Crater {
     private static Logger log = LoggerFactory.getLogger(Crater.class);
 
     private static final int COUNTER_PAGES_IN_FILE = 97;
+    private static final int NUMBER_URL_PAGE = 5;
 
     private static final boolean isTest = false;
 
@@ -40,7 +44,7 @@ public class Crater {
 
     private static void createPages() {
 
-        Google google = new Google();
+        Google google = new Google(10);
         ArrayList<Page> pages = new ArrayList<>();
         Random random = new Random();
 
@@ -59,13 +63,13 @@ public class Crater {
             ArrayList<Picture> pictures;
 
             try {
-                pictures = google.findPicture(resource.getNameRequest(), 10);
+                pictures = google.findPicture(resource.getNameRequest(), 10, new InetSocketAddress("localhost", 1111));
 
                 timeOut = random.nextInt(70);
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
 
-                urlInfos = google.find(resource.getNameRequest());
+                urlInfos = google.find(resource.getNameRequest(), new InetSocketAddress("localhost", 1111));
             } catch (Exception e) {
                 log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or captcha.");
                 continue;
@@ -98,7 +102,8 @@ public class Crater {
                     resource.getTextOfElement(),
                     elementOfPage.getPath(),
                     srcOnceTexts,
-                    elementOfPage.getUrlInfoList()
+                    elementOfPage.getUrlInfoList(),
+                    NUMBER_URL_PAGE
             ).elementDescription(resource.getDescription())
                     .elementTitle(resource.getTitle())
                     .guidOfGroup("") //mainPage.getGuidOfGroup())
@@ -114,7 +119,7 @@ public class Crater {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    page.setPathYouTube(google.findYouTube(resource.getNameRequest(), 1, 10).get(0));
+                    page.setPathYouTube(google.findYouTube(resource.getNameRequest(), 1, new InetSocketAddress("localhost", 1111)).get(0));
                 } catch (Exception e) {
                     log.error("For \"" + resource.getNameRequest() + "\" do not create youTube Id.");
                     page.setIndexing(false);

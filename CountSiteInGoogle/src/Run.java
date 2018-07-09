@@ -1,3 +1,5 @@
+import com.ps.searchEngines.Google;
+
 import java.io.*;
 
 public class Run {
@@ -5,7 +7,7 @@ public class Run {
     private static final String fileData = "work-domains";
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Google google = new Google();
+        Google google = new Google(10);
         BufferedReader in = new BufferedReader(new FileReader(new File(patchData + fileData + ".txt")));
         BufferedWriter out = new BufferedWriter(new FileWriter(new File(patchData + fileData + "_WithCounter.txt"), true));
 

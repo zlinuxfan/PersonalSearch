@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class CsvFileReader_Page {
     private static final String DELIMITER = ";";
     private static final String SOURCE = "file.csv";
+    private static final int NUMBER_URL_PAGE = 5;
+
 
     // attributes index
     private static final int nameParagraph = 0;
@@ -96,7 +98,8 @@ public class CsvFileReader_Page {
                                     tokens[textOfElement],
                                     tokens[pathlElement],
                                     getOnceTexts(tokens),
-                                    getUrlInfos(tokens)
+                                    getUrlInfos(tokens),
+                                    NUMBER_URL_PAGE
                             ).nameParagraph(tokens[nameParagraph])
                                     .guidOfGroup(tokens[guidOfGroup])
                                     .guidOfParentGroup(tokens[guidOfParentGroup])

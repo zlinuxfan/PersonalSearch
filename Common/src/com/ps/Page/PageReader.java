@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PageReader {
-    private static final char DELIMITER = ';';
     private String fileName;
+    private final int numberUrlPage;
 
-    public PageReader(String file) throws FileNotFoundException {
+    public PageReader(String file, int numberUrlInPage) throws FileNotFoundException {
         this.fileName = file;
+        this.numberUrlPage = numberUrlInPage;
     }
 
     public ArrayList<Page> read() throws IOException {
@@ -70,7 +71,8 @@ public class PageReader {
                                 null,
                                 null,
                                 null,
-                                urlInfos
+                                urlInfos,
+                                numberUrlPage
                         ).idYouTube(
                                 record.get("Адрес (youtube)")
                         ).build());

@@ -40,35 +40,10 @@ public class Page {
     private String siteUserID; // Идентификатор пользователя сайта
     private ArrayList<OnceText> textBoxes;
 
-    public String getPathYouTube() {
-        return pathYouTube;
-    }
-
     private String pathYouTube;
-
-    public String getIdYouTube() {
-        return idYouTube;
-    }
-
-    public void setIndexing(boolean indexing) {
-        this.indexing = indexing;
-    }
-
     private String idYouTube;
     private List<UrlInfo> urlInfoList;
-
-    public void addUrlListAll(ArrayList<UrlInfo> urlInfos) {
-        this.urlInfoList.addAll(urlInfos);
-    }
-
-    public void setPathImageSmall(String pathImageSmall) {
-        this.pathImageSmall = pathImageSmall;
-    }
-
-    public void setPathYouTube(String pathYouTube) {
-        this.pathYouTube = pathYouTube;
-        this.idYouTube = !pathYouTube.equals("") ? Builder.crateIdYouTube(this.pathYouTube) : "";
-    }
+    private int numberUrlInPage;
 
     public void addUrlList(UrlInfo urlInfo) {
         this.urlInfoList.add(urlInfo);
@@ -99,6 +74,7 @@ public class Page {
 
 
     public static class Builder {
+        private final int numberUrlInPage;
         private String nameParagraph = "";
         private String guidOfGroup = "";
         private String guidOfParentGroup = "";
@@ -141,7 +117,8 @@ public class Page {
                        String textOfElement,
                        String pathElement,
                        ArrayList<OnceText> textBoxes,
-                       List<UrlInfo> urlInfoList) {
+                       List<UrlInfo> urlInfoList,
+                       int numberUrlInPage) {
 
             this.guidOfElement = guidOfElement;
             this.nameOfElement = nameOfElement;
@@ -152,6 +129,7 @@ public class Page {
             this.pathYouTube = selectPathYouTube(urlInfoList);
             this.idYouTube = !pathYouTube.equals("") ? crateIdYouTube(this.pathYouTube) : "";
             this.urlInfoList = urlInfoList;
+            this.numberUrlInPage = numberUrlInPage;
         }
 
         private static String crateIdYouTube(String pathYouTube) {
@@ -362,6 +340,7 @@ public class Page {
         this.pathYouTube = builder.pathYouTube;
         this.idYouTube = builder.idYouTube;
         this.urlInfoList = builder.urlInfoList;
+        this.numberUrlInPage = builder.numberUrlInPage;
     }
 
     public String getNameParagraph() {
@@ -482,5 +461,22 @@ public class Page {
 
     public List<UrlInfo> getUrlInfoList() {
         return urlInfoList;
+    }
+
+    public String getIdYouTube() {
+        return idYouTube;
+    }
+
+    public void setIndexing(boolean indexing) {
+        this.indexing = indexing;
+    }
+
+    public void setPathYouTube(String pathYouTube) {
+        this.pathYouTube = pathYouTube;
+        this.idYouTube = !pathYouTube.equals("") ? Builder.crateIdYouTube(this.pathYouTube) : "";
+    }
+
+    public int getNumberUrlInPage() {
+        return numberUrlInPage;
     }
 }

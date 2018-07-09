@@ -2,7 +2,10 @@
 import Utils.Utilities;
 import com.Page;
 import com.ps.Page.PageReader;
-import com.ps.Threads.GoogleThread;
+import com.ps.Threads.PageMaker;
+import com.ps.searchEngines.Find;
+import com.ps.searchEngines.Google;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ public class RunThreads {
     private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(3000);
     private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
 
-    private static GoogleThread[] googleThreads;
+    private static PageMaker[] pageMakers;
 
     private static final String tempFile = "AddFields/data/result/temp.csv";
     private static final String tempGuidFile = "temp.guid.csv";
@@ -23,6 +26,7 @@ public class RunThreads {
     private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
+    private static final int NUMBER_URL_IN_PAGE = 3;
     private static int numberOfPage;
     private static String header = "";
 
@@ -41,16 +45,20 @@ public class RunThreads {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(5);
+        createCheckThreadPool(proxies.size() - 1);
 
         do {
             try {
                 page = pages.poll(3000, TimeUnit.MILLISECONDS);
                 if (page != null) {
-                    Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
-                    Utilities.writeStringInFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
-                    counterPage++;
-                    System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
+                    if (page.getUrlInfoList().size() > 0 && !page.getIdYouTube().isEmpty()) {
+                        Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
+                        Utilities.writeStringInFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
+                        counterPage++;
+                        System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
+                    } else {
+                        pages.put(page);
+                    }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -63,7 +71,7 @@ public class RunThreads {
     private static boolean isRunThreads() {
         boolean isRun = false;
 
-        for (GoogleThread googleThread : googleThreads) {
+        for (PageMaker googleThread : pageMakers) {
             isRun = googleThread.isRunning();
         }
 
@@ -71,11 +79,14 @@ public class RunThreads {
     }
 
     private static void createCheckThreadPool(int numberCheckThreadPool) {
-        googleThreads = new GoogleThread[numberCheckThreadPool];
+        pageMakers = new PageMaker[numberCheckThreadPool];
+        ArrayList<Find> searchEngines = new ArrayList<>();
+        searchEngines.add(new Google(10));
+
 
         for (int i = 0; i < numberCheckThreadPool; i++) {
-            googleThreads[i] = new GoogleThread(
-                    20,
+            pageMakers[i] = new PageMaker(
+                    searchEngines,
                     rawPages,
                     pages,
                     proxies,
@@ -83,8 +94,8 @@ public class RunThreads {
             );
         }
 
-        for (GoogleThread googleThread : googleThreads) {
-            new Thread(googleThread).start();
+        for (PageMaker pageMaker : pageMakers) {
+            new Thread(pageMaker).start();
         }
 
         try {
@@ -98,10 +109,10 @@ public class RunThreads {
         try {
             proxies.put(new InetSocketAddress("62.109.8.114", 443));
             proxies.put(new InetSocketAddress("94.250.255.31", 443));
-//            proxies.put(new InetSocketAddress("149.154.71.37", 443));
+            proxies.put(new InetSocketAddress("149.154.71.37", 443));
             proxies.put(new InetSocketAddress("82.146.40.45", 443));
-            proxies.put(new InetSocketAddress("188.120.246.178", 443));
-            proxies.put(new InetSocketAddress("78.24.223.92", 443));
+//            proxies.put(new InetSocketAddress("188.120.246.178", 443));
+//            proxies.put(new InetSocketAddress("78.24.223.92", 443));
             proxies.put(new InetSocketAddress("185.127.166.200", 443));
             proxies.put(new InetSocketAddress("37.230.138.173", 443));
             proxies.put(new InetSocketAddress("185.127.165.122", 443));
@@ -116,7 +127,7 @@ public class RunThreads {
         ArrayList<Page> downPages;
 
         try {
-            PageReader pageReader = new PageReader(tempFile);
+            PageReader pageReader = new PageReader(tempFile, NUMBER_URL_IN_PAGE);
             pages = pageReader.read();
             rawPages.addAll(pages);
         } catch (IOException e) {
@@ -200,7 +211,8 @@ public class RunThreads {
                             "", //("Текст для элемента"),
                             "", //("Путь к элементу"),
                             null,
-                            new ArrayList<>()
+                            new ArrayList<>(),
+                            3
                     ).build());
         }
 

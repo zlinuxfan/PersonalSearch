@@ -1,6 +1,9 @@
 import com.UrlInfo;
+import com.ps.searchEngines.Google;
+import com.ps.searchEngines.Picture;
 import org.junit.Test;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
 public class Google_Test {
@@ -8,10 +11,10 @@ public class Google_Test {
     public void find1() throws Exception {
     }
 
-    private Google google = new Google();
+    private Google google = new Google(10);
     @Test
     public void find() throws Exception {
-        ArrayList<UrlInfo> urlInfos = google.find("Новогодние цвета 2015");
+        ArrayList<UrlInfo> urlInfos = google.find("Новогодние цвета 2015", new InetSocketAddress("localhost", 1111));
 
         for (UrlInfo urlInfo : urlInfos) {
             System.out.println(urlInfo.getLink());
@@ -20,7 +23,7 @@ public class Google_Test {
 
     @Test
     public void findPicture() throws Exception {
-        ArrayList<Picture> request = google.findPicture("Как приготовить самбук абрикосовый", 3);
+        ArrayList<Picture> request = google.findPicture("Как приготовить самбук абрикосовый", 3, new InetSocketAddress("localhost", 1111));
 
         for (Picture picture : request) {
             System.out.println(picture.getUrl());
@@ -29,7 +32,7 @@ public class Google_Test {
 
     @Test
     public void findYouTube() throws Exception {
-        ArrayList<String> youTubeUrls = google.findYouTube("Как приготовить самбук абрикосовый", 3, 10);
+        ArrayList<String> youTubeUrls = google.findYouTube("Как приготовить самбук абрикосовый", 3, new InetSocketAddress("localhost", 1111));
 
     }
 

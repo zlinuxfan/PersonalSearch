@@ -266,7 +266,7 @@ public class Utilities {
             fileWriter.append(DELIMITER);
             fileWriter.append(addQuotes(page.getIdYouTube()));
             fileWriter.append(DELIMITER);
-            fileWriter.append(urlInfoListWithoutSecondUrlToCsvOnly(page.getUrlInfoList()));
+            fileWriter.append(urlInfoListToCsv(page.getUrlInfoList()));
             fileWriter.append(NEW_LINE_SEPARATOR);
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter_Page !!!");
