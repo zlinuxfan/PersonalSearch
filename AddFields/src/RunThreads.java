@@ -45,7 +45,7 @@ public class RunThreads {
         Page page;
         int counterPage = 0;
         init();
-        createCheckThreadPool(proxies.size() - 1);
+        createProxyThreadPool(proxies.size() - 1);
 
         do {
             try {
@@ -78,7 +78,7 @@ public class RunThreads {
         return isRun;
     }
 
-    private static void createCheckThreadPool(int numberCheckThreadPool) {
+    private static void createProxyThreadPool(int numberCheckThreadPool) {
         pageMakers = new PageMaker[numberCheckThreadPool];
         ArrayList<Find> searchEngines = new ArrayList<>();
         searchEngines.add(new Google(10));
