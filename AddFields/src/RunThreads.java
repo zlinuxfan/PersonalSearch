@@ -16,13 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class RunThreads {
     private static BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(3000);
     private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(3000);
-    private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(30);
+    private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(50);
 
     private static PageMaker[] pageMakers;
 
     private static final String tempFile = "AddFields/data/result/temp.csv";
+    private static final String proxyFile = "AddFields/data/proxes-30.txt";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "kak-lechit-utf-work.csv";
+    private static final String inPutFileName = "export-procedury-utf8-work.csv";
     private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
@@ -36,7 +37,7 @@ public class RunThreads {
         startTime = System.currentTimeMillis();
         checkTempFile(tempFile);
         fillRawPage();
-        fillProxies();
+        fillProxies(proxyFile);
 
         numberOfPage = rawPages.size();
     }
@@ -47,11 +48,13 @@ public class RunThreads {
         init();
         createProxyThreadPool(proxies.size() - 1);
 
+        System.out.println("Number of page: " + numberOfPage);
+
         do {
             try {
                 page = pages.poll(3000, TimeUnit.MILLISECONDS);
                 if (page != null) {
-                    if (page.getUrlInfoList().size() > 0 && !page.getIdYouTube().isEmpty()) {
+                    if (page.getUrlInfoList().size() > 0) {
                         Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
                         Utilities.writeStringInFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
                         counterPage++;
@@ -83,7 +86,6 @@ public class RunThreads {
         ArrayList<Find> searchEngines = new ArrayList<>();
         searchEngines.add(new Google(10));
 
-
         for (int i = 0; i < numberCheckThreadPool; i++) {
             pageMakers[i] = new PageMaker(
                     searchEngines,
@@ -105,17 +107,14 @@ public class RunThreads {
         }
     }
 
-    private static void fillProxies() {
+    private static void fillProxies(String fileName) {
+        ArrayList<String> lines = Utilities.readResource(fileName);
+
         try {
-            proxies.put(new InetSocketAddress("62.109.8.114", 443));
-            proxies.put(new InetSocketAddress("94.250.255.31", 443));
-            proxies.put(new InetSocketAddress("149.154.71.37", 443));
-            proxies.put(new InetSocketAddress("82.146.40.45", 443));
-//            proxies.put(new InetSocketAddress("188.120.246.178", 443));
-//            proxies.put(new InetSocketAddress("78.24.223.92", 443));
-            proxies.put(new InetSocketAddress("185.127.166.200", 443));
-            proxies.put(new InetSocketAddress("37.230.138.173", 443));
-            proxies.put(new InetSocketAddress("185.127.165.122", 443));
+            for (String line : lines) {
+                String[] proxy = line.split(":");
+                proxies.put(new InetSocketAddress(proxy[0], Integer.valueOf(proxy[1])));
+            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();

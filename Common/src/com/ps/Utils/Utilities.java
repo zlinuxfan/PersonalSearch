@@ -20,8 +20,11 @@ public class Utilities {
     private static final int NUMBER_ELEMENT = 5;
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    private static final String authUser = "LYpeSb6ha";
-    private static final String authPassword = "PmhaXqKFI";
+//    private static final String authUser = "LYpeSb6ha";
+//    private static final String authPassword = "PmhaXqKFI";
+
+    private static final String authUser = "4T6uNEp8W";
+    private static final String authPassword = "jd1NLZcqc";
 
     static {
         String log4jConfPath = "conf/log4j.properties";
@@ -159,7 +162,9 @@ public class Utilities {
             String line;
 
             while ((line = fileReader.readLine()) != null) {
-                textsOfElements.add(line);
+                if (! line.startsWith("#")) {
+                    textsOfElements.add(line);
+                }
             }
         } catch (Exception e) {
             System.out.println("Error in FileReader !!!");
