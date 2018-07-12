@@ -23,7 +23,7 @@ public class RunThreads {
     private static final String tempFile = "AddFields/data/result/temp.csv";
     private static final String proxyFile = "AddFields/data/proxes-30.txt";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "export-procedury-utf8-work.csv";
+    private static final String inPutFileName = "poleznoe-pitanie-utf8work.csv";
     private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
@@ -52,7 +52,7 @@ public class RunThreads {
 
         do {
             try {
-                page = pages.poll(3000, TimeUnit.MILLISECONDS);
+                page = pages.poll(1000, TimeUnit.MILLISECONDS);
                 if (page != null) {
                     if (page.getUrlInfoList().size() > 0) {
                         Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
@@ -60,7 +60,9 @@ public class RunThreads {
                         counterPage++;
                         System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
                     } else {
-                        pages.put(page);
+                        System.out.println(String.format("Page id: %s. UrlInfoList size: %d",
+                                page.getGuidOfElement(),
+                                page.getUrlInfoList().size()));
                     }
                 }
             } catch (InterruptedException e) {
@@ -75,7 +77,7 @@ public class RunThreads {
         boolean isRun = false;
 
         for (PageMaker googleThread : pageMakers) {
-            isRun = googleThread.isRunning();
+            isRun = isRun || googleThread.isRunning();
         }
 
         return isRun;
@@ -84,7 +86,7 @@ public class RunThreads {
     private static void createProxyThreadPool(int numberCheckThreadPool) {
         pageMakers = new PageMaker[numberCheckThreadPool];
         ArrayList<Find> searchEngines = new ArrayList<>();
-        searchEngines.add(new Google(10));
+        searchEngines.add(new Google(30));
 
         for (int i = 0; i < numberCheckThreadPool; i++) {
             pageMakers[i] = new PageMaker(

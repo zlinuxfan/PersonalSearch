@@ -61,7 +61,9 @@ public class Google implements Find {
                         requestName
                 ));
             } catch (MalformedURLException ex) {
-                System.out.println("Do not create link from: " + link);
+                System.out.println(String.format("Do not create link from: %s for %s",
+                        link,
+                        requestName));
             }
         }
         return urlInfoList;
