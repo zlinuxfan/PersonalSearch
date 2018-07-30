@@ -23,7 +23,7 @@ public class RunThreads {
     private static final String tempFile = "AddFields/data/result/temp.csv";
     private static final String proxyFile = "AddFields/data/proxes-30.txt";
     private static final String tempGuidFile = "temp.guid.csv";
-    private static final String inPutFileName = "poleznoe-pitanie-utf8work.csv";
+    private static final String inPutFileName = "export-nogti-utf8-work.csv";
     private static final String inPutPath = "AddFields/data/";
     private static final String outPutFileName = inPutFileName + ".out";
     private static final String outPutPath = "AddFields/data/result/";
