@@ -23,8 +23,8 @@ public class Utilities {
 //    private static final String authUser = "LYpeSb6ha";
 //    private static final String authPassword = "PmhaXqKFI";
 
-    private static final String authUser = "4T6uNEp8W";
-    private static final String authPassword = "jd1NLZcqc";
+    private static final String authUser = "trzHZKLRI";
+    private static final String authPassword = "Wem8GM4hu";
 
     static {
         String log4jConfPath = "conf/log4j.properties";
@@ -263,11 +263,11 @@ public class Utilities {
         try {
             fileWriter = new FileWriter(fileName, append);
 
-            fileWriter.append(addQuotes(page.getGuidOfElement()));
-            fileWriter.append(DELIMITER);
             fileWriter.append(addQuotes(page.getNameOfElement()));
             fileWriter.append(DELIMITER);
-            fileWriter.append(addQuotes(page.getPathlElement()));
+            fileWriter.append(addQuotes(page.getElementTitle()));
+            fileWriter.append(DELIMITER);
+            fileWriter.append(addQuotes(page.getPathImage()));
             fileWriter.append(DELIMITER);
             fileWriter.append(addQuotes(page.getIdYouTube()));
             fileWriter.append(DELIMITER);

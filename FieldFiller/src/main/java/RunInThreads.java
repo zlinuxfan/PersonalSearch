@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class RunInThreads {
     private static BlockingQueue<Page> rawPages = new ArrayBlockingQueue<>(1000);
@@ -20,14 +21,16 @@ public class RunInThreads {
 
     private static final String tempFile = "FieldFiller/data/temp.csv";
     private static final String proxyFile = "Common/data/proxes-9.txt";
-    private static final String tempGuidFile = "temp.guid.csv";
+    private static final String tempSearchQueryFile = "temp.SearchQuery.csv";
     private static final String inPutFileName = "test.csv";
     private static final String inPutPath = "FieldFiller/data/";
     private static final String outPutFileName = inPutFileName + ".out";
-    private static final String outPutPath = "AddFields/result/";
+    private static final String outPutPath = "FieldFiller/result/";
     private static final int NUMBER_URL_IN_PAGE = 4;
     private static int numberOfPage;
     private static String header = "";
+    private static String headerOutput = "Название элемента;Заголовок (title);Файл изображения для элемента;Адрес (youtube);Заголовок1-1;Ссылка1-1;Описание1-1;Заголовок2-1;Ссылка2-1;Описание2-1;Заголовок3-1;Ссылка3-1;Описание3-1;Заголовок4-1;Ссылка4-1;Описание4-1";
+    private static String headerTemp = "Поисковый запрос";
 
     private static long startTime;
 
@@ -36,18 +39,44 @@ public class RunInThreads {
 
         int counterPage = 0;
         init();
-
-        for (Page rawPage : rawPages) {
-            System.out.println(String.format("%s, %s, %s",
-                    rawPage.getSearchQuery(),
-                    rawPage.getNameOfElement(),
-                    rawPage.getElementTitle()
-            ));
-        }
-
         createProxyThreadPool(1);
 
-        System.out.println("Number of page: " + numberOfPage);
+        if (numberOfPage > 0) {
+            System.out.println("Left pages: " + numberOfPage + ".");
+        } else {
+            System.out.println("All pages are collected for " + inPutFileName + ". See " + outPutPath + outPutFileName);
+            System.exit(0);
+        }
+
+        do {
+            try {
+                page = pages.poll(1000, TimeUnit.MILLISECONDS);
+                if (page != null) {
+                    if (page.getUrlInfoList().size() > 0) {
+                        Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
+                        Utilities.writeStringInFile(outPutPath + tempSearchQueryFile, page.getSearchQuery(), true);
+                        counterPage++;
+                        System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
+                    } else {
+                        System.out.println(String.format("Page id: %s. UrlInfoList size: %d",
+                                page.getGuidOfElement(),
+                                page.getUrlInfoList().size()));
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (isRunThreads() && counterPage < numberOfPage);
+
+        System.out.println("Time work: " + Utilities.convertToTime(System.currentTimeMillis() - startTime));
+    }
+
+    private static void printPage(Page page) {
+            System.out.println(String.format("%s, %s, %s",
+                    page.getSearchQuery(),
+                    page.getNameOfElement(),
+                    page.getElementTitle()
+            ));
     }
 
     private static void init() {
@@ -124,25 +153,35 @@ public class RunInThreads {
             e.printStackTrace();
         }
 
+        if (new File(outPutPath + outPutFileName).exists() &&
+                new File(outPutPath + tempSearchQueryFile).exists()) {
+            downPages = readPagesInF(outPutPath + tempSearchQueryFile);
+            rawPages.removeAll(downPages);
+        } else {
+            Utilities.writeStringInFile(outPutPath + outPutFileName, headerOutput, true);
+            Utilities.writeStringInFile(outPutPath + tempSearchQueryFile, headerTemp, true);
+        }
     }
 
     private static ArrayList<Page> readPagesInF(String fileName) {
-        ArrayList<String> guids = Utilities.readResource(fileName);
+        ArrayList<String> searchQueryList = Utilities.readResource(fileName);
         ArrayList<Page> pages = new ArrayList<>();
 
-        for (String guid : guids) {
+        for (String searchQuery : searchQueryList) {
 
             pages.add(
                     new Page.Builder(
-                            guid,
+                            null,
                             "", //("Название элемента"),
                             "", //("Описание элемента"),
                             "", //("Текст для элемента"),
                             "", //("Путь к элементу"),
                             null,
                             new ArrayList<>(),
-                            3
-                    ).build());
+                            NUMBER_URL_IN_PAGE
+                    )
+                            .searchQuery(searchQuery)
+                            .build());
         }
 
         return pages;
@@ -186,5 +225,15 @@ public class RunInThreads {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean isRunThreads() {
+        boolean isRun = false;
+
+        for (PageMaker googleThread : pageMakers) {
+            isRun = isRun || googleThread.isRunning();
+        }
+
+        return isRun;
     }
 }

@@ -43,7 +43,7 @@ public class PageMaker implements Runnable {
         List<UrlInfo> urlInfoList = new ArrayList<>();
 
         for (Find searchEngine : searchEngines) {
-            urlInfoList.addAll(searchEngine.find(page.getNameOfElement(), currentProxy));
+            urlInfoList.addAll(searchEngine.find(page.getSearchQuery(), currentProxy));
         }
 
         if (bypass) {
@@ -52,6 +52,10 @@ public class PageMaker implements Runnable {
 
         if (page.getIdYouTube().isEmpty()) {
             createYouTube(page);
+        }
+
+        if (page.getPathImage().isEmpty()) {
+            createPathImage(page);
         }
 
         int index = 0;
@@ -71,6 +75,15 @@ public class PageMaker implements Runnable {
 
     @Override
     public void run() {
+
+        // timeout for filling the list rawPage
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         this.running = true;
         int counterError = 0;
         Page currentPage = null;
@@ -125,6 +138,17 @@ public class PageMaker implements Runnable {
 //                log.error("For \"" + page.getNameOfElement() + "\" do not create youTube Id.");
             e.printStackTrace();
             page.setIndexing(false);
+        }
+    }
+
+    private void createPathImage(Page page) {
+        ArrayList<String> pathImages = new ArrayList<>();
+        for (Find searchEngine : searchEngines) {
+//            pathImages.addAll(searchEngine.findPicture(
+    //                page.getSearchQuery(),
+        //            5,
+
+           // ))
         }
     }
 

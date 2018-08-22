@@ -54,7 +54,7 @@ public class Page {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + this.guidOfElement.hashCode();
+        hash = 53 * hash + this.guidOfElement.hashCode() + this.searchQuery.hashCode();
 
         return hash;
     }
@@ -71,7 +71,8 @@ public class Page {
 
         Page thisObj = (Page) obj;
 
-        return Objects.equals(this.getGuidOfElement(), thisObj.getGuidOfElement());
+        return Objects.equals(this.getGuidOfElement(), thisObj.getGuidOfElement()) &&
+                Objects.equals(this.getSearchQuery(), thisObj.getSearchQuery());
     }
 
 
