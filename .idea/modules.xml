@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AddFields/AddFields.iml" filepath="$PROJECT_DIR$/AddFields/AddFields.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CountSiteInGoogle/CountSiteInGoogle.iml" filepath="$PROJECT_DIR$/CountSiteInGoogle/CountSiteInGoogle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FieldFiller/FieldFiller.iml" filepath="$PROJECT_DIR$/FieldFiller/FieldFiller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PersonalSearch.iml" filepath="$PROJECT_DIR$/PersonalSearch.iml" />
+    </modules>
+  </component>
+</project>
