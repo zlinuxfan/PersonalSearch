@@ -19,6 +19,8 @@ public class Page {
     private String pathSection; // Путь для раздела
     private String partitionSortingSection; // Порядок сортировки раздела
 
+    private String searchQuery = ""; //Поисковый запрос
+
     private String guidOfElement; // GUID идентификатор элемента
     private String nameOfElement; // название элемента
     private String briefDescriptionElement; //Описание элемента
@@ -84,6 +86,8 @@ public class Page {
         private String briefDescriptionSection = ""; //Описание раздела
         private String pathSection = ""; // Путь для раздела
 
+        private String searchQuery = ""; //Поисковый запрос
+
         private String partitionSortingSection = ""; // Порядок сортировки раздела
         private String guidOfElement = ""; // GUID идентификатор элемента
         private String nameOfElement = ""; // название элемента
@@ -121,15 +125,17 @@ public class Page {
                        int numberUrlInPage) {
 
             this.guidOfElement = guidOfElement;
+            this.searchQuery = searchQuery;
             this.nameOfElement = nameOfElement;
             this.briefDescriptionElement = briefDescriptionElement;
             this.textOfElement = textOfElement;
             this.pathElement = pathElement;
             this.textBoxes = textBoxes;
-            this.pathYouTube = selectPathYouTube(urlInfoList);
-            this.idYouTube = !pathYouTube.equals("") ? crateIdYouTube(this.pathYouTube) : "";
             this.urlInfoList = urlInfoList;
             this.numberUrlInPage = numberUrlInPage;
+
+            this.pathYouTube = selectPathYouTube(urlInfoList);
+            this.idYouTube = !pathYouTube.equals("") ? crateIdYouTube(this.pathYouTube) : "";
         }
 
         private static String crateIdYouTube(String pathYouTube) {
@@ -302,6 +308,11 @@ public class Page {
             return this;
         }
 
+        public Builder searchQuery(String searchQuery) {
+            this.searchQuery = searchQuery;
+            return this;
+        }
+
         public Page build() {
             return new Page(this);
         }
@@ -341,6 +352,7 @@ public class Page {
         this.idYouTube = builder.idYouTube;
         this.urlInfoList = builder.urlInfoList;
         this.numberUrlInPage = builder.numberUrlInPage;
+        this.searchQuery = builder.searchQuery;
     }
 
     public String getNameParagraph() {
@@ -478,5 +490,9 @@ public class Page {
 
     public int getNumberUrlInPage() {
         return numberUrlInPage;
+    }
+
+    public String getSearchQuery() {
+        return searchQuery;
     }
 }

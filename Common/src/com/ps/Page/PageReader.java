@@ -63,7 +63,7 @@ public class PageReader {
 
                 pages.add(
                         new Page.Builder(
-                                record.get("GUID идентификатор элемента"),
+                                null,
                                 record.get("Название элемента"),
                                 null,
                                 null,
@@ -71,9 +71,11 @@ public class PageReader {
                                 null,
                                 urlInfos,
                                 numberUrlPage
-                        ).idYouTube(
-                                record.get("Адрес (youtube)")
-                        ).build());
+                        )
+                                .idYouTube("")
+                                .searchQuery(record.get("Поисковый запрос"))
+                                .elementTitle(record.get("Заголовок (title)"))
+                                .build());
             }
 
         } catch (IOException e) {

@@ -83,7 +83,7 @@ public class RunThreads {
         return isRun;
     }
 
-    private static void createProxyThreadPool(int numberCheckThreadPool) {
+    public static void createProxyThreadPool(int numberCheckThreadPool) {
         pageMakers = new PageMaker[numberCheckThreadPool];
         ArrayList<Find> searchEngines = new ArrayList<>();
         searchEngines.add(new Google(30));
@@ -109,7 +109,7 @@ public class RunThreads {
         }
     }
 
-    private static void fillProxies(String fileName) {
+    public static void fillProxies(String fileName) {
         ArrayList<String> lines = Utilities.readResource(fileName);
 
         try {
@@ -123,7 +123,7 @@ public class RunThreads {
         }
     }
 
-    private static void fillRawPage() {
+    public static void fillRawPage() {
         ArrayList<Page> pages;
         ArrayList<Page> downPages;
 
@@ -145,7 +145,7 @@ public class RunThreads {
         }
     }
 
-    private static void checkTempFile(String tempFile) {
+    public static void checkTempFile(String tempFile) {
 
         if (!(new File(tempFile)).exists()) {
             removeWrapping(tempFile);
