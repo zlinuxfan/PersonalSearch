@@ -155,15 +155,15 @@ public class Run {
 
             checkYouTube(page, google);
 
-            Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
-            Utilities.writeStringInFile(outPutPath + "temp.guid.txt", page.getGuidOfElement(), true);
+            Utilities.writeShortPageToFile(outPutPath + outPutFileName, page, true);
+            Utilities.writeStringToFile(outPutPath + "temp.guid.txt", page.getGuidOfElement(), true);
             pageIterator.remove();
         }
     }
 
     private static void fillPage(Page page, Google google) throws Exception {
 
-        ArrayList<UrlInfo> urlInfos = google.find(page.getNameOfElement(), new InetSocketAddress("localhost", 1111));
+        ArrayList<UrlInfo> urlInfos = google.findUrl(page.getNameOfElement(), new InetSocketAddress("localhost", 1111));
 //        makeDelay();
 
         int index = 0;

@@ -496,4 +496,8 @@ public class Page {
     public String getSearchQuery() {
         return searchQuery;
     }
+
+    public void setTextBoxes(ArrayList<OnceText> textBoxes) {
+        this.textBoxes = textBoxes;
+    }
 }

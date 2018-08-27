@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/ElementOfPage.java" line="76" />
-  </component>
   <component name="ChangeListManager">
     <list id="43b6a0f5-60fc-4610-b951-c7c7c8be931f" name="In Threads " comment="" />
-    <list default="true" id="d1cb5b22-0c3d-4087-87f2-c556f8695d66" name="Default" comment="" />
+    <list default="true" id="d1cb5b22-0c3d-4087-87f2-c556f8695d66" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FieldFiller/src/main/java/FF_additional_run.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FieldFiller/src/main/java/Utils.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/data/temp.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/result/temp.SearchQuery.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/result/test.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/result/test.csv.out" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/src/main/java/RunInThreads.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Common/data/proxes-30.txt" afterPath="$PROJECT_DIR$/Common/data/proxy-30.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Common/data/proxes-9.txt" afterPath="$PROJECT_DIR$/Common/data/proxy-9.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/FieldFiller/data/test.csv" afterPath="$PROJECT_DIR$/FieldFiller/data/src/test.csv" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ElementOfPage.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Page/ElementOfPage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AddFields/src/Run.java" afterPath="$PROJECT_DIR$/AddFields/src/Run.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AddFields/src/RunThreads.java" afterPath="$PROJECT_DIR$/AddFields/src/RunThreads.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crater.log" afterPath="$PROJECT_DIR$/crater.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Crater.java" afterPath="$PROJECT_DIR$/src/Crater.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/Google_Test.java" afterPath="$PROJECT_DIR$/test/Google_Test.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/FieldFiller/target/" />
+    <ignored path="$PROJECT_DIR$/FieldFiller_onlyTestBoxes/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,24 +59,22 @@
     <favorites_list name="PersonalSearch" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Run.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AddFields/src/Run.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="1281">
+      <file leaf-file-name="FF_additional_run.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/FF_additional_run.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1743">
-              <caret line="286" column="22" lean-forward="false" selection-start-line="286" selection-start-column="22" selection-end-line="286" selection-end-column="22" />
-              <folding>
-                <marker date="1531141988932" expanded="true" signature="9571:10255" ph="{...}" />
-              </folding>
+            <state relative-caret-position="1224">
+              <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunInThreads.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/RunInThreads.java">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="46" column="118" lean-forward="false" selection-start-line="46" selection-start-column="118" selection-end-line="46" selection-end-column="118" />
+            <state relative-caret-position="231">
+              <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,44 +82,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.csv.out" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldFiller/result/test.csv.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageMaker.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PageMaker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="303">
-              <caret line="57" column="32" lean-forward="false" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
+              <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
               <folding>
-                <element signature="e#4646#4647#0" expanded="true" />
-                <element signature="e#4676#4677#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="temp.SearchQuery.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldFiller/result/temp.SearchQuery.csv">
+      <file leaf-file-name="Crater.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Crater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="480">
+              <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="temp.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldFiller/data/temp.csv">
+      <file leaf-file-name="CsvFileWriter_Page.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CsvFileWriter_Page.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="495">
+              <caret line="266" column="39" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="266" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CsvFileWriter_PageTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CsvFileWriter_PageTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -107,71 +127,33 @@
       <file leaf-file-name="Page.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/Page.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="28" />
+            <state relative-caret-position="790">
+              <caret line="500" column="35" lean-forward="true" selection-start-line="500" selection-start-column="35" selection-end-line="500" selection-end-column="35" />
               <folding>
-                <element signature="e#15229#15230#0" expanded="true" />
-                <element signature="e#15263#15264#0" expanded="true" />
+                <element signature="e#15830#15831#0" expanded="true" />
+                <element signature="e#15872#15873#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="ElementOfPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/ElementOfPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="912">
+              <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utilities.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java">
+      <file leaf-file-name="PageReader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="274" column="50" lean-forward="true" selection-start-line="274" selection-start-column="50" selection-end-line="274" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Utils/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldFiller/data/test.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Google.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Picture.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Picture.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="744">
+              <caret line="74" column="46" lean-forward="true" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -180,21 +162,39 @@
       <file leaf-file-name="Find.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state relative-caret-position="144">
+              <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java">
+      <file leaf-file-name="OnceText.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/OnceText.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="75" column="33" lean-forward="true" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="48">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Google.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="35" column="30" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utilities.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="389" column="28" lean-forward="false" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -212,7 +212,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>56FD43F9-F50B-B646-FFA5-54A071D11398</find>
       <find>Как выглядеть в новогоднюю ночь</find>
       <find>F76B8DB9-0370-63E6-99E3-B94BD16F8E35</find>
       <find>&quot;&quot;;&quot;Как отметить Новый год на 1500 рублей&quot;;&quot;kak-otmetit-novyy-god-na-1500-rubley&quot;;&quot;TpdIGfxGKyo&quot;;</find>
@@ -242,6 +241,7 @@
       <find>поис</find>
       <find>\t`</find>
       <find>\t</find>
+      <find>textBoxes</find>
     </findStrings>
     <replaceStrings>
       <replace>UrlInfo</replace>
@@ -273,22 +273,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/testForThread/data/result/shashlyk-utf-work.csv.out" />
-        <option value="$PROJECT_DIR$/testForThread/data/result/temp.csv" />
-        <option value="$PROJECT_DIR$/testForThread/data/result/temp.guid.csv" />
-        <option value="$PROJECT_DIR$/testForThread/data/result/varenie-utf8-work2.csv.out" />
-        <option value="$PROJECT_DIR$/AddFields/data/sousy-utf-work.csv" />
-        <option value="$PROJECT_DIR$/AddFields/data/result/sousy-utf-work.csv.out" />
-        <option value="$PROJECT_DIR$/testForThread/data/sousy-utf-work.csv" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/testForThread/src/testForThread.java" />
         <option value="$PROJECT_DIR$/testForThread/src/GoogleThread.java" />
         <option value="$PROJECT_DIR$/testForThread/data/result/lechenie1utf-work.csv.out" />
         <option value="$PROJECT_DIR$/Common/src/com/ps/Threads/GoogleThread.java" />
         <option value="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Picture.java" />
         <option value="$PROJECT_DIR$/Common/src/com/ps/Threads/Find.java" />
         <option value="$PROJECT_DIR$/src/Google.java" />
-        <option value="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" />
         <option value="$PROJECT_DIR$/src/CsvFileReader_Page.java" />
         <option value="$PROJECT_DIR$/src/Crater.java" />
         <option value="$PROJECT_DIR$/test/com/Page_Test.java" />
@@ -307,23 +297,33 @@
         <option value="$PROJECT_DIR$/AddFields/data/proxes-9.txt" />
         <option value="$PROJECT_DIR$/AddFields/data/arch/summer.data/export-procedury-utf8-work.csv" />
         <option value="$PROJECT_DIR$/AddFields/data/arch/poleznoe-pitanie-utf8work.csv" />
-        <option value="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" />
         <option value="$PROJECT_DIR$/AddFields/data/result/poleznoe-pitanie-utf8work.csv.out" />
         <option value="$PROJECT_DIR$/AddFields/data/result/temp.guid.csv" />
         <option value="$PROJECT_DIR$/AddFields/src/RunThreads.java" />
         <option value="$PROJECT_DIR$/FieldFiller/pom.xml" />
         <option value="$PROJECT_DIR$/FieldFiller/src/main/java/RunThreads.java" />
         <option value="$PROJECT_DIR$/Common/src/com/ps/Page/PageReader_.java" />
-        <option value="$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/FieldFiller/data/test.csv" />
         <option value="$PROJECT_DIR$/PersonalSearch.iml" />
-        <option value="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" />
         <option value="$PROJECT_DIR$/FieldFiller/result/test.csv.out" />
-        <option value="$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java" />
         <option value="$PROJECT_DIR$/FieldFiller/result/temp.SearchQuery.csv" />
+        <option value="$PROJECT_DIR$/FieldFiller_onlyTestBoxes/pom.xml" />
+        <option value="$PROJECT_DIR$/FieldFiller_onlyTestBoxes/src/main/java/FF_onlyTextBoxes_run.java" />
         <option value="$PROJECT_DIR$/FieldFiller/src/main/java/RunInThreads.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/src/main/java/FF_onlyYouTubeUrls_run.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/src/main/java/FF_additionalFields_run.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/src/main/java/FF_onlyTextBoxes_run.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/src/main/java/Utils.java" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/src/main/java/FF_additional_run.java" />
         <option value="$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/Page/ElementOfPage.java" />
+        <option value="$PROJECT_DIR$/FieldFiller/data/result/test.csv.out" />
+        <option value="$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java" />
       </list>
     </option>
   </component>
@@ -332,6 +332,13 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
@@ -359,10 +366,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -373,24 +380,7 @@
             <path>
               <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="AddFields" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="AddFields" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
               <item name="Common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
@@ -464,12 +454,6 @@
               <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
               <item name="FieldFiller" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="FieldFiller" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -487,6 +471,11 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PersonalSearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PersonalSearch" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -499,7 +488,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../searchEngine" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WorkFromProxy" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/PersonalSearch.iml" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -510,9 +499,6 @@
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
       <recent name="com" />
@@ -524,22 +510,27 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FieldFiller/data/src" />
+      <recent name="$PROJECT_DIR$/FieldFiller/data" />
+      <recent name="$PROJECT_DIR$/AddFields/data/arch/summer.data" />
+      <recent name="$PROJECT_DIR$/AddFields/data" />
+      <recent name="$PROJECT_DIR$/AddFields/data/arch" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FieldFiller_onlyTestBoxes" />
       <recent name="$PROJECT_DIR$/Common/data" />
       <recent name="$PROJECT_DIR$/AddFields/summer.data" />
       <recent name="$PROJECT_DIR$/AddFields/data/" />
       <recent name="$PROJECT_DIR$/AddFields/data/arch/summer.data" />
-      <recent name="$PROJECT_DIR$/testForThread/data" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.ps.Page" />
       <recent name="" />
       <recent name="Utils" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/AddFields/data/arch/summer.data" />
-      <recent name="$PROJECT_DIR$/AddFields/data" />
-      <recent name="$PROJECT_DIR$/AddFields/data/arch" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
     </key>
   </component>
   <component name="Regex">
@@ -565,7 +556,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RunInThreads">
+  <component name="RunManager">
+    <configuration name="FF_additional_run" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="FF_additional_run" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="FieldFiller" />
+      <envs />
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -592,20 +597,6 @@
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="AddFields" />
-      <envs />
-    </configuration>
-    <configuration name="RunInThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="RunInThreads" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="FieldFiller" />
       <envs />
     </configuration>
     <configuration name="RunThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -1042,11 +1033,11 @@
       <item index="1" class="java.lang.String" itemvalue="Application.Main" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.Run_Test" />
       <item index="3" class="java.lang.String" itemvalue="Application.RunThreads" />
-      <item index="4" class="java.lang.String" itemvalue="Application.RunInThreads" />
+      <item index="4" class="java.lang.String" itemvalue="Application.FF_additional_run" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.RunInThreads" />
+        <item index="0" class="java.lang.String" itemvalue="Application.FF_additional_run" />
         <item index="1" class="java.lang.String" itemvalue="Application.RunThreads" />
         <item index="2" class="java.lang.String" itemvalue="Application.Main" />
         <item index="3" class="java.lang.String" itemvalue="Application.Run" />
@@ -1107,6 +1098,7 @@
       <workItem from="1532079629395" duration="1295000" />
       <workItem from="1532948809760" duration="1029000" />
       <workItem from="1534934611223" duration="14185000" />
+      <workItem from="1535362297790" duration="16712000" />
     </task>
     <task id="LOCAL-00007" summary="Fix uppercase in link element.">
       <created>1502355327729</created>
@@ -1487,7 +1479,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="520409000" />
+    <option name="totallyTimeSpent" value="537121000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1519,11 +1511,11 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.30997878" sideWeight="0.48719317" order="11" side_tool="false" content_ui="tabs" x="1920" y="388" width="1920" height="547" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38372093" sideWeight="0.48719317" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4194237" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21314102" sideWeight="0.47977942" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35651213" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.30997878" sideWeight="0.48719317" order="11" side_tool="false" content_ui="tabs" x="1920" y="345" width="1920" height="547" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28922093" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20245726" sideWeight="0.47977942" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3564568" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21314102" sideWeight="0.5202206" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1622,14 +1614,8 @@
           <properties />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/FieldFiller/src/main/java/RunInThreads.java</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="129" />
+      <option name="time" value="131" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1638,115 +1624,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/config/CraterConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/config/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/chto-delat-utf8-work.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/chto-delat-utf8-work.csv.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8446">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-procedury-utf8-work.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="1418" column="61" lean-forward="false" selection-start-line="1418" selection-start-column="61" selection-end-line="1418" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/export-procedury-utf8-work.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/result/export-procedury-utf8-work.csv.out" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-procedury-utf8-work.csv.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///opt/java/jdk1.8.0_141/src.zip!/java/util/concurrent/ArrayBlockingQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="410" column="0" lean-forward="false" selection-start-line="410" selection-start-column="0" selection-end-line="410" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/netradicionnaya-utf8-work.csv.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="22" column="159" lean-forward="false" selection-start-line="22" selection-start-column="159" selection-end-line="22" selection-end-column="342" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/result/temp.guid.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/poleznoe-pitanie-utf8work.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/result/poleznoe-pitanie-utf8work.csv.out" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-otnosheniya-work.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/netradicionnaya-utf8-work.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/proxes-30.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/export-otnosheniya-work.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-otnosheniya-work.csv.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/AddFields.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/export-nogti-utf8-work.csv" />
-    <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-nogti-utf8-work.csv.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5726">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AddFields/data/result/temp.csv" />
     <entry file="file://$PROJECT_DIR$/AddFields/data/arch/summer.data/export-nogti-utf8-work.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1758,7 +1635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1766,7 +1642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1782,18 +1657,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader_.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="74" column="32" lean-forward="true" selection-start-line="74" selection-start-column="32" selection-end-line="75" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader_.java" />
     <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/UrlInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -1820,19 +1687,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldFiller/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FieldFiller/FieldFiller.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1840,34 +1698,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="12" column="71" lean-forward="false" selection-start-line="12" selection-start-column="71" selection-end-line="12" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="75" column="33" lean-forward="true" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/data/proxes-9.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AddFields/src/Run.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1743">
+        <state relative-caret-position="6408">
           <caret line="286" column="22" lean-forward="false" selection-start-line="286" selection-start-column="22" selection-end-line="286" selection-end-column="22" />
           <folding>
-            <marker date="1531141988932" expanded="true" signature="9571:10255" ph="{...}" />
+            <marker date="1535372655086" expanded="true" signature="9574:10258" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1893,26 +1732,15 @@
         <state relative-caret-position="879">
           <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/Page.java">
+    <entry file="file://$PROJECT_DIR$/FieldFiller/result/test.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="28" />
-          <folding>
-            <element signature="e#15229#15230#0" expanded="true" />
-            <element signature="e#15263#15264#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="274" column="50" lean-forward="true" selection-start-line="274" selection-start-column="50" selection-end-line="274" selection-end-column="50" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1925,14 +1753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldFiller/data/test.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FieldFiller/data/temp.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1941,36 +1761,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/RunInThreads.java">
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/resulttest.csv.out">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="46" column="118" lean-forward="false" selection-start-line="46" selection-start-column="118" selection-end-line="46" selection-end-column="118" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/temp.csvtemp.SearchQuery.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller_onlyTestBoxes/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="12" lean-forward="false" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="12" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="20" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/src/test.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="52" lean-forward="false" selection-start-line="0" selection-start-column="52" selection-end-line="0" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller_onlyTestBoxes/data/src/test.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller_onlyTestBoxes/data/tmp/temp.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller_onlyTestBoxes/data/result/test.csv.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/tmp/temp.SearchQuery.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/tmp/temp.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/FF_onlyTextBoxes_run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="38" column="31" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/data/proxy-9.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/data/proxy-30.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/tmp/temp.urls.completedQuery.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/result/test.csv.urls.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/OnceText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldFiller/result/test.csv.out">
+    <entry file="file://$PROJECT_DIR$/data/soup/result/soup_1-90_1.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java">
+    <entry file="jar:///opt/java/jdk1.8.0_141/src.zip!/java/util/function/Function.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="312">
+          <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java">
+    <entry file="file://$PROJECT_DIR$/src/CsvFileWriter_PageTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+        <state relative-caret-position="48">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CsvFileWriter_Page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="266" column="39" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="266" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Crater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/PageReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="74" column="46" lean-forward="true" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1978,11 +1950,87 @@
     <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
-          <caret line="57" column="32" lean-forward="false" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
+          <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
           <folding>
-            <element signature="e#4646#4647#0" expanded="true" />
-            <element signature="e#4676#4677#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="35" column="30" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/ElementOfPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Page/Page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="500" column="35" lean-forward="true" selection-start-line="500" selection-start-column="35" selection-end-line="500" selection-end-column="35" />
+          <folding>
+            <element signature="e#15830#15831#0" expanded="true" />
+            <element signature="e#15872#15873#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/tmp/temp.completedQuery.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/src/main/java/FF_additional_run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="59" column="45" lean-forward="true" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/result/test.csv.textBoxes.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldFiller/data/result/test.csv.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="53" lean-forward="false" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/com/ps/Utils/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="389" column="28" lean-forward="false" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2039,7 +2087,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>FieldFiller</last-edited>
+          <last-edited>FieldFiller_onlyTestBoxes</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

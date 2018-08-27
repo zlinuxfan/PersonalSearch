@@ -1,5 +1,6 @@
 package com.ps.Utils;
 
+import com.ps.Page.OnceText;
 import com.ps.Page.Page;
 import com.ps.Page.UrlInfo;
 import com.ps.proxy.ProxyAuthenticator;
@@ -34,8 +35,8 @@ public class Utilities {
     private static Logger log = LoggerFactory.getLogger(Utilities.class);
 
     public static String toTransliteration(String string) {
-        final char[] ru = {'-',' ', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ч', 'Ц', 'Ш', 'Щ', 'Э', 'Ю', 'Я', 'Ы', 'Ъ', 'Ь', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ч', 'ц', 'ш', 'щ', 'э', 'ю', 'я', 'ы', 'ъ', 'ь'};
-        final String[] en = {"-"," ", "a", "b", "v", "g", "d", "e", "jo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "Y", "", "", "a", "b", "v", "g", "d", "e", "jo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "y", "", ""};
+        final char[] ru = {'-', ' ', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ч', 'Ц', 'Ш', 'Щ', 'Э', 'Ю', 'Я', 'Ы', 'Ъ', 'Ь', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ч', 'ц', 'ш', 'щ', 'э', 'ю', 'я', 'ы', 'ъ', 'ь'};
+        final String[] en = {"-", " ", "a", "b", "v", "g", "d", "e", "jo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "Y", "", "", "a", "b", "v", "g", "d", "e", "jo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ch", "c", "sh", "csh", "e", "ju", "ja", "y", "", ""};
         final StringBuilder response = new StringBuilder(string.length());
         final HashMap<Character, String> table = new HashMap<>();
 
@@ -47,7 +48,7 @@ public class Utilities {
         String element;
 
         for (i = 0; i < string.length(); i++) {
-              element = table.get(string.charAt(i));
+            element = table.get(string.charAt(i));
             response.append(element == null ? " " : element);
         }
 
@@ -57,14 +58,14 @@ public class Utilities {
     public static Document getDocument(String url) throws IOException {
         Document document;
 
-            document = Jsoup
-                    .connect(url)
-                    .method(Connection.Method.GET)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 " +
-                            "(KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 OPR/42.0.2393.94")
-                    .followRedirects(true)
-                    .timeout(5000)
-                    .get();
+        document = Jsoup
+                .connect(url)
+                .method(Connection.Method.GET)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 " +
+                        "(KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 OPR/42.0.2393.94")
+                .followRedirects(true)
+                .timeout(5000)
+                .get();
         return document;
     }
 
@@ -84,11 +85,11 @@ public class Utilities {
         urlConn.connect();
         BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 
-        while ((response = reader.readLine()) !=null) {
+        while ((response = reader.readLine()) != null) {
             output.append(response);
         }
 
-        return  Jsoup.parse(String.valueOf(output));
+        return Jsoup.parse(String.valueOf(output));
     }
 
     public static String checkUrlString(String link) {
@@ -96,8 +97,8 @@ public class Utilities {
             return link;
         }
         String str = link.substring(0, 4);
-        while (link.length() > 5 && ! str.equals("http")) {
-            link = link.substring(1, link.length()-1);
+        while (link.length() > 5 && !str.equals("http")) {
+            link = link.substring(1, link.length() - 1);
             str = link.substring(0, 4);
         }
         return link.split("&")[0];
@@ -124,8 +125,8 @@ public class Utilities {
 
         System.setProperty("http.proxyHost", "149.154.71.37");
         System.setProperty("http.proxyPort", "443");
-        URL url=new URL(stringURL);
-        URLConnection uc = url.openConnection ();
+        URL url = new URL(stringURL);
+        URLConnection uc = url.openConnection();
         uc.setRequestProperty(
                 "User-Agent",
                 "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB;     rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13 (.NET CLR 3.5.30729)");
@@ -162,7 +163,7 @@ public class Utilities {
             String line;
 
             while ((line = fileReader.readLine()) != null) {
-                if (! line.startsWith("#")) {
+                if (!line.startsWith("#")) {
                     textsOfElements.add(line);
                 }
             }
@@ -214,7 +215,6 @@ public class Utilities {
     }
 
 
-
     public static void writeShortHeaderInFile(String fileName) {
 
         FileWriter fileWriter = null;
@@ -226,7 +226,7 @@ public class Utilities {
                     "\"" + headerElements[1] + i + "-1\"" + DELIMITER +
                     "\"" + headerElements[2] + i + "-1\"" + DELIMITER;
         }
-        urls = urls.substring(0, urls.length()-1);
+        urls = urls.substring(0, urls.length() - 1);
 
         try {
             fileWriter = new FileWriter(fileName);
@@ -257,7 +257,7 @@ public class Utilities {
         }
     }
 
-    public static void writeShortPageInFile(String fileName, Page page, boolean append) {
+    public static void writeShortPageToFile(String fileName, Page page, boolean append) {
         FileWriter fileWriter = null;
 
         try {
@@ -299,7 +299,7 @@ public class Utilities {
     static String urlInfoListToCsv(List<UrlInfo> urlInfoList) {
         StringBuilder stringBuilder = new StringBuilder();
         int counter = 1;
-        for (UrlInfo urlInfo: urlInfoList) {
+        for (UrlInfo urlInfo : urlInfoList) {
             if (urlInfo.isYoutube()) {
                 continue;
             }
@@ -316,14 +316,14 @@ public class Utilities {
             counter++;
         }
 
-        if (! stringBuilder.toString().isEmpty()) {
+        if (!stringBuilder.toString().isEmpty()) {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
 
         return stringBuilder.toString();
     }
 
-    public static void writeStringInFile(String fileName, String str, boolean append) {
+    public static void writeStringToFile(String fileName, String str, boolean append) {
         FileWriter fileWriter = null;
 
         try {
@@ -332,7 +332,7 @@ public class Utilities {
             fileWriter.append(System.lineSeparator());
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 assert fileWriter != null;
                 fileWriter.close();
@@ -340,5 +340,69 @@ public class Utilities {
                 System.out.println("Error while flushing/closing fileWriter !!!");
             }
         }
+    }
+
+    public static void writeTextBoxesToFile(String fileName, Page page, boolean append) {
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(fileName, append);
+
+            fileWriter.append(addQuotes(page.getNameOfElement()));
+            fileWriter.append(DELIMITER);
+            fileWriter.append(addQuotes(page.getElementTitle()));
+            fileWriter.append(DELIMITER);
+            fileWriter.append(textBoxesListToCsv(page.getTextBoxes()));
+            fileWriter.append(NEW_LINE_SEPARATOR);
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter_Page !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                assert fileWriter != null;
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+            }
+        }
+    }
+
+    private static String textBoxesListToCsv(ArrayList<OnceText> textBoxes) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String[] tmp = new String[] {"", ""} ;
+        int counter = 0;
+
+        for (OnceText onceText : textBoxes) {
+            tmp[counter] = String.format("\"%s\"%s\"%s\"%s",
+                    onceText.getTextBox(),
+                    DELIMITER,
+                    onceText.isCheckBox() ? '1' : '0',
+                    DELIMITER
+            );
+
+            if (counter > 1) {
+                break;
+            }
+            counter++;
+        }
+
+        if (tmp[1].isEmpty()) {
+            tmp[1] = String.format("\"%s\"%s\"%s\"%s",
+                    "",
+                    DELIMITER,
+                    "0",
+                    DELIMITER
+            );
+        }
+
+        for (String textBox : tmp) {
+            stringBuilder.append(textBox);
+        }
+
+        if (!stringBuilder.toString().isEmpty()) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
+        return stringBuilder.toString();
     }
 }

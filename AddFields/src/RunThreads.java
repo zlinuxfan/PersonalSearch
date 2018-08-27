@@ -55,8 +55,8 @@ public class RunThreads {
                 page = pages.poll(1000, TimeUnit.MILLISECONDS);
                 if (page != null) {
                     if (page.getUrlInfoList().size() > 0) {
-                        Utilities.writeShortPageInFile(outPutPath + outPutFileName, page, true);
-                        Utilities.writeStringInFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
+                        Utilities.writeShortPageToFile(outPutPath + outPutFileName, page, true);
+                        Utilities.writeStringToFile(outPutPath + tempGuidFile, page.getGuidOfElement(), true);
                         counterPage++;
                         System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
                     } else {
@@ -140,8 +140,8 @@ public class RunThreads {
             downPages = readPagesInF(outPutPath + tempGuidFile);
             rawPages.removeAll(downPages);
         } else {
-            Utilities.writeStringInFile(outPutPath + outPutFileName, header, true);
-            Utilities.writeStringInFile(outPutPath + tempGuidFile, header, true);
+            Utilities.writeStringToFile(outPutPath + outPutFileName, header, true);
+            Utilities.writeStringToFile(outPutPath + tempGuidFile, header, true);
         }
     }
 

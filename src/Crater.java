@@ -1,3 +1,4 @@
+import com.ps.Page.ElementOfPage;
 import com.ps.Utils.Utilities;
 import com.ps.Page.OnceText;
 import com.ps.Page.Page;
@@ -69,7 +70,7 @@ public class Crater {
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
 
-                urlInfos = google.find(resource.getNameRequest(), new InetSocketAddress("localhost", 1111));
+                urlInfos = google.findUrl(resource.getNameRequest(), new InetSocketAddress("localhost", 1111));
             } catch (Exception e) {
                 log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or captcha.");
                 continue;

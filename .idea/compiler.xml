@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="FieldFiller" />
+        <module name="FieldFiller_onlyTestBoxes" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="FieldFiller" target="1.8" />
+      <module name="FieldFiller_onlyTestBoxes" target="1.5" />
+      <module name="FieldFiller_onlyTextBoxes" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

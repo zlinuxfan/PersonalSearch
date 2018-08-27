@@ -1,7 +1,7 @@
 package com.ps.searchEngines;
 
-import com.ps.Utils.Utilities;
 import com.ps.Page.UrlInfo;
+import com.ps.Utils.Utilities;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -33,7 +33,7 @@ public class Google implements Find {
     }
 
     @Override
-    public ArrayList<UrlInfo> find(String requestName, InetSocketAddress currentProxy) throws Exception {
+    public ArrayList<UrlInfo> findUrl(String requestName, InetSocketAddress currentProxy) throws Exception {
 
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
@@ -46,7 +46,7 @@ public class Google implements Find {
         h3Descriptions = doc.select("span.st");
         URL link = null;
 
-        System.out.println("google find [" + requestName + "] ... ");
+        System.out.println("google findUrl [" + requestName + "] ... ");
 
         // первые ссылки - херня, поэтому начинаем с 3
         for (int i = 3; i < h3s.size() && i < h3Descriptions.size(); i++) {

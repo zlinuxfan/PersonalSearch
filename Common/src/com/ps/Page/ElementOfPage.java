@@ -1,5 +1,6 @@
+package com.ps.Page;
+
 import com.ps.Utils.Utilities;
-import com.ps.Page.UrlInfo;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-class ElementOfPage {
-    private static final int NUMBER_TEXT_BOX = 3;
+public class ElementOfPage {
+    private static final int NUMBER_TEXT_BOX = 2;
     private static Logger log = LoggerFactory.getLogger(ElementOfPage.class);
 
     private String name;
@@ -23,7 +24,7 @@ class ElementOfPage {
 
     static private ArrayList<String> bedUrls = new ArrayList<>();
 
-    ElementOfPage(String name, ArrayList<UrlInfo> urlInfoList) {
+    public ElementOfPage(String name, ArrayList<UrlInfo> urlInfoList) {
 
         this.name = name;
         this.path = (Utilities.toTransliteration(name)).replace(" ", "-");
@@ -66,7 +67,7 @@ class ElementOfPage {
                                 .replace("\r", "")
                                 .replace(";", "")
                                 .replace("\"", "\"\"");
-                        if (!text.equals("") && text.length() < 10_000) {
+                        if (!text.equals("") && text.length() < 7_000) {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();
                             System.out.print(" [" + text.length() + "] ");
@@ -98,10 +99,5 @@ class ElementOfPage {
             }
         }
         return document != null ? document.select("div.content").text() : "";
-    }
-
-    public static void main(String[] args) throws MalformedURLException {
-        URL url = new URL("https://eteplica.ru/gryadki/rassada-v-pelenkax-vyrashhivanie-pikirovka-video-yulii-minyaevoj.html");
-        System.out.println(url.getHost());
     }
 }

@@ -68,7 +68,7 @@ public class PageReader {
                                 null,
                                 null,
                                 null,
-                                null,
+                                new ArrayList<>(2),
                                 urlInfos,
                                 numberUrlPage
                         )

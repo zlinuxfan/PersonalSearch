@@ -1,14 +1,16 @@
 package com.ps.Threads;
 
-import com.ps.Page.Page;
-import com.ps.searchEngines.*;
-import com.ps.Page.UrlInfo;
+import com.ps.Page.*;
+import com.ps.searchEngines.Find;
+
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
 import static java.lang.Thread.sleep;
 
 
@@ -43,8 +45,10 @@ public class PageMaker implements Runnable {
         List<UrlInfo> urlInfoList = new ArrayList<>();
 
         for (Find searchEngine : searchEngines) {
-            urlInfoList.addAll(searchEngine.find(page.getSearchQuery(), currentProxy));
+            urlInfoList.addAll(searchEngine.findUrl(page.getSearchQuery(), currentProxy));
         }
+
+        createTextBoxes(page, (ArrayList<UrlInfo>) urlInfoList);
 
         if (bypass) {
             makeDelay();
@@ -71,6 +75,16 @@ public class PageMaker implements Runnable {
         }
 
         return page;
+    }
+
+    private void createTextBoxes(Page page, ArrayList<UrlInfo> urlInfoList) {
+        ElementOfPage elementOfPage = new ElementOfPage("", urlInfoList);
+
+        page.setTextBoxes(elementOfPage
+                .getTextBoxes()
+                .stream()
+                .map(textBox -> new OnceText(textBox, true))
+                .collect(Collectors.toCollection(ArrayList::new)));
     }
 
     @Override
@@ -145,10 +159,10 @@ public class PageMaker implements Runnable {
         ArrayList<String> pathImages = new ArrayList<>();
         for (Find searchEngine : searchEngines) {
 //            pathImages.addAll(searchEngine.findPicture(
-    //                page.getSearchQuery(),
-        //            5,
+            //                page.getSearchQuery(),
+            //            5,
 
-           // ))
+            // ))
         }
     }
 

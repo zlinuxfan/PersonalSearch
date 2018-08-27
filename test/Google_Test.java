@@ -14,7 +14,7 @@ public class Google_Test {
     private Google google = new Google(10);
     @Test
     public void find() throws Exception {
-        ArrayList<UrlInfo> urlInfos = google.find("Новогодние цвета 2015", new InetSocketAddress("localhost", 1111));
+        ArrayList<UrlInfo> urlInfos = google.findUrl("Новогодние цвета 2015", new InetSocketAddress("localhost", 1111));
 
         for (UrlInfo urlInfo : urlInfos) {
             System.out.println(urlInfo.getLink());
