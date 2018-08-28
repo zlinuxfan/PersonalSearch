@@ -3,19 +3,7 @@
   <component name="ChangeListManager">
     <list id="43b6a0f5-60fc-4610-b951-c7c7c8be931f" name="In Threads " comment="" />
     <list default="true" id="d1cb5b22-0c3d-4087-87f2-c556f8695d66" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/data/result/test.csv.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/data/result/test.csv.textBoxes.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/data/tmp/temp.completedQuery.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldFiller/data/tmp/temp.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AddFields/src/Run.java" afterPath="$PROJECT_DIR$/AddFields/src/Run.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Page/Page.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/Threads/PageMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Find.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" afterPath="$PROJECT_DIR$/Common/src/com/ps/searchEngines/Google.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crater.log" afterPath="$PROJECT_DIR$/crater.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Crater.java" afterPath="$PROJECT_DIR$/src/Crater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/Google_Test.java" afterPath="$PROJECT_DIR$/test/Google_Test.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/FieldFiller/target/" />
@@ -1097,14 +1085,7 @@
       <workItem from="1532079629395" duration="1295000" />
       <workItem from="1532948809760" duration="1029000" />
       <workItem from="1534934611223" duration="14185000" />
-      <workItem from="1535362297790" duration="29565000" />
-    </task>
-    <task id="LOCAL-00008" summary="Added double parser for files.">
-      <created>1502360991447</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1502360991447</updated>
+      <workItem from="1535362297790" duration="29613000" />
     </task>
     <task id="LOCAL-00009" summary="Remove method to utilities.">
       <created>1502362047668</created>
@@ -1442,7 +1423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535382509630</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="FieldFiller: implemented find images.">
+      <created>1535462979022</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1535462979022</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1478,7 +1466,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="549974000" />
+    <option name="totallyTimeSpent" value="550022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1491,7 +1479,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1505,7 +1492,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24893162" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27214515" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" x="1920" y="110" width="1920" height="391" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27214515" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" x="1920" y="110" width="1920" height="391" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28708646" sideWeight="0.4914621" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1513,7 +1500,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38372093" sideWeight="0.48719317" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.30997878" sideWeight="0.48719317" order="11" side_tool="false" content_ui="tabs" x="1920" y="345" width="1920" height="547" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43223053" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43223053" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20245726" sideWeight="0.47977942" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3564568" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1572,7 +1559,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new data" />
     <MESSAGE value="new proxy" />
     <MESSAGE value="proxy and thread." />
     <MESSAGE value="added method - write to file." />
@@ -1597,7 +1583,8 @@
     <MESSAGE value="FieldFiller: added conf idea" />
     <MESSAGE value="FieldFiller: implemented find url and youtube." />
     <MESSAGE value="FieldFiller: implemented find text boxes." />
-    <option name="LAST_COMMIT_MESSAGE" value="FieldFiller: implemented find text boxes." />
+    <MESSAGE value="FieldFiller: implemented find images." />
+    <option name="LAST_COMMIT_MESSAGE" value="FieldFiller: implemented find images." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
