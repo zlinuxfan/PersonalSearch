@@ -1,7 +1,14 @@
 package com.ps.Threads;
 
-import com.ps.Page.*;
+import com.ps.Page.ElementOfPage;
+import com.ps.Page.OnceText;
+import com.ps.Page.Page;
+import com.ps.Page.UrlInfo;
+import com.ps.Utils.Utilities;
 import com.ps.searchEngines.Find;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -41,11 +48,11 @@ public class PageMaker implements Runnable {
     }
 
 
-    public Page fillPage(Page page) throws Exception {
+    private Page fillPage(Page page) throws Exception {
         List<UrlInfo> urlInfoList = new ArrayList<>();
 
         for (Find searchEngine : searchEngines) {
-            urlInfoList.addAll(searchEngine.findUrl(page.getSearchQuery(), currentProxy));
+            urlInfoList.addAll(searchEngine.findUrls(page.getSearchQuery(), currentProxy));
         }
 
         createTextBoxes(page, (ArrayList<UrlInfo>) urlInfoList);
@@ -56,6 +63,10 @@ public class PageMaker implements Runnable {
 
         if (page.getIdYouTube().isEmpty()) {
             createYouTube(page);
+        }
+
+        if (bypass) {
+            makeDelay();
         }
 
         if (page.getPathImage().isEmpty()) {
@@ -155,15 +166,20 @@ public class PageMaker implements Runnable {
         }
     }
 
-    private void createPathImage(Page page) {
-        ArrayList<String> pathImages = new ArrayList<>();
-        for (Find searchEngine : searchEngines) {
-//            pathImages.addAll(searchEngine.findPicture(
-            //                page.getSearchQuery(),
-            //            5,
+    private void createPathImage(Page page) throws Exception {
+        ArrayList<UrlInfo> urls = new ArrayList<>();
 
-            // ))
+        for (Find searchEngine : searchEngines) {
+            urls.addAll(searchEngine.findUrls(page.getSearchQuery() + " site:kakprosto.ru", currentProxy));
         }
+
+        Document doc = Utilities.getDocument(urls.get(0).getLink().toString(), currentProxy);
+
+        Elements content_img = doc.select(".content__img_wrapper");
+        Element img = content_img.select("img").first();
+        page.setPathImage(img.attr("abs:src"));
+
+
     }
 
     private static void makeDelay() {

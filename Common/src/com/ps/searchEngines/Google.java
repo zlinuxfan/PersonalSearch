@@ -1,5 +1,7 @@
 package com.ps.searchEngines;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ps.Page.UrlInfo;
 import com.ps.Utils.Utilities;
 import org.jsoup.nodes.Document;
@@ -10,6 +12,8 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static com.ps.Utils.Utilities.getDocument;
 
 public class Google implements Find {
     private static final String NAME = "google";
@@ -25,7 +29,7 @@ public class Google implements Find {
         String url = "http://www.google.com.ua/search?q=site%3A" + requestName + "&oq=site%3A" + requestName + "&num=" + numInRequest;
 
         System.out.println(url);
-        Document doc = Utilities.getDocument(url);
+        Document doc = getDocument(url);
 
         Elements idResults = doc.select("#resultStats");
 
@@ -33,20 +37,20 @@ public class Google implements Find {
     }
 
     @Override
-    public ArrayList<UrlInfo> findUrl(String requestName, InetSocketAddress currentProxy) throws Exception {
+    public ArrayList<UrlInfo> findUrls(String requestName, InetSocketAddress currentProxy) throws Exception {
 
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + numInRequest;
         Elements h3s;
         Elements h3Descriptions;
         //        Document doc = Utilities.getDocument(urlString);
-        Document doc = Utilities.getDocument(url, currentProxy);
+        Document doc = getDocument(url, currentProxy);
         ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         h3s = doc.select("h3.r a");
         h3Descriptions = doc.select("span.st");
         URL link = null;
 
-        System.out.println("google findUrl [" + requestName + "] ... ");
+        System.out.println("google findUrls [" + requestName + "] ... ");
 
         // первые ссылки - херня, поэтому начинаем с 3
         for (int i = 3; i < h3s.size() && i < h3Descriptions.size(); i++) {
@@ -71,23 +75,20 @@ public class Google implements Find {
 
     @Override
     @Deprecated
-    public ArrayList<Picture> findPicture(String requestName, int numberPicture, InetSocketAddress currentProxy) {
+    public ArrayList<Picture> findPicture(String requestName, int numberPicture, InetSocketAddress currentProxy) throws IOException {
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "&num=" + numInRequest + "&tbm=isch";
 
-        Document doc = null; //connectUrl(url);  //getDocument(url);
+        Document doc = getDocument(url, currentProxy);
         ArrayList<Picture> pictures = new ArrayList<>();
 
-        try {
-            doc = Utilities.getDocument(url, currentProxy);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-//        if (doc != null) {
-//            Elements div_jsnames = doc.select("div.rg_meta");
-//
-//            ObjectMapper mapper;
-//            JsonNode rootNode;
+        if (doc != null) {
+            Elements elementsByClass = doc.select("div.rg_meta.notranslate");
+
+            elementsByClass.text();
+
+            ObjectMapper mapper;
+            JsonNode rootNode;
 //
 //            for (int index = 1; index <= numberPicture; index++) {
 //                mapper = new ObjectMapper();
@@ -107,7 +108,7 @@ public class Google implements Find {
 //                    e.printStackTrace();
 //                }
 //            }
-//        }
+        }
         return pictures;
     }
 
@@ -116,7 +117,7 @@ public class Google implements Find {
         String url = "http://www.google.com.ua/search?q=" + requestName.replace(" ", "+") + "site%3Ayoutube.com&num=" + numInRequest;
 
         Elements h3r;
-        Document doc = Utilities.getDocument(url, currentProxy); //connectUrl(url);  //getDocument(url);
+        Document doc = getDocument(url, currentProxy); //connectUrl(url);  //getDocument(url);
         ArrayList<String> youTubeUrls = new ArrayList<>();
 
         h3r = doc.select("h3.r a");
