@@ -70,7 +70,7 @@ public class Crater {
                 System.out.println("Timeout: " + timeOut + "sec ...");
                 Thread.sleep(timeOut * 1000);
 
-                urlInfos = google.findUrl(resource.getNameRequest(), new InetSocketAddress("localhost", 1111));
+                urlInfos = google.findUrls(resource.getNameRequest(), new InetSocketAddress("localhost", 1111));
             } catch (Exception e) {
                 log.error("    error: \"" + resource.getNameRequest() + "\" is not processed. Check internet or captcha.");
                 continue;

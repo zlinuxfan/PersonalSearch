@@ -497,6 +497,10 @@ public class Page {
         return searchQuery;
     }
 
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
     public void setTextBoxes(ArrayList<OnceText> textBoxes) {
         this.textBoxes = textBoxes;
     }

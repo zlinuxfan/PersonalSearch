@@ -163,7 +163,7 @@ public class Run {
 
     private static void fillPage(Page page, Google google) throws Exception {
 
-        ArrayList<UrlInfo> urlInfos = google.findUrl(page.getNameOfElement(), new InetSocketAddress("localhost", 1111));
+        ArrayList<UrlInfo> urlInfos = google.findUrls(page.getNameOfElement(), new InetSocketAddress("localhost", 1111));
 //        makeDelay();
 
         int index = 0;
