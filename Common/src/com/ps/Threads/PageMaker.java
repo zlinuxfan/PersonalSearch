@@ -49,13 +49,13 @@ public class PageMaker implements Runnable {
 
 
     private Page fillPage(Page page) throws Exception {
-        List<UrlInfo> urlInfoList = new ArrayList<>();
+        ArrayList<UrlInfo> urlInfoList = new ArrayList<>();
 
         for (Find searchEngine : searchEngines) {
             urlInfoList.addAll(searchEngine.findUrls(page.getSearchQuery(), currentProxy));
         }
 
-        createTextBoxes(page, (ArrayList<UrlInfo>) urlInfoList);
+        createTextBoxes(page, urlInfoList);
 
         if (bypass) {
             makeDelay();

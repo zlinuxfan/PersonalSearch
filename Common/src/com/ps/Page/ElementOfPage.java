@@ -70,10 +70,10 @@ public class ElementOfPage {
                         if (!text.equals("") && text.length() < 7_000) {
                             this.textBoxes.add(text);
                             urlInfoIterator.remove();
-                            System.out.print(" [" + text.length() + "] ");
+                            //System.out.print(" [" + text.length() + "] ");
                         }
                     }
-                System.out.print(this.textBoxes.size()+ " > ");
+                //System.out.print(this.textBoxes.size()+ " > ");
             } catch (NoSuchElementException e) {
                 log.error("java.util.NoSuchElementException.");
             }
