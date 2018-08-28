@@ -132,6 +132,7 @@ public class PageMaker implements Runnable {
 
         if (counterError >= 3) {
             try {
+                //TODO put current page in did not work out file.
                 this.rawPage.put(currentPage);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
@@ -177,9 +178,9 @@ public class PageMaker implements Runnable {
 
         Elements content_img = doc.select(".content__img_wrapper");
         Element img = content_img.select("img").first();
-        page.setPathImage(img.attr("abs:src"));
-
-
+        if (!img.is("")) {
+            page.setPathImage(img.attr("abs:src"));
+        }
     }
 
     private static void makeDelay() {

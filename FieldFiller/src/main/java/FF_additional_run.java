@@ -13,13 +13,13 @@ public class FF_additional_run {
     private static BlockingQueue<Page> pages = new ArrayBlockingQueue<>(1000);
     private static BlockingQueue<InetSocketAddress> proxies = new ArrayBlockingQueue<>(50);
 
-    private static PageMaker[] pageMakers = new PageMaker[7];
+    private static PageMaker[] pageMakers = new PageMaker[8];
 
     private static final String tempPath = "FieldFiller/data/tmp/";
     private static final String tempFile = "temp.csv";
     private static final String proxyFile = "Common/data/proxy-9.txt";
     private static final String tmpCompletedQuery = "temp.completedQuery.csv";
-    private static final String inPutFileName = "топ 500 +++ (Большие буквы).csv";
+    private static final String inPutFileName = "топ 500 +++ (Большие буквы)500.csv";
     private static final String inPutPath = "FieldFiller/data/src/";
     private static final String outPutFileName = inPutFileName  + ".out";
     private static final String outPutFileName_textBoxes = inPutFileName + ".textBoxes.out";

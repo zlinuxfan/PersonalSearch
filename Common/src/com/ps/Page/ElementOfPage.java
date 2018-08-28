@@ -53,7 +53,7 @@ public class ElementOfPage {
     }
 
     private void createTextBox() {
-        System.out.print("Crate text boxes ... ");
+        System.out.println("Crate text boxes ... ");
         Iterator<UrlInfo> urlInfoIterator = this.urlInfoList.iterator();
         String text;
         int counter = 0;
@@ -79,7 +79,7 @@ public class ElementOfPage {
             }
             counter++;
         }
-        System.out.println("Read " + counter);
+        //System.out.println("Read " + counter);
     }
 
     private static String getText(String url) {
