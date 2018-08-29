@@ -114,12 +114,12 @@ public class PageMaker implements Runnable {
         Page currentPage = null;
         try {
             currentPage = this.rawPage.poll(30, TimeUnit.MILLISECONDS);
-            currentProxy = this.proxies.take();
+            currentProxy = this.proxies.poll(100, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        while (currentPage != null && counterError < 3) {
+        while (currentPage != null && counterError < 3 && isRunning()) {
             try {
                 this.page.put(this.fillPage(currentPage));
                 currentPage = this.rawPage.poll(1100, TimeUnit.MILLISECONDS);
@@ -174,12 +174,14 @@ public class PageMaker implements Runnable {
             urls.addAll(searchEngine.findUrls(page.getSearchQuery() + " site:kakprosto.ru", currentProxy));
         }
 
-        Document doc = Utilities.getDocument(urls.get(0).getLink().toString(), currentProxy);
+        if (!urls.isEmpty()) {
+            Document doc = Utilities.getDocument(urls.get(0).getLink().toString(), currentProxy);
 
-        Elements content_img = doc.select(".content__img_wrapper");
-        Element img = content_img.select("img").first();
-        if (!img.is("")) {
-            page.setPathImage(img.attr("abs:src"));
+            Elements content_img = doc.select(".content__img_wrapper");
+            Element img = content_img.select("img").first();
+            if (img != null) {
+                page.setPathImage(img.attr("abs:src"));
+            }
         }
     }
 
@@ -194,6 +196,10 @@ public class PageMaker implements Runnable {
 
     public boolean isRunning() {
         return running;
+    }
+
+    public void stop() {
+        this.running = false;
     }
 }
 

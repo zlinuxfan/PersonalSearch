@@ -19,7 +19,7 @@ public class FF_additional_run {
     private static final String tempFile = "temp.csv";
     private static final String proxyFile = "Common/data/proxy-9.txt";
     private static final String tmpCompletedQuery = "temp.completedQuery.csv";
-    private static final String inPutFileName = "топ 500 +++ (Большие буквы)500.csv";
+    private static final String inPutFileName = "test.csv"; //"топ 500 +++ (Большие буквы)500.csv";
     private static final String inPutPath = "FieldFiller/data/src/";
     private static final String outPutFileName = inPutFileName  + ".out";
     private static final String outPutFileName_textBoxes = inPutFileName + ".textBoxes.out";
@@ -30,6 +30,7 @@ public class FF_additional_run {
     private static final String headerOutput_textBoxes = "Название элемента;Заголовок (title);Форматированное текстовое поле1-1;Чек бокс1-1;Форматированное текстовое поле2-1;Чек бокс2-1";
     private static final String headerTemp = "Поисковый запрос";
 
+    private static int numberOfThreads = 0;
     private static long startTime;
 
     public static void main(String[] args) {
@@ -60,9 +61,11 @@ public class FF_additional_run {
                         Utilities.writeTextBoxesToFile(outPutPath + outPutFileName_textBoxes, page, true);
                         Utilities.writeStringToFile(tempPath+ tmpCompletedQuery, page.getSearchQuery(), true);
                         counterPage++;
-                        System.out.println(String.format("%s pcs remaining", numberOfPage - counterPage));
+                        System.out.println(String.format("%s pcs remaining in %d threads",
+                                numberOfPage - counterPage,
+                                numberOfThreads));
                     } else {
-                        System.out.println(String.format("Page id: %s. UrlInfoList size: %d",
+                        System.out.println(String.format("Page id: %s. UrlInfoList size: %d.",
                                 page.getGuidOfElement(),
                                 page.getUrlInfoList().size()));
                     }
@@ -110,11 +113,16 @@ public class FF_additional_run {
 
     private static boolean isRunThreads() {
         boolean isRun = false;
+        int counter = 0;
 
         for (PageMaker googleThread : pageMakers) {
-            isRun = isRun || googleThread.isRunning();
+            if (googleThread.isRunning()) {
+                isRun = true;
+                counter++;
+            }
         }
 
+        numberOfThreads = counter;
         return isRun;
     }
 }
